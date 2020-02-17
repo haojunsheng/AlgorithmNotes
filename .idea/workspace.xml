@@ -2,17 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6addbecf-3c87-4692-a962-c8e233c3a7b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/dpAndGreedy/CuttingRope_14.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/goback/RobotMove_13.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/goback/StringPathInMatrix_12.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/recursive/GrayCode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/stackandqueue/QueueWithTwoStacks_09.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/stackandqueue/StackWithTwoQueue_0902.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/ConstructBinaryTree_07.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/NextNodeInBinaryTrees_08.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/array/OverHalfInArray_39.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/array/ReorderArray_21.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/highQuality/Print1ToMaxOfNDigits_17.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/CopyList_35.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/DeleteNodeInList_18.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/DeleteNodeOfDuplication_1802.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/EnterNodeInLink_23.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/KthNodeFromEnd_22.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/MergeList_25.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/ReverseList_24.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/BubbleSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/HeapSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/InsertSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/MergeSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/QuickSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/RadixSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/SelectSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/ShellSort.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/sort/SwapDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/stackandqueue/CustomStack_30.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/stackandqueue/StackSequence_31.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/string/NumericStrings_20.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/string/RegularMatch_19.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/BinaryTreeConvert_36.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/BinaryTreeSerialize_37.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/IsSubTree_26.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PathInTree_34.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PrintTreeFromTopToBottom_3201.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PrintTreeFromTopToBottom_3202.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PrintTreeFromTopToBottom_3203.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/SquenceOfBST_33.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/tree/SymmetricalBinaryTree_28.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__Arquillian_JUnit_Release.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__Arquillian_JUnit_Release.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
@@ -42,7 +64,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="go.gopath.indexing.explicitly.defined" value="true" />
     <property name="go.import.settings.migrated" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/code" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="project.structure.last.edited" value="Modules" />
@@ -52,15 +74,16 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.code.goback" />
-      <recent name="com.code.linklist" />
-      <recent name="com.code.string" />
       <recent name="com.code.array" />
+      <recent name="com.code.tree" />
+      <recent name="com.code.linklist" />
+      <recent name="com.code.stackandqueue" />
+      <recent name="com.code.goback" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/code/tree" />
       <recent name="$PROJECT_DIR$/src/com/code" />
       <recent name="$PROJECT_DIR$/src/com/code/stackandqueue" />
-      <recent name="$PROJECT_DIR$/src/com/code/tree" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -75,13 +98,13 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.CuttingRope_14">
-    <configuration name="ConstructBinaryTree_07" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.code.tree.ConstructBinaryTree_07" />
+  <component name="RunManager" selected="Application.InsertSort">
+    <configuration name="BubbleSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.code.sort.BubbleSort" />
       <module name="AlgorithmNotes" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.code.tree.*" />
+          <option name="PATTERN" value="com.code.sort.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -89,12 +112,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CuttingRope_14" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.code.dpAndGreedy.CuttingRope_14" />
+    <configuration name="DeleteNodeInList_18" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.code.linklist.DeleteNodeInList_18" />
       <module name="AlgorithmNotes" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.code.dpAndGreedy.*" />
+          <option name="PATTERN" value="com.code.linklist.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -102,12 +125,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DuplicationInArray_0301" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.code.array.DuplicationInArray_0301" />
+    <configuration name="InsertSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.code.sort.InsertSort" />
       <module name="AlgorithmNotes" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.code.array.*" />
+          <option name="PATTERN" value="com.code.sort.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -115,12 +138,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="GrayCode" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.code.recursive.GrayCode" />
+    <configuration name="RegularMatch_19" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.code.string.RegularMatch_19" />
       <module name="AlgorithmNotes" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.code.recursive.*" />
+          <option name="PATTERN" value="com.code.string.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -128,12 +151,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RobotMove_13" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.code.goback.RobotMove_13" />
+    <configuration name="SelectSort" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.code.sort.SelectSort" />
       <module name="AlgorithmNotes" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.code.goback.*" />
+          <option name="PATTERN" value="com.code.sort.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -143,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.CuttingRope_14" />
-        <item itemvalue="Application.RobotMove_13" />
-        <item itemvalue="Application.GrayCode" />
-        <item itemvalue="Application.ConstructBinaryTree_07" />
-        <item itemvalue="Application.DuplicationInArray_0301" />
+        <item itemvalue="Application.InsertSort" />
+        <item itemvalue="Application.BubbleSort" />
+        <item itemvalue="Application.SelectSort" />
+        <item itemvalue="Application.RegularMatch_19" />
+        <item itemvalue="Application.DeleteNodeInList_18" />
       </list>
     </recent_temporary>
   </component>
@@ -172,6 +195,12 @@
       <workItem from="1571105809327" duration="7000" />
       <workItem from="1571106127505" duration="797000" />
       <workItem from="1571920286847" duration="2411000" />
+      <workItem from="1572352181764" duration="14612000" />
+      <workItem from="1572431255706" duration="346000" />
+      <workItem from="1572435870404" duration="4912000" />
+      <workItem from="1572868917237" duration="1256000" />
+      <workItem from="1572924520403" duration="1071000" />
+      <workItem from="1581921767377" duration="4988000" />
     </task>
     <servers />
   </component>
@@ -233,6 +262,21 @@
           <url>file://$PROJECT_DIR$/src/com/code/recursive/GrayCode.java</url>
           <line>23</line>
           <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/code/highQuality/Print1ToMaxOfNDigits_17.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/code/highQuality/Print1ToMaxOfNDigits_17.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/code/highQuality/Print1ToMaxOfNDigits_17.java</url>
+          <line>86</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
