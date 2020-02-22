@@ -141,23 +141,6 @@ https://www.cxyxiaowu.com/7072.html
 
 二叉查找树（也叫二叉搜索树，BST），平衡二叉树（AVL树），并查集，堆，哈夫曼树。
 
-顺序是牛客网。
-004-重建二叉树
-017-树的子结构
-018-二叉树的镜像
-022-从上往下打印二叉树
-023-二叉搜索树的后序遍历序列
-024-二叉树中和为某一值的路径
-026-二叉搜索树与双向链表
-038-二叉树的深度
-039-平衡二叉树
-057-二叉树的下一个结点
-058-对称的二叉树
-059-按之字形顺序打印二叉树
-060-把二叉树打印成多行
-061-序列化二叉树
-062-二叉搜索树的第k个结点
-
 **二叉树的深度优先遍历**
 
 [重建二叉树7](https://github.com/haojunsheng/JavaLearning/blob/master/CodingInterview/src/com/code/tree/ConstructBinaryTree_07.java)
@@ -229,6 +212,8 @@ Hash Table
 # 6. 字符串
 [替换空格5](https://github.com/haojunsheng/JavaLearning/blob/master/CodingInterview/src/com/code/string/ReplaceSpaces_05.java)
 
+
+
 [正则表达式匹配19](https://github.com/haojunsheng/JavaLearning/blob/master/CodingInterview/src/com/code/string/RegularMatch_19.java)
 
 [表示数值的字符串20](https://github.com/haojunsheng/JavaLearning/blob/master/CodingInterview/src/com/code/string/NumericStrings_20.java)
@@ -247,7 +232,7 @@ Hash Table
 **算法类**
 
 **斐波那契数列（牛客网顺序）**
-007-斐波拉契数列
+
 [斐波拉契数列10](https://github.com/haojunsheng/JavaLearning/blob/master/CodingInterview/src/com/code/sortAndFind/Fibonacci_10.java)
 008-跳台阶，本质上属于斐波那契数列。
 009-变态跳台阶
@@ -322,28 +307,19 @@ public void quickSort(int A[],int left,int right){
         quickSort(A,pos+1,right);
     }
 
-    public int partition(int A[],int left,int right){
-        //int temp=A[left];//最好不要使用这种算法，基准元要随机选择
-        int p=left+(int)Math.random()*(right-left+1);
-        swap(A,left,p);
-        int temp=A[left];
-        while (left<right){//只要两个数不相遇
-            while (left<right&&A[right]>=temp)//从右边找小于temp的值
-                right--;
-            A[left]=A[right];//找到则交换
-            while (left<right&&A[left]<=temp)//从左边找大于temp的值
-                left++;
-            A[right]=A[left];
-        }
-        A[left]=temp;
-        return left;
-    }
-
-    private void swap(int A[],int a,int b) {
-        int temp = A[a];
-        A[a] = A[b];
-        A[b] = temp;
-    }
+public int partition(int A[],int left,int right){
+  int temp=A[left];
+  while (left<right){//只要两个数不相遇
+    while (left<right&&A[right]>=temp)//从右边找小于temp的值
+      right--;
+    A[left]=A[right];//找到则交换
+    while (left<right&&A[left]<=temp)//从左边找大于temp的值
+      left++;
+    A[right]=A[left];
+  }
+  A[left]=temp;
+  return left;
+}
 ```
 
 排序

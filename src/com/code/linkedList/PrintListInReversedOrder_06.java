@@ -1,4 +1,4 @@
-package com.code.linklist;
+package com.code.linkedList;
 
 import java.util.Stack;
 
@@ -9,11 +9,6 @@ import java.util.Stack;
  * 第三种：栈的本质就是递归，所以也可以使用递归来实现。
  */
 public class PrintListInReversedOrder_06 {
-    // 定义链表结构
-    static class ListNode {
-        int value;
-        ListNode next;
-    }
 
     public static void main(String[] args) {
         ListNode node1 = new ListNode();
@@ -43,8 +38,8 @@ public class PrintListInReversedOrder_06 {
         }
     }
 
-    public static void printListReverseByRecursion(ListNode headNode) {
-        if (headNode == null)
+    public static void printListReverseByRecursion(ListNode headNode){
+        if(headNode==null)
             return;
         printListReverseByStack(headNode.next);
         System.out.println(headNode.value);
@@ -58,6 +53,10 @@ public class PrintListInReversedOrder_06 {
 //        printListReverseByRecursion(headNode.next);
 //        System.out.println(headNode.value);
 //    }
-
 }
 
+// 定义链表结构
+class ListNode {
+    int value;
+    ListNode next;
+}

@@ -10,7 +10,7 @@
 
 模板
 
-：<img src="https://raw.githubusercontent.com/haojunsheng/ImageHost/master/20191223202420.png" style="zoom:50%;" />
+<img src="https://raw.githubusercontent.com/haojunsheng/ImageHost/master/20191223202420.png" style="zoom:50%;" />
 
 ### 2.1.2 选择排序
 

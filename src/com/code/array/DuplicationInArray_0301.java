@@ -55,36 +55,13 @@ public class DuplicationInArray_0301 {
         return false;
     }
 
-
-//    public static boolean duplicate(int numbers[],int length,int [] duplication) {
-//        if(numbers==null || numbers.length==0) {
-//            return false;
-//        }
-//        for(int i=0;i < numbers.length;++i){
-//            if(numbers[i]<0||numbers[i]>=numbers.length){
-//                return false;
-//            }
-//        }
-//        for(int i=0;i<numbers.length;++i){
-//            while (numbers[i]!=i){
-//                if(numbers[i]==numbers[numbers[i]]){
-//                    duplication[0]=numbers[i];
-//                    return true;
-//                }
-//                int temp=numbers[i];
-//                numbers[i]=numbers[temp];
-//                numbers[temp]=temp;
-//            }
-//        }
-//        return false;
-//    }
     // 重复的数字是数组中最小的数字
-    void test1(){
+    void test1() {
 
     }
 
     // 重复的数字是数组中最大的数字
-    void test2(){
+    void test2() {
 
     }
 
@@ -95,10 +72,10 @@ public class DuplicationInArray_0301 {
     // 无效的输入
 
     /**
-     *
      * 不需要额外的数组或者hash table来保存，题目里写了数组里数字的范围保证在0 ~ n-1 之间，
      * 所以可以利用现有数组设置标志，当一个数字被访问过后，可以设置对应位上的数 + n，
      * 之后再遇到相同的数时，会发现对应位上的数已经大于等于n了，那么直接返回这个数即可。
+     *
      * @param numbers
      * @param length
      * @param duplication
@@ -126,8 +103,8 @@ public class DuplicationInArray_0301 {
 
     public static void main(String[] args) {
         int[] arr = {0, 3, 2, 4, 2, 5, 6};
-        int[] a={};
-        boolean result = duplicate(arr,7,a);
+        int[] a = {};
+        boolean result = duplicate(arr, 7, a);
         System.out.println(result);
     }
 }

@@ -2,41 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6addbecf-3c87-4692-a962-c8e233c3a7b2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/code/array/OverHalfInArray_39.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/array/ReorderArray_21.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/highQuality/Print1ToMaxOfNDigits_17.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/CopyList_35.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/DeleteNodeInList_18.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/DeleteNodeOfDuplication_1802.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/EnterNodeInLink_23.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/KthNodeFromEnd_22.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/MergeList_25.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/linklist/ReverseList_24.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/BubbleSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/HeapSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/InsertSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/MergeSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/QuickSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/RadixSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/SelectSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/ShellSort.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/sort/SwapDemo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/stackandqueue/CustomStack_30.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/stackandqueue/StackSequence_31.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/string/NumericStrings_20.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/string/RegularMatch_19.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/BinaryTreeConvert_36.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/BinaryTreeSerialize_37.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/IsSubTree_26.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PathInTree_34.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PrintTreeFromTopToBottom_3201.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PrintTreeFromTopToBottom_3202.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/PrintTreeFromTopToBottom_3203.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/SquenceOfBST_33.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/code/tree/SymmetricalBinaryTree_28.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__Arquillian_JUnit_Release.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__Arquillian_JUnit_Release.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/array/FindInPartiallySortedMatrix_04.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/code/array/ReplaceSpaces_05.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/algorithm-fourth.md" beforeDir="false" afterPath="$PROJECT_DIR$/algorithm-fourth.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/complexity.md" beforeDir="false" afterPath="$PROJECT_DIR$/complexity.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/640" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/640-20200217181536433" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/code/linklist/PrintListInReversedOrder_06.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/code/linklist/PrintListInReversedOrder_06.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/code/tree/ConstructBinaryTree_07.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/code/tree/ConstructBinaryTree_07.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -200,7 +176,11 @@
       <workItem from="1572435870404" duration="4912000" />
       <workItem from="1572868917237" duration="1256000" />
       <workItem from="1572924520403" duration="1071000" />
-      <workItem from="1581921767377" duration="4988000" />
+      <workItem from="1581921767377" duration="5312000" />
+      <workItem from="1582097431705" duration="247000" />
+      <workItem from="1582292463003" duration="1570000" />
+      <workItem from="1582294188802" duration="2275000" />
+      <workItem from="1582373950468" duration="409000" />
     </task>
     <servers />
   </component>
@@ -225,27 +205,27 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java</url>
-          <line>111</line>
+          <line>88</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java</url>
-          <line>113</line>
+          <line>90</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java</url>
-          <line>117</line>
+          <line>94</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java</url>
-          <line>116</line>
+          <line>93</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/com/code/array/DuplicationInArray_0301.java</url>
-          <line>120</line>
+          <line>97</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
