@@ -1,7 +1,4 @@
-package com.code.sortAndFind;
-
-import java.lang.reflect.Array;
-import java.util.Arrays;
+package com.code.sort_find;
 
 /**
  * 变态跳台阶

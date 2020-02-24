@@ -280,7 +280,7 @@ Hash Table
 变态跳台阶（这个不是斐波那契）
 矩形覆盖
 
-数值的整数次方16
+16-数值的整数次方
 
 
 # 7. 查找和排序
@@ -334,7 +334,7 @@ public int partition(int A[],int left,int right){
 
 贪婪算法和动态规划是不同的，需要用数学的方法来证明我们是正确的。
 
-[剪绳子14](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/dpAndGreedy/CuttingRope_14.java)
+[14-剪绳子](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/dpAndGreedy/CuttingRope_14.java)
 
 可以采用动态规划和贪婪算法来求解，其中贪婪算法较为常规，贪婪算法基本需要提前做过，面试的时候想是想不到的。
 

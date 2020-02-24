@@ -1,4 +1,4 @@
-package com.code.sortAndFind;
+package com.code.sort_find;
 
 /**
  * 递增排序,旋转数组中的最小值

@@ -1,8 +1,7 @@
-package com.code.stackandqueue;
+package com.code.stack_queue;
 
 
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class StackWithTwoQueue_0902 {
     private LinkedList<Integer> queue1;

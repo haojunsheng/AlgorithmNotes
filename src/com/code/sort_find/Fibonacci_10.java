@@ -1,4 +1,4 @@
-package com.code.sortAndFind;
+package com.code.sort_find;
 
 
 /**

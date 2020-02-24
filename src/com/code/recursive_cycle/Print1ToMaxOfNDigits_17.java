@@ -1,4 +1,4 @@
-package com.code.highQuality;
+package com.code.recursive_cycle;
 
 /**
  * 打印从1到最大的n位数：使用数组表示大数

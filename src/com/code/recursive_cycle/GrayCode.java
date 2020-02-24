@@ -1,4 +1,4 @@
-package com.code.recursive;
+package com.code.recursive_cycle;
 
 // 题目描述 https://www.nowcoder.com/practice/50959b5325c94079a391538c04267e15
 //在一组数的编码中，若任意两个相邻的代码只有一位二进制数不同， 则称这种编码为格雷码(Gray Code)，

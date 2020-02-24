@@ -1,4 +1,4 @@
-package com.code.highQuality;
+package com.code.recursive_cycle;
 
 /**
  * 题目描述：
@@ -6,8 +6,6 @@ package com.code.highQuality;
  *
  * 数值的整数次方
  */
-
-import java.math.BigInteger;
 
 /**
  * 我们知道当指数为负数的时候，可以先对指数求绝对值，然后算出次方的结果之后再取倒数。既然有求倒数，我们很自然的就要想到有没有可能对0求倒数，如果对0求倒数怎么办？当底数base是零且指数是负数的时候，我们不做特殊的处理，就会发现对0求倒数从而导致程序运行出错。怎么告诉函数的调用者出现了这种错误？我们使用全局变量的方式处理。

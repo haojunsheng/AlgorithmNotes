@@ -1,4 +1,4 @@
-package com.code.dpAndGreedy;
+package com.code.dp_greedy;
 
 /**
  * 题目：
