@@ -38,21 +38,12 @@ public class PrintListInReversedOrder_06 {
         }
     }
 
-    public static void printListReverseByRecursion(ListNode headNode){
-        if(headNode==null)
+    public static void printListReverseByRecursion(ListNode headNode) {
+        if (headNode == null)
             return;
         printListReverseByStack(headNode.next);
         System.out.println(headNode.value);
     }
-
-
-    // 使用递归的方法实现
-//    public static void printListReverseByRecursion(ListNode headNode) {
-//        if (headNode == null)
-//            return;
-//        printListReverseByRecursion(headNode.next);
-//        System.out.println(headNode.value);
-//    }
 }
 
 // 定义链表结构

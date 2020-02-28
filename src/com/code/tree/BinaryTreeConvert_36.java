@@ -3,93 +3,61 @@ package com.code.tree;
 import java.util.Stack;
 
 public class BinaryTreeConvert_36 {
-    class TreeNode{
-        int val=0;
+    class TreeNode {
+        int val = 0;
         TreeNode left = null;
         TreeNode right = null;
-        public TreeNode(int val){
-            this.val=val;
+
+        public TreeNode(int val) {
+            this.val = val;
         }
     }
 
-    //两个节点，分别记录临时节点和最终头结点
-    TreeNode pre=null;
-    TreeNode lastLeft=null;
-    //递归
-//    public TreeNode Convert(TreeNode pRootOfTree) {
-//        if(pRootOfTree==null){//判空
-//            return null;
-//        }
-//        Convert(pRootOfTree.left);
-//        pRootOfTree.left=pre;
-//        if(pre!=null){
-//            pre.right=pRootOfTree;
-//        }
-//        pre=pRootOfTree;
-//        lastLeft=(lastLeft==null)?pRootOfTree:lastLeft;
-//        Convert(pRootOfTree.right);
-//        return lastLeft;
-//    }
-//
-//    //非递归
-//    public TreeNode Convert1(TreeNode pRootOfTree) {
-//        if (pRootOfTree == null)
-//            return pRootOfTree;
-//        Stack<TreeNode> stack=new Stack<TreeNode>();
-//        TreeNode list=null;//头结点
-//        while (pRootOfTree!=null|| !stack.isEmpty()){
-//            if(pRootOfTree!=null){
-//                stack.push(pRootOfTree);
-//                pRootOfTree=pRootOfTree.right;
-//            }else {
-//                pRootOfTree=stack.pop();
-//                if(list==null){
-//                    list=pRootOfTree;
-//                }else {
-//                    list.left=pRootOfTree;
-//                    pRootOfTree.right=list;
-//                    list=pRootOfTree;
-//                }
-//                pRootOfTree=pRootOfTree.left;
-//            }
-//        }
-//        return list;
-//    }
+    /**
+     * 我们需要记录上一个节点，因为需要给右节点赋值
+     * 还需要记录最终的根节点，这个节点一旦找到就不变了
+     */
+    TreeNode pre = null;
+    TreeNode lastLeft = null;
 
-    //中序遍历
+    // 中序遍历
     public TreeNode Convert(TreeNode pRootOfTree) {
-        if(pRootOfTree==null)
+        if (pRootOfTree == null) {
             return null;
+        }
         Convert(pRootOfTree.left);
-        pRootOfTree.left=pre;
-        if(pre != null)
-            pre.right=pRootOfTree;
-        pre=pRootOfTree;
-        lastLeft=(lastLeft==null?pRootOfTree:lastLeft);//头结点
+        pRootOfTree.left = pre;
+        if (pre != null) {
+            pre.right = pRootOfTree;
+        }
+        pre = pRootOfTree;
+        //头结点，中序遍历最先访问到的是最左边的节点
+        lastLeft = (lastLeft == null ? pRootOfTree : lastLeft);
         Convert(pRootOfTree.right);
         return lastLeft;
     }
 
-    //非递归
+    //非递归，不是尾递归，无法直接转循环，需要借助于栈来帮助我们
     public TreeNode Convert1(TreeNode pRootOfTree) {
-        if(pRootOfTree==null)
+        if (pRootOfTree == null) {
             return null;
-        Stack<TreeNode> stack=new Stack<TreeNode>();
-        TreeNode root=null;
-        while (pRootOfTree!=null|| (!stack.isEmpty())){
-            if(pRootOfTree!=null){
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        TreeNode root = null;
+        while (pRootOfTree != null || (!stack.isEmpty())) {
+            if (pRootOfTree != null) {
                 stack.push(pRootOfTree);
-                pRootOfTree=pRootOfTree.right;
-            }else {
-                pRootOfTree=stack.pop();
-                if(root==null){
-                    root=pRootOfTree;
-                }else {
-                    root.left=pRootOfTree;
-                    pRootOfTree.left=root;
-                    root=pRootOfTree;
+                pRootOfTree = pRootOfTree.right;
+            } else {
+                pRootOfTree = stack.pop();
+                if (root == null) {
+                    root = pRootOfTree;
+                } else {
+                    root.left = pRootOfTree;
+                    pRootOfTree.left = root;
+                    root = pRootOfTree;
                 }
-                pRootOfTree=pRootOfTree.left;
+                pRootOfTree = pRootOfTree.left;
             }
         }
         return root;

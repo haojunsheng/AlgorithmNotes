@@ -5,28 +5,30 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
+ * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。
+ * 例如输入字符串abc,则打印出由字符a,b,c所能排列出来的所有字符串abc,acb,bac,bca,cab和cba。
  */
 public class StringPermutation_38 {
     public ArrayList<String> Permutation(String str) {
         List<String> resultList = new ArrayList<String>();
-        if(str.length() == 0)
-            return (ArrayList)resultList;
+        if (str.length() == 0) {
+            return (ArrayList) resultList;
+        }
         //递归的初始值为（str数组，空的list，初始下标0）
-        PermutationHelper(str.toCharArray(),resultList,0);
+        PermutationHelper(str.toCharArray(), resultList, 0);
         Collections.sort(resultList);
-        return (ArrayList)resultList;
+        return (ArrayList) resultList;
     }
 
-    private void PermutationHelper(char[] ch,List<String> list,int i){
+    private void PermutationHelper(char[] ch, List<String> list, int i) {
         //这是递归的终止条件，就是i下标已经移到char数组的末尾的时候，考虑添加这一组字符串进入结果集中
-        if(i == ch.length-1){
+        if (i == ch.length - 1) {
             //判断一下是否重复
-            if(!list.contains(new String(ch))){
+            if (!list.contains(new String(ch))) {
                 list.add(new String(ch));
                 return;
             }
-        }else{
+        } else {
             //这一段就是回溯法，这里以"abc"为例
 
             //递归的思想与栈的入栈和出栈是一样的,某一个状态遇到return结束了之后，会回到被调用的地方继续执行
@@ -79,10 +81,10 @@ public class StringPermutation_38 {
 
             //5.最后退出for循环，结束。
 
-            for(int j=i;j<ch.length;j++){
-                swap(ch,i,j);
-                PermutationHelper(ch,list,i+1);
-                swap(ch,i,j);
+            for (int j = i; j < ch.length; j++) {
+                swap(ch, i, j);
+                PermutationHelper(ch, list, i + 1);
+                swap(ch, i, j);
             }
         }
     }

@@ -4,92 +4,122 @@ package com.code.recursive_cycle;
  * 打印从1到最大的n位数：使用数组表示大数
  * 题目描述：
  * 输入数字n,按顺序打印出从1到最大的n位十进制数，比如输入3,则打印出1,2,3一直到最大的3位数即999
- *
+ * <p>
  * 模拟大数的运算
  */
 
 public class Print1ToMaxOfNDigits_17 {
-    // 使用数组实现对数进行+1操作
-    public static boolean increment(int[] number) {
-        // 最高位产生进位标志
-        boolean isOverFlow = false;
-        // 进位位
-        int carry = 0;
-        for(int i=number.length-1;i>=0;--i){
-            int sum=number[i]+carry;
-            //处理个位数，每次加1
-            if(i==number.length-1)
-                sum++;
-            if(sum>=10){
-                //处理最高位的情况,如果第一个字符产生了进位，用来跳出循环
-                if(i == 0){
-                    isOverFlow=true;
-                }
-                sum-=10;
-                carry=1;
-                number[i]=sum;
-            }else {
-                number[i]++;
-                break;
-            }
-        }
-        return isOverFlow;
-    }
-    // 打印数组中表示的数，如果数组中表示的数字位数小于n，则不打印前面的0
-    public static void print(int[] number) {
-        // 标记：判断是否可以开始打印
-        boolean isBeginning = false;
-        for (int i = 0; i < number.length; i++) {
-            if (!isBeginning && number[i] != 0) {
-                isBeginning = true;
-            }
-            if (isBeginning)
-                System.out.print(number[i]);
-        }
-        System.out.println();
-    }
-    //打印数
-    public static void printNumber(StringBuffer sb){
-        boolean flag = false;
 
-        for(int i = 0; i < sb.length(); i++){
-            if(!flag && sb.charAt(i) != '0'){
-                flag = true;
-            }
-            if(flag){
-                System.out.print(sb.charAt(i));
-            }
-        }
-        if(flag)
-            System.out.println();
-    }
-
-    //打印从1到n位的最大数
-    public static void Print1ToMaxOfNDigits(int n){
-        if(n <= 0)
-            return ;
-
-        //初始化数字（用StringBuffer表示）
-        StringBuffer sb = new StringBuffer(n);
-        for(int i = 0; i < n; i++){
-            sb.append('0');
-        }
-
-        print1ToMaxOfNDigits_Recursely(sb, n, 0);
-    }
-
-    private static void print1ToMaxOfNDigits_Recursely(StringBuffer sb, int n, int index) {
-        if(index==n){
-            printNumber(sb);
+    /**
+     * 输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则打印出1、2、3 一直到最大的3位数即999。
+     *
+     * @param n 数字的最大位数
+     */
+    public static void printOneToNthDigits(int n) {
+        // 输入值必须大于0
+        if (n < 1) {
             return;
         }
-        for(int i=0;i<n;i++){
-            sb.setCharAt(index,(char)(i+'0'));
-            print1ToMaxOfNDigits_Recursely(sb,n,index+1);
+        // 创建一个长度为n的数组
+        int[] number = new int[n];
+        // 为数组元素赋初始值
+        for (int i = 0; i < number.length; i++) {
+            number[i] = 0;
+        }
+        // 求结果，如果最高位没有进位就一直进行处理
+        while (addOne(number) == 0) {
+            printArray(number);
+        }
+    }
+
+    /**
+     * 对number表示的数组的最低位加1
+     * number中的每个数都不能超过9不能小于0，每个位置模拟一个数位
+     *
+     * @param number 待加数组
+     * @return 判断最高位是否有进位，如果有进位就返回1，否则返回0
+     */
+    public static int addOne(int[] number) {
+        // 保存进位值，因为每次最低位加1
+        int carry = 1;
+        // 最低位的位置的后一位
+        int index = number.length;
+        do {
+            // 指向上一个处理位置
+            index--;
+            // 处理位置的值加上进位的值
+            number[index] += carry;
+            // 求处理位置的进位
+            carry = number[index] / 10;
+            // 求处理位置的值
+            number[index] %= 10;
+        } while (carry != 0 && index > 0);
+        // 如果index=0说明已经 处理了最高位，carry>0说明最高位有进位，返回1
+        if (carry > 0 && index == 0) {
+            return 1;
+        }
+        // 无进位返回0
+        return 0;
+    }
+
+    /**
+     * 输入数字n，按顺序打印出从1最大的n位十进制数。
+     * 比如输入3，则打印出1、2、3 一直到最大的3位数即999。
+     * 核心思想：n位所有10进制数其实就是n个从0到9的全排列。
+     *
+     * @param n 数字的最大位数
+     */
+    public static void printOneToNthDigitsRecursely(int n) {
+        if (n <= 0) {
+            return;
+        }
+
+        // 创建一个数组用于打存放值
+        int[] number = new int[n];
+        printOneToNthDigitsRecursely(0, number);
+    }
+
+    /**
+     * 输入数字n，按顺序打印出从1最大的n位十进制数。
+     *
+     * @param n      当前处理的是第个元素，从0开始计数
+     * @param number 存放结果的数组
+     */
+    public static void printOneToNthDigitsRecursely(int n, int[] number) {
+        // 说明所有的数据排列选择已经处理完了
+        if (n >= number.length) {
+            // 可以输出数组的值
+            printArray(number);
+            return;
+        }
+        for (int i = 0; i <= 9; i++) {
+            number[n] = i;
+            printOneToNthDigitsRecursely(n + 1, number);
+        }
+    }
+
+    /**
+     * 输入数组的元素，从左到右，从第一个非0值到开始输出到最后的元素。
+     *
+     * @param arr 要输出的数组
+     */
+    public static void printArray(int[] arr) {
+        // 找第一个非0的元素
+        int index = 0;
+        while (index < arr.length && arr[index] == 0) {
+            index++;
+        }
+        // 从第一个非0值到开始输出到最后的元素。
+        for (int i = index; i < arr.length; i++) {
+            System.out.print(arr[i]);
+        }
+        // 条件成立说明数组中有非零元素，所以需要换行
+        if (index < arr.length) {
+            System.out.println();
         }
     }
 
     public static void main(String[] args) {
-        Print1ToMaxOfNDigits(3);
+        printOneToNthDigits(3);
     }
 }

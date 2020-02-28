@@ -25,7 +25,6 @@ https://www.cxyxiaowu.com/7072.html
 在排序中，需要掌握各种排序算法的平均时间复杂度，最差时间复杂度，空间复杂度，另快排是十分重要的。
 快排的核心是随机选择一个数字，比这个数字大的移动到左边，比这个数字小的移动到右边。可以用递归和循环来实现。
 
-
 当题目要求在二维数组上（迷宫或者棋盘）上搜索路径，我们可以尝试使用回溯法，很适合采用递归的手段来实现。
 如果明确指出不可以使用递归的话，可以使用栈来模拟递归。
 
@@ -52,7 +51,7 @@ https://www.cxyxiaowu.com/7072.html
 [二维数组中的查找(4)](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/FindInPartiallySortedMatrix_04.java)
 本题的规律在于矩阵右上角和左下角比较特殊，比该行所有元素大，比该列所有元素小。而左上角没有这样的规律。
 
-[旋转数组旋转数组的最小数字（11）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sortAndFind/MinNumberInRotatedArray_11.java)
+[旋转数组旋转数组的最小数字（11）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sort_find/MinNumberInRotatedArray_11.java)
 本题还属于二分查找算法。因为某种程度上是有序的。
 
 
@@ -128,12 +127,11 @@ https://www.cxyxiaowu.com/7072.html
      f[1]=0;
      f[i]=(f[i-1]+m)%i;  (i>1)
 
-
 [面试题35：复杂链表的复制](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/CopyList_35.java)
 考察把复杂问题分解的能力，用到了空间换时间的思想，能够在O(1)的时间复杂度找到下一个随机节点。
 
 [面试题36：二叉搜索树与双向链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/BinaryTreeConvert_36.java)
-双向链表
+把二叉树和双向链表进行了结合。
 
 
 # 4. 二叉树&递归
@@ -142,9 +140,14 @@ https://www.cxyxiaowu.com/7072.html
 
 **二叉树的深度优先遍历**
 
-[重建二叉树7](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/ConstructBinaryTree_07.java)
-用到了递归的知识。
+二叉树遍历序列题目：
 
+- 解题思路：先找到二叉树的根节点，基于根节点把二叉树的遍历分为左右子树，然后递归的处理左右子树
+
+- [重建二叉树7](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/ConstructBinaryTree_07.java)
+  用到了递归的知识。
+- [面试题33：二叉搜索树的后序遍历](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/SquenceOfBST_33.java)
+  - 考察了二叉搜索树的概念，考察了后序遍历的特点，以及递归编程的能力。
 
 [面试题8:二叉树的下一个节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/NextNodeInBinaryTrees_08.java)
 需要进行归纳总结出相应的规律。
@@ -155,10 +158,9 @@ https://www.cxyxiaowu.com/7072.html
 
 [面试题28：对称的二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/SymmetricalBinaryTree_28.java)
 
-
-[面试题33：二叉搜索树的后序遍历](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/SquenceOfBST_33.java)
-
 [面试题34：二叉树中和为某值的路径](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/PathInTree_34.java)
+
+考察了二叉树的前序遍历。
 
 
 [面试题55：二叉树的深度,平衡二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/TreeDepth_5501.java)
@@ -232,7 +234,7 @@ Hash Table
 
 **斐波那契数列（牛客网顺序）**
 
-[斐波拉契数列10](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sortAndFind/Fibonacci_10.java)
+[斐波拉契数列10](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/recursive_cycle/Fibonacci_10.java)
 008-跳台阶，本质上属于斐波那契数列。
 009-变态跳台阶
 010-矩形覆盖
@@ -243,7 +245,7 @@ Hash Table
 本题的规律在于矩阵右上角和左下角比较特殊，比该行所有元素大，比该列所有元素小。而左上角没有这样的规律。
 
 006-旋转数组的最小数字（二分查找）
-[旋转数组旋转数组的最小数字（11）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sortAndFind/MinNumberInRotatedArray_11.java)
+[旋转数组旋转数组的最小数字（11）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sort_find/MinNumberInRotatedArray_11.java)
 
 037-数字在排序数组中出现的次数（二分查找）
 [数字在排序数组中出现的次数53](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/NumberOfK_5301.java)
@@ -272,15 +274,28 @@ Hash Table
 
 
 # 6. 递归和循环
-递归的关键是递归边界和递归式。
+- 递归的关键是递归边界和递归式。
+
+- 当递归调用是函数体中最后执行的语句并且它的返回值不属于表达式一部分时， 这个递归就是**尾递归**。并且编辑器会对尾递归进行优化，可以复用栈帧。
+
+- 那么是不是所有的递归都可以转成尾递归呢？答案是否定的。不过尾递归可以和循环相互转化，在现在的面试题目中，面试官经常让我们不要用递归，那么尾递归直接改成循环。
+- 非尾递归咋办呢？我们可以使用栈来模拟吧。
 
 下面几个本质上属于斐波那契数列：
-[斐波拉契数列10](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sortAndFind/Fibonacci_10.java)
+[斐波拉契数列10](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/recursive_cycle/Fibonacci_10.java)
 跳台阶
 变态跳台阶（这个不是斐波那契）
 矩形覆盖
 
-16-数值的整数次方
+[16-数值的整数次方](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/recursive_cycle/Power_16.java)
+
+这个题目需要我们考虑到各种情况，然后还需要掌握**累乘和快速求幂**的方法。
+
+[17-打印从1到最大的n位数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/recursive_cycle/Print1ToMaxOfNDigits_17.java)
+
+大数问题，使用字符串来模拟加法运算，还有减乘除呢，头大。
+
+一种是老老实实的模拟，而是我们发现：**n位所有10进制数其实就是n个从0到9的全排列**。
 
 
 # 7. 查找和排序
@@ -334,7 +349,7 @@ public int partition(int A[],int left,int right){
 
 贪婪算法和动态规划是不同的，需要用数学的方法来证明我们是正确的。
 
-[14-剪绳子](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/dpAndGreedy/CuttingRope_14.java)
+[14-剪绳子](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/dp_greedy/CuttingRope_14.java)
 
 可以采用动态规划和贪婪算法来求解，其中贪婪算法较为常规，贪婪算法基本需要提前做过，面试的时候想是想不到的。
 

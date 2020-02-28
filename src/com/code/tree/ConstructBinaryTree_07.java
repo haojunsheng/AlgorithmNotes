@@ -1,5 +1,7 @@
 package com.code.tree;
 
+import java.util.Stack;
+
 /**
  * 题目描述：
  * 输入某二叉树的前序遍历和中序遍历的结果，请重新构造出该二叉树。假设输入的前序遍历和中序遍历的结果中不包含重复的数字。例如输入的前序遍历序列为｛1，2，4，7，3，5，6，8｝和中序遍历为{4,7,2,1,5,3,6,8},则重建出二叉树并输出它的头结点。
@@ -35,11 +37,49 @@ public class ConstructBinaryTree_07 {
     private static TreeNode reConstructBinaryTree(int[] pre, int startPre, int endPre, int[] in, int startIn, int endIn) {
         if (startPre > endPre || startIn > endIn)
             return null;
+        //根节点
         TreeNode root = new TreeNode(pre[startPre]);
+        // 在中序中找根节点，方便划分左右子树
         for (int i = startIn; i <= endIn; i++) {
             if (in[i] == pre[startPre]) {
+                // 重建左子树, 左子树的先序是startPre+1,startPre + i - startIn（循环的次数）,中序是startIn,i-1
                 root.left = reConstructBinaryTree(pre, startPre + 1, startPre + i - startIn, in, startIn, i - 1);
-                root.right = reConstructBinaryTree(pre, i - startIn + startPre + 1, endPre, in, i + 1, endIn);
+                // 重建右子树, 右子树的先序是startPre + i - startIn + 1(左子树endPre+1),endPre,i+1(左子树endIn+2),endIn
+                root.right = reConstructBinaryTree(pre, startPre + i - startIn + 1, endPre, in, i + 1, endIn);
+            }
+        }
+        return root;
+    }
+
+    //用栈来模拟递归
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        if (preorder == null || preorder.length == 0) {
+            return null;
+        }
+        // 根节点
+        TreeNode root = new TreeNode(preorder[0]);
+        int length = preorder.length;
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        int inorderIndex = 0;
+        // 数组长度
+        for (int i = 1; i < length; i++) {
+            int preorderVal = preorder[i];
+            TreeNode node = stack.peek();
+            // 在右子树中找根节点，方便区分左右子树
+            if (node.val != inorder[inorderIndex]) {
+                // 根节点左子树
+                node.left = new TreeNode(preorderVal);
+                stack.push(node.left);
+            } else {
+                // 找到根节点,出栈
+                while (!stack.isEmpty() && stack.peek().val == inorder[inorderIndex]) {
+                    node = stack.pop();
+                    inorderIndex++;
+                }
+                // 根节点右子树,此时栈里面保存的是
+                node.right = new TreeNode(preorderVal);
+                stack.push(node.right);
             }
         }
         return root;
