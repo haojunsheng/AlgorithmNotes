@@ -13,79 +13,67 @@ public class MergeList_25 {
         ListNode next;
     }
 
-    //采用递归的方法实现
-
-//    private ListNode merge(ListNode list1,ListNode list2){
-//        //递归边界
-//        if(list1==null)
-//            return list2;
-//        else if(list2==null)
-//            return list1;
-//
-//        ListNode merge=null;
-//        if(list1.value<list2.value){
-//            merge=list1;
-//            merge.next=merge(list1.next,list2);
-//        }else {
-//            merge=list2;
-//            merge.next=merge(list1,list2.next);
-//        }
-//        return merge;
-//    }
-
-
-    private ListNode merge(ListNode list1,ListNode list2){
-        if(list1==null)
+    /**
+     * @param list1
+     * @param list2
+     * @return
+     */
+    private ListNode merge(ListNode list1, ListNode list2) {
+        if (list1 == null) {
             return list2;
-        if(list2==null)
+        } else if (list2 == null) {
             return list1;
-        ListNode merge=null;
-        if(list1.value<list2.value){
-            merge=list1;
-            merge.next=merge(list1.next,list2);
-        }else {
-            merge=list2;
-            merge.next=merge(list1,list2.next);
+        }
+
+        ListNode merge = null;
+        if (list1.value < list2.value) {
+            merge = list1;
+            merge.next = merge(list1.next, list2);
+        } else {
+            merge = list2;
+            merge.next = merge(list1, list2.next);
         }
         return merge;
     }
 
     //采用循环的方法实现
-//    private ListNode merge(ListNode list1,ListNode list2){
-//
-//        if(list1==null)//处理两种特殊情况
-//            return list2;
-//        if(list2==null)
-//            return list1;
-//
-//        ListNode merge=null;
-//        if(list1.value<list2.value){
-//            merge=list1;
-//            list1=list1.next;
-//        }else {
-//            merge=list2;
-//            list2=list2.next;
-//        }
-//        //两个链表都非空
-//        ListNode temp=merge;
-//        while (list1 != null && list2!=null){
-//            if(list1.value<list2.value){
-//                temp.next=list1;
-//                list1=list1.next;
-//            }else {
-//                temp.next=list2;
-//                list2=list2.next;
-//            }
-//            temp=temp.next;
-//        }
-//
-//        if(list1!=null){
-//            temp.next=list1;
-//        }else {
-//            temp.next=list2;
-//        }
-//        return merge;
-//    }
+    private ListNode mergeCycle(ListNode list1, ListNode list2) {
+
+        if (list1 == null) {
+            return list2;
+        }
+        if (list2 == null) {
+            return list1;
+        }
+        // 确定头
+        ListNode merge = null;
+        if (list1.value < list2.value) {
+            merge = list1;
+            list1 = list1.next;
+        } else {
+            merge = list2;
+            list2 = list2.next;
+        }
+        //两个链表都非空
+        ListNode temp = merge;
+        while (list1 != null && list2 != null) {
+            if (list1.value < list2.value) {
+                temp.next = list1;
+                list1 = list1.next;
+            } else {
+                temp.next = list2;
+                list2 = list2.next;
+            }
+            temp = temp.next;
+        }
+        // 处理二者剩下的
+        if (list1 != null) {
+            temp.next = list1;
+        } else {
+            temp.next = list2;
+        }
+        return merge;
+    }
 }
 
 

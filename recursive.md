@@ -229,6 +229,8 @@ public int f(int n) {
 
 ## 反转二叉树(二叉树镜像)
 
+[面试题27：二叉树的镜像](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/MirrorTree_27.java)
+
 接下来我们来看下一道经典的题目: 反转二叉树 将左边的二叉树反转成右边的二叉树
 
 ![img](img/v2-787f6e94e03c86cfd4a53ff83d49d1bf_1440w.jpg)
@@ -296,6 +298,38 @@ TreeNode left = invertTree(root.left);
 ![img](img/v2-5f14a083d8ba27c632bed86830d7caf2_1440w.jpg)
 
 说句题外话，这道题当初曾引起轰动，因为 Mac 下著名包管理工具 homebrew 的作者 Max Howell 当初解不开这道题，结果被 Google 拒了，也就是说如果你解出了这道题，就超越了这位世界大神，想想是不是很激动
+
+**非递归解法**
+
+```java
+public void MirrorNotRecursively(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode temp = queue.poll();
+            if (temp.left != null || temp.right != null) {
+                swap(temp);
+                if (root.left != null) {
+                    queue.add(temp.left);
+                }
+                if (root.right != null) {
+                    queue.add(temp.right);
+                }
+            }
+        }
+    }
+```
+
+# 反转链表
+
+> 定义一个函数，输入一个链表的头结点，反转该链表并输出反转后的链表的头结点。
+
+[面试题24：反转链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/ReverseList_24.java)
+
+
 
 ## 汉诺塔问题
 

@@ -1,4 +1,31 @@
 <!--ts-->
+   * [1.概述](#1概述)
+   * [2.数组](#2数组)
+   * [3 链表](#3-链表)
+   * [4. 二叉树&amp;递归](#4-二叉树递归)
+      * [4.1 二叉搜索树BST](#41-二叉搜索树bst)
+   * [5. 栈和队列](#5-栈和队列)
+   * [6. 字符串](#6-字符串)
+   * [6. 递归和循环](#6-递归和循环)
+   * [7. 查找和排序](#7-查找和排序)
+   * [8. 动态规划和贪心算法](#8-动态规划和贪心算法)
+   * [9. 回溯](#9-回溯)
+   * [9.1 全排列问题](#91-全排列问题)
+   * [10. 位运算](#10-位运算)
+      * [10.1 n&amp;(n-1)](#101-nn-1)
+   * [11. 双指针法](#11-双指针法)
+      * [11.1 快慢指针法](#111-快慢指针法)
+         * [11.1.1 <strong>判定链表中是否含有环</strong>](#1111-判定链表中是否含有环)
+         * [11.1.2 <strong>寻找链表的中点</strong>](#1112-寻找链表的中点)
+         * [11.1.3 <strong>寻找链表的倒数第</strong> <strong>k</strong> <strong>个元素</strong>](#1113-寻找链表的倒数第-k-个元素)
+      * [11.2 左右指针法](#112-左右指针法)
+         * [11.2.1 二分查找](#1121-二分查找)
+         * [11.2.2 两数和](#1122-两数和)
+         * [11.2.3 反转数组](#1123-反转数组)
+         * [11.2.4 滑动窗口算法](#1124-滑动窗口算法)
+   * [参考书籍](#参考书籍)
+
+<!-- Added by: anapodoton, at: Sun Mar  8 18:52:09 CST 2020 -->
 
 <!--te-->
 
@@ -54,16 +81,20 @@ https://www.cxyxiaowu.com/7072.html
 [旋转数组旋转数组的最小数字（11）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sort_find/MinNumberInRotatedArray_11.java)
 本题还属于二分查找算法。因为某种程度上是有序的。
 
-
 [调整数组顺序使奇数位于偶数前面(21)](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/ReorderArray_21.java)
 双指针法，一般就是找规律和空间换时间。
+
+**延伸**：判断一个数是不是偶数的方法：(a & 0x1) == 0
+
+[顺时针打印矩阵29](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/PrintMatrix_29.java)
+
+解决思路：循环次数 + 每一圈(左到右，上到下，右到左，下到上)
 
 [数组中出现次数超过一半的数字(39)](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/OverHalfInArray_39.java)
 
 [最小的k个数（40）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/highQuality/KLeastNumbers_40.java)
 **partition，即分治算法，十分的重要。可以用在快排算法中，还可以用来实现在长度为n的数组中查找第k大的数字**比如，面试题39，数组中出现次数超过一半的数字和面试题40，最小的k个数。其中，**我们有成熟的算法的时间复杂度为O(n)得到数组中任意第k大的数字，假设你选择的数字p在快排一轮完成后下标是m，那么比p小的数字就有m个，如果k小于m，那么第k大的数字一定在p的左边，否则在右边。**
 
---- 这里----
 [连续子数组的最大和42](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/GreatestSumOfSubarrays_42.java)
 
 [把数组排成最小的数45](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/SortArrayForMinNumber_45.java)
@@ -93,11 +124,10 @@ https://www.cxyxiaowu.com/7072.html
   第三种：栈的本质就是递归，所以也可以使用递归来实现。
 
 [面试题18：删除链表中的节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/DeleteNodeInList_18.java)
-思路：把下一个节点的值保存到该节点，然后删除下一个节点即可，需要考虑只有一个节点和删除尾节点的特殊情况。
+思路：把下一个节点的值保存到该节点，然后删除下一个节点即可，需要考虑只有一个节点和删除尾节点的特殊情况。主要是需要考虑边界情况。
 
-[面试题：删除链表中的重复节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/deleteDuplication.java)
-思路：保存要比较节点的前一个节点，需要注意：重复节点的位置（头部，中间和尾部）。
-
+举一反三:[面试题：删除链表中的重复节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/deleteDuplication.java)
+思路：需要三个节点，当前节点，要比较节点的前一个节点（防止丢失），最终头结点（因为头部可能被删除）。需要注意：**重复节点的位置**（头部，中间和尾部）。
 
 [面试题22：链表中倒数第k个节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/KthNodeFromEnd_22.java)
 
@@ -106,12 +136,23 @@ https://www.cxyxiaowu.com/7072.html
 
 举一反三：求链表的中间节点。我们的思路是：一个指针每次走两步，另一个走一步，快的走到末尾的时候，慢的恰好在中间。
 
+[面试题23:链表中环的入口节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/EnterNodeInLink_23.java)
+
+和面试题22类似。
 
 [面试题24：反转链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/ReverseList_24.java)
 循环和递归两种方法都要会。
 
+reverse(ListNode head)=记录当前节点下一个节点 + 断开 + 递归处理子问题 + 指回来
+
 [面试题25：合并两个排序链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/MergeList_25.java)
 循环和递归两种方法都要会。
+
+[面试题35：复杂链表的复制](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/CopyList_35.java)
+考察把复杂问题分解的能力，用到了空间换时间的思想，能够在O(1)的时间复杂度找到下一个随机节点。
+
+[面试题36：二叉搜索树与双向链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/BinaryTreeConvert_36.java)
+把二叉树和双向链表进行了结合。
 
 
 [面试题52：两个链表的第一个公共节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/FirstCommonNodesInLists_52.java)
@@ -127,14 +168,29 @@ https://www.cxyxiaowu.com/7072.html
      f[1]=0;
      f[i]=(f[i-1]+m)%i;  (i>1)
 
-[面试题35：复杂链表的复制](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/linkedList/CopyList_35.java)
-考察把复杂问题分解的能力，用到了空间换时间的思想，能够在O(1)的时间复杂度找到下一个随机节点。
-
-[面试题36：二叉搜索树与双向链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/BinaryTreeConvert_36.java)
-把二叉树和双向链表进行了结合。
-
 
 # 4. 二叉树&递归
+
+二叉树算法的设计的总路线:明确一个节点要做的事情，然后剩下的事抛给 框架。
+
+```java
+void traverse(TreeNode root) {
+	// root 需要做什么?在这做。
+	// 其他的不用 root 操心，抛给框架 
+	traverse(root.left); 
+	traverse(root.right);
+}
+```
+
+![image-20200308131333762](img/image-20200308131333762.png)
+
+## 4.1 二叉搜索树BST
+
+**判断** **BST** **的合法性**
+
+<img src="img/image-20200308131451498.png" alt="image-20200308131451498" style="zoom:50%;" />
+
+<img src="img/image-20200308131529819.png" alt="image-20200308131529819" style="zoom:50%;" />
 
 二叉查找树（也叫二叉搜索树，BST），平衡二叉树（AVL树），并查集，堆，哈夫曼树。
 
@@ -143,35 +199,37 @@ https://www.cxyxiaowu.com/7072.html
 二叉树遍历序列题目：
 
 - 解题思路：先找到二叉树的根节点，基于根节点把二叉树的遍历分为左右子树，然后递归的处理左右子树
-
 - [重建二叉树7](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/ConstructBinaryTree_07.java)
   用到了递归的知识。
 - [面试题33：二叉搜索树的后序遍历](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/SquenceOfBST_33.java)
   - 考察了二叉搜索树的概念，考察了后序遍历的特点，以及递归编程的能力。
+- [面试题26：树的子结构](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/IsSubTree_26.java) Important
+  - 这个题目很牛逼的，使用了两层递归，这个题目循环很难去处理的。
+- [面试题27：二叉树的镜像](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/MirrorTree_27.java)
+- [面试题28：对称的二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/SymmetricalBinaryTree_28.java)
+  - 思路不是很难。
+- [面试题34：二叉树中和为某值的路径](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/PathInTree_34.java)
+  - 考察了二叉树的前序遍历。
 
 [面试题8:二叉树的下一个节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/NextNodeInBinaryTrees_08.java)
 需要进行归纳总结出相应的规律。
 
-[面试题26：树的子结构](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/IsSubTree_26.java)
+面试题32：从上向下打印二叉树,[分行](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/PrintTreeFromTopToBottom_3202.java)，[不分行](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/PrintTreeFromTopToBottom_3201.java)，[按之字形顺序打印二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/PrintTreeFromTopToBottom_3203.java)
 
-[面试题27：二叉树的镜像](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/MirrorTree_27.java)
+宽度优先遍历。
 
-[面试题28：对称的二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/SymmetricalBinaryTree_28.java)
+[面试题36：二叉搜索树与双向链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/BinaryTreeConvert_36.java)
 
-[面试题34：二叉树中和为某值的路径](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/PathInTree_34.java)
+二叉树的特例：二叉搜索树。搜索时间复杂度logn
 
-考察了二叉树的前序遍历。
+37序列化二叉树
+
 
 
 [面试题55：二叉树的深度,平衡二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/TreeDepth_5501.java)
 在遍历二叉树的时候，优化的算法一般是每个节点尽量只遍历一次，不要进行重复遍历，而且在遍历的时候，要及时进行剪枝，如果结果已经出现，要及时的进行返回。
 
-宽度优先遍历：
-[面试题32：从上向下打印二叉树,分行，不分行，按之字形顺序打印二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/ConstructBinaryTree_07.java)
 
-二叉树的特例：二叉搜索树。搜索时间复杂度logn
-
-[面试题36：二叉搜索树与双向链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/BinaryTreeConvert_36.java)
 
 
 [面试题68：树中两个节点的最低公共祖先](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/tree/ConstructBinaryTree_07.java)
@@ -187,27 +245,31 @@ https://www.cxyxiaowu.com/7072.html
 
 
 # 5. 栈和队列
-顺序是牛客网
-005-用两个栈实现队列
-020-包含min函数的栈
-021-栈的压入、弹出序列
-044-翻转单词顺序列(栈)
-064-滑动窗口的最大值(双端队列)
-
 [使用两个栈实现队列9](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/stack/QueueWithTwoStacks_09.java)
 
-[包含min函数的栈30](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/stack/CustomStack_30.java)
+[包含min函数的栈30](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/stack/CustomStack_30.java) important
+
+这个题目是很新颖的，我们需要借助一个辅助栈来完成任务。因为一个变量来保存最小元素，存在最小元素被弹出栈的情况，剩下的情况就无法处理了。
 
 [栈的压入、弹出序列31](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/stack/StackSequence_31.java)
 
+需要辅助栈。
 
-Heap（牛客网顺序）
-029-最小的K个数
-Hash Table
-034-第一个只出现一次的字符
-图
-065-矩阵中的路径(BFS)
-066-机器人的运动范围(DFS)
+总结：考察栈类的题目，一般不会直接考察，一般需要构建一个辅助栈。
+
+**区分栈和队列的函数**
+
+```java
+Stack:
+peek()//打印栈顶元素
+pop()//出栈
+push()//入栈
+
+Queue:
+add()//入队
+poll()//出队，和remove的区别是对空队列的处理
+peek()//队列头部
+```
 
 
 # 6. 字符串
@@ -217,7 +279,13 @@ Hash Table
 
 [正则表达式匹配19](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/string/RegularMatch_19.java)
 
+TODO
+
+这个题目对我来说难度太高了。
+
 [表示数值的字符串20](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/string/NumericStrings_20.java)
+
+这个需要总结出规律，数值的规律：`A[.[B]][e|EC]`,然后A和C的特点是整数，允许有正负号，B不能有正负号。然后从前向后扫描即可。
 
 [字符串的排列38](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/string/StringPermutation_38.java)
 
@@ -244,10 +312,8 @@ Hash Table
 [二维数组中的查找(4)](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/FindInPartiallySortedMatrix_04.java)
 本题的规律在于矩阵右上角和左下角比较特殊，比该行所有元素大，比该列所有元素小。而左上角没有这样的规律。
 
-006-旋转数组的最小数字（二分查找）
 [旋转数组旋转数组的最小数字（11）](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/sort_find/MinNumberInRotatedArray_11.java)
 
-037-数字在排序数组中出现的次数（二分查找）
 [数字在排序数组中出现的次数53](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/NumberOfK_5301.java)
 **看见有序，肯定就是二分查找了。** 二分查找十分的重要。
 
@@ -302,6 +368,16 @@ Hash Table
 
 **如果面试题要求在排序的数组或者部分排序的数组中查找一个数字或者统计某数字出现的次数，可以尝试使用二分查找算法。**
 
+**二分查找的细节：**
+
+1、分析二分查找代码时，不要出现 else，全部展开成 else if 方便理解。
+
+2、注意「搜索区间」和 while 的终止条件，如果存在漏掉的元素，记得在 最后检查。
+
+3、如需要搜索左右边界，只要在 nums[mid] == target 时做修改即可。搜索 右侧时需要减一。
+
+
+
 查找常用的有：二分查找，顺序查找，二叉排序树查找和哈希表查找。
 
 在查找中，哈希表和二叉排序树的考察重点在数据结构上，而不是算法上。哈希表的时间复杂度为O(1)，原理是空间换时间，题目代表50“第一个只出现一次的字符”，可以关注布隆过滤器的实现。
@@ -337,9 +413,6 @@ public int partition(int A[],int left,int right){
 ```
 
 排序
-035-数组中的逆序对(归并排序)
-029-最小的K个数(堆排序)
-029-最小的K个数(快速排序)
 
 
 # 8. 动态规划和贪心算法
@@ -366,6 +439,49 @@ public int partition(int A[],int left,int right){
 
 # 9. 回溯
 
+**解决一个回溯问题，实际上就是一个决 策树的遍历过程**。你只需要思考 3 个问题:
+
+> 1、路径:也就是已经做出的选择。 
+>
+> 2、选择列表:也就是你当前可以做的选择。
+>
+>  3、结束条件:也就是到达决策树底层，无法再做选择的条件。
+
+<img src="img/image-20200308134535557.png" alt="image-20200308134535557" style="zoom:33%;" />
+
+**其核心就是** **for** **循环里面的递归，在递归调用之前「做选择」，在递归调用 之后「撤销选择」**，特别简单。
+
+我们在写backtrack函数的时候，需要**维护走过的「路径」和当前可以做的「选择列 表」，当触发「结束条件」时，将「路径」记入结果集**。
+
+# 9.1 全排列问题
+
+n 个不重复的 数，全排列共有 n! 个。
+
+**回溯算法的决策树模型。**
+
+<img src="img/image-20200308134902305.png" alt="image-20200308134902305" style="zoom:33%;" />
+
+这个玩意就是n叉树的遍历。模板如下。
+
+<img src="img/image-20200308134949714.png" alt="image-20200308134949714" style="zoom:50%;" />
+
+<img src="img/image-20200308135015407.png" alt="image-20200308135015407" style="zoom: 33%;" />
+
+```
+for 选择 in 选择列表:
+	# 做选择 
+	将该选择从选择列表移除 
+	路径.add(选择) 
+	backtrack(路径, 选择列表) 
+	# 撤销选择 
+	路径.remove(选择) 
+	将该选择再加入选择列表
+```
+
+**我们只要在递归之前做出选择，在递归之后撤销刚才的选择**，就能正确得到 每个节点的选择列表和路径。
+
+
+
 回溯法是升级版的暴力法，解决迷宫类似的问题，从解决问题的每一步的所有可能选项选出一项，然后进入下一步，进行重复选择，直到最终状态。（在到达递归边界前的某层，由于一些事实不需要向任何一个子问题进行递归，直接返回上一层，这种做法称为回溯法）。
 
 和图的遍历算法很像。
@@ -376,15 +492,20 @@ public int partition(int A[],int left,int right){
 
 [13-机器人的运动范围](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/goback/RobotMove_13.java)
 
+[字符串的排列38](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/goback/StringPermutation_38.java)
+
 好好体会这两个题目。
 
 # 10. 位运算
 
 位运算：与，或，异或，左移和右移。
 需要关注的是**右移**，分为有符号和无符号两种，如果是无符号，则直接用0填补左边的n位，如果是有符号的负数，如10001010 >> 3= 11110001
+
+## 10.1 n&(n-1)
+
 **把一个整数减去1，再和原整数做与运算，会把该整数最右边的一个1变成0**。也是很多二进制问题的解决思路。
 
-[15-二进制中1的个数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/bit/NumberOf1InBinary_15.java)
+- [15-二进制中1的个数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/bit/NumberOf1InBinary_15.java)
 
 这个题目看上去很好解答，与1做与运算可验证最后一位是否为1，然后右移一位，在此和1进行与运算，直到为0。但这样是存在问题的，因为存在负数的右移的情况，负数右移是很难去处理的，我们要尽量避免。尽量转化为左移运算，所以我们的解决方案应运而生，我们把1每次左移就可以了。
 
@@ -392,10 +513,62 @@ public int partition(int A[],int left,int right){
 
 我们来看相关的题目：判断一个整数是不是2的整数次方。根据上面的方法，我们知道如果1个数如果是2的整数次方，那么该数的二进制只有1位为1，那么我们使用上面的方法，一步就可以判断出来。即n=(n-1)&n;
 
-相关题目2：给定两个证书m和n，需要改变m的二进制的多少位才能和n一样。第一步求这两个数的异或（把不相同的数变为1），第二步统计异或结果中1的位数。比如10的二进制为1010，13的二进制为1101，我们需要改变三个数才可以。
+- 相关题目2：给定两个证书m和n，需要改变m的二进制的多少位才能和n一样。第一步求这两个数的异或（把不相同的数变为1），第二步统计异或结果中1的位数。比如10的二进制为1010，13的二进制为1101，我们需要改变三个数才可以。
+- 判断一个数是不是2的指数(意思是二进制的表示中只有1位为1)
 
 面试题56：数组中数字出现的次数
 面试题65：不用加减乘除做加法
+
+# 11. 双指针法
+
+## 11.1 快慢指针法
+
+解决链表中的问题。
+
+### 11.1.1 **判定链表中是否含有环**
+
+### 11.1.2 **寻找链表的中点**
+
+### 11.1.3 **寻找链表的倒数第** **k** **个元素**
+
+## 11.2 左右指针法
+
+解决数组，字符串的问题。
+
+### 11.2.1 二分查找
+
+### 11.2.2 两数和
+
+### 11.2.3 反转数组
+
+### 11.2.4 滑动窗口算法
+
+滑动窗口算法的思路是这样:
+
+1、我们在字符串 S 中使用双指针中的左右指针技巧，初始化 left = right = 0，把索引闭区间 [left, right] 称为一个「窗口」。
+
+2、我们先不断地增加 right 指针扩大窗口 [left, right]，直到窗口中的字符串 符合要求(包含了 T 中的所有字符)。
+
+3、此时，我们停止增加 right，转而不断增加 left 指针缩小窗口 [left, right]，直到窗口中的字符串不再符合要求(不包含 T 中的所有字符了)。 同时，每次增加 left，我们都要更新一轮结果。
+
+4、重复第 2 和第 3 步，直到 right 到达字符串 S 的尽头。
+
+**第** **2** **步相当于在寻找一个「可行解」，然后第** **3** **步在 优化这个「可行解」，最终找到最优解。**左右指针轮流前进，窗口大小增增 减减，窗口不断向右滑动。
+
+needs 和 window 相当于计数器，分别记录 T 中字符出 现次数和窗口中的相应字符的出现次数。
+
+```java
+int left = 0, right = 0;
+	while (right < s.size()) { 
+    window.add(s[right]); 
+    right++;
+		while (valid) { 
+      window.remove(s[left]); 
+      left++;
+} }
+```
+
+
 
 # 参考书籍
 算法图解：https://book.douban.com/subject/26979890/
@@ -405,4 +578,4 @@ public int partition(int A[],int left,int right){
 
 做题，分类：
 - 基础算法题。其中有大量的算法题，解这些题都是有套路的，不是用递归(深度优先 DFS， 广度优先 BFS)，就是要用动态规划(Dynamic Programming)，或是折半查找(Binary Search)，或是回溯(Back tracing)，或是分治法(Divide and Conquer)，还有大量的 对树、数组、链表、字符串和 hash 表的操作。通过做这些题能让你对这些最基础的算法的 思路有非常扎实的了解和训练。对我而言，Dynamic Programming 是我的短板，尤其是一 些比较复杂的问题，在推导递推公式上总是有思维的缺陷(数学是我的硬伤)。做了这些题 后，我能感到我在动态编程的思路上受到了很大的启发。
-- 编程题。比如:atoi，strstr，add two nums，括号匹配，字符串乘法，通配符匹配，文件 路径简化，Text Justification，反转单词等，这些题的 Edge Case 和 Corner Case 有很 多。这些题需要你想清楚了再干，只要你稍有疏忽，就会有几个 case 让你痛不欲生，而且一 不小心就会让你的代码写得又臭又长，无法阅读。通过做这些题，可以非常好地训练你对各 种情况的考虑，以及你对程序代码组织的掌控(其实就是其中的状态变量)。
+- 编程题。比如:atoi，strstr，add two nums，括号匹配，字符串乘法，通配符匹配，文件 路径简化，Text Justification，反转单词等，这些题的 Edge Case 和 Corner Case 有很 多。这些题需要你想清楚了再干，只要你稍有疏忽，就会有几个 case 让你痛不欲生，而且一 不小心就会让你的代码写得又臭又长，无法阅读。通过做这些题，可以非常好地训练你对各 种情况的考虑，以及你对程序代码组织的掌控(其实就是其中的状态变量)。qi

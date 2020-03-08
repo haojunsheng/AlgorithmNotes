@@ -15,65 +15,61 @@ package com.code.tree;
  */
 public class IsSubTree_26 {
 
-    class TreeNode{
-        int val=0;
+    class TreeNode {
+        int val = 0;
         TreeNode left = null;
         TreeNode right = null;
-        public TreeNode(int val){
-            this.val=val;
+
+        public TreeNode(int val) {
+            this.val = val;
         }
     }
 
-//    private boolean isSubTree(TreeNode root1,TreeNode root2){
-//        boolean result=false;
-//
-//        if(root1!=null && root2!=null){//先序遍历树1，看树1中是否有节点和树2的根节点相同
-//            if(root1.val==root2.val){//相同，去比较字数
-//                result=isTree1HasTree2(root1,root2);
-//            }
-//            if(result==false)//遍历左子树
-//                result=isSubTree(root1.left,root2);
-//            if(result==false)//遍历右子树
-//                result=isSubTree(root1.right,root2);
-//        }
-//        return result;
-//    }
-//
-//    private boolean isTree1HasTree2(TreeNode root1, TreeNode root2) {
-//        if(root2==null)
-//            return true;
-//        if(root1==null)
-//            return false;
-//
-//        if(root1.val!=root2.val)
-//            return false;
-//        return isTree1HasTree2(root1.left,root2.left) && isTree1HasTree2(root1.right,root2.right);
-//    }
-
-
-    public boolean HasSubtree(TreeNode root1,TreeNode root2) {
+    /**
+     * 两个先序遍历
+     * @param root1
+     * @param root2
+     * @return
+     */
+    public boolean HasSubtree(TreeNode root1, TreeNode root2) {
         boolean result = false;
-        if(root1 == null || root2 == null)
+        if (root1 == null || root2 == null) {
             return result;
-        //根节点相同，去寻找结构是否相同
-        if(root1.val == root2.val){
-            result = isTree1HasTree2(root1,root2);
         }
-        //
-        if(result == false)
-            result = HasSubtree(root1.left,root2);
-        if(result == false)
-            result = HasSubtree(root1.right,root2);
+        //根节点相同，去寻找子结构是否相同
+        if (root1.val == root2.val) {
+            result = isTree1HasTree2(root1, root2);
+        }
+
+        if (result == false) {
+            result = HasSubtree(root1.left, root2);
+        }
+        if (result == false) {
+            result = HasSubtree(root1.right, root2);
+        }
         return result;
     }
 
+    /**
+     * 同样是递归判断，注意当节点的值是double类型时，不能直接判断相等，要计算差值小于0.000001
+     * @param root1
+     * @param root2
+     * @return
+     */
     private boolean isTree1HasTree2(TreeNode root1, TreeNode root2) {
-        if(root2 == null)
+        // 子树已判断完毕
+        if (root2 == null) {
             return true;
-        if(root1 == null)
+        }
+        // 原树遍历完
+        if (root1 == null) {
             return false;
-        if(root1.val != root2.val)
+        }
+        // 根节点不等
+        if (root1.val != root2.val) {
             return false;
-        return isTree1HasTree2(root1.left,root2.left) && isTree1HasTree2(root1.right,root2.right);
+        }
+        // 递归判断左右子树
+        return isTree1HasTree2(root1.left, root2.left) && isTree1HasTree2(root1.right, root2.right);
     }
 }

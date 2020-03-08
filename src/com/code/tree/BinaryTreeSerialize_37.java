@@ -1,21 +1,27 @@
 package com.code.tree;
 
+/**
+ *
+ */
 public class BinaryTreeSerialize_37 {
-    class TreeNode{
-        int val=0;
+    class TreeNode {
+        int val = 0;
         TreeNode left = null;
         TreeNode right = null;
-        public TreeNode(int val){
-            this.val=val;
+
+        public TreeNode(int val) {
+            this.val = val;
         }
     }
+
     int index = -1;   //计数变量
 
     private String Serialize(TreeNode root) {
-        StringBuffer buffer=new StringBuffer();
-        if(root==null)
+        StringBuffer buffer = new StringBuffer();
+        if (root == null) {
             return buffer.append("#,").toString();
-        buffer.append(root.val+",");
+        }
+        buffer.append(root.val + ",");
         buffer.append(Serialize(root.left));
         buffer.append(Serialize(root.right));
         return buffer.toString();
@@ -24,14 +30,15 @@ public class BinaryTreeSerialize_37 {
     private TreeNode Deserialize(String str) {
         index++;
         int length = str.length();
-        if(index > length)
+        if (index > length) {
             return null;
-        String[] strr=str.split(",");
-        TreeNode node=null;
-        if(!strr[index].equals("#")){
-            node=new TreeNode(Integer.valueOf(strr[index]));
-            node.left=Deserialize(str);
-            node.right=Deserialize(str);
+        }
+        String[] strr = str.split(",");
+        TreeNode node = null;
+        if (!strr[index].equals("#")) {
+            node = new TreeNode(Integer.valueOf(strr[index]));
+            node.left = Deserialize(str);
+            node.right = Deserialize(str);
         }
         return node;
     }

@@ -1,8 +1,6 @@
-package com.code.string;
+package com.code.goback;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * 输入一个字符串,按字典序打印出该字符串中字符的所有排列。
@@ -18,6 +16,10 @@ public class StringPermutation_38 {
         PermutationHelper(str.toCharArray(), resultList, 0);
         Collections.sort(resultList);
         return (ArrayList) resultList;
+    }
+
+    private void PermutationHelper(char[] ch, List<String> list) {
+
     }
 
     private void PermutationHelper(char[] ch, List<String> list, int i) {
@@ -82,8 +84,11 @@ public class StringPermutation_38 {
             //5.最后退出for循环，结束。
 
             for (int j = i; j < ch.length; j++) {
+                // 做选择
                 swap(ch, i, j);
+                // 下一层决策树
                 PermutationHelper(ch, list, i + 1);
+                // 取消选择
                 swap(ch, i, j);
             }
         }
