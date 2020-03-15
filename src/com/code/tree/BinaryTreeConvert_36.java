@@ -2,6 +2,9 @@ package com.code.tree;
 
 import java.util.Stack;
 
+/**
+ * 将二叉搜索树转换成排序的双向链表
+ */
 public class BinaryTreeConvert_36 {
     class TreeNode {
         int val = 0;

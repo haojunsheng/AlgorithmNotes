@@ -29,27 +29,27 @@ public class SquenceOfBST_33 {
      *
      * @param sequence
      * @param start
-     * @param root
+     * @param end
      * @return
      */
-    private static boolean judge(int[] sequence, int start, int root) {
-        if (start >= root) {
+    private static boolean judge(int[] sequence, int start, int end) {
+        if (start >= end) {
             return true;
         }
         //第一个大于根节点的元素作为右子树
         int index = start;
-        while (sequence[index] < sequence[root]) {
+        while (sequence[index] < sequence[end]) {
             index++;
         }
         // 判断右子树是不是全部大于根节点
         // 及时进行剪支
-        for (int j = index; j < root; ++j) {
-            if (sequence[j] < sequence[root]) {
+        for (int j = index; j < end; ++j) {
+            if (sequence[j] < sequence[end]) {
                 return false;
             }
         }
         // 递归处理左右子树
-        return judge(sequence, start, index - 1) && judge(sequence, index, root - 1);
+        return judge(sequence, start, index - 1) && judge(sequence, index, end - 1);
     }
 
     // 非递归版本

@@ -54,6 +54,7 @@ public class EnterNodeInLink_23 {
 
     /**
      * 找到相遇的节点
+     *
      * @param head
      * @return
      */
@@ -75,5 +76,4 @@ public class EnterNodeInLink_23 {
         }
         return null;
     }
-
 }

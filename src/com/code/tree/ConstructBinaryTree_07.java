@@ -35,8 +35,9 @@ public class ConstructBinaryTree_07 {
 
     //前序遍历{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}
     private static TreeNode reConstructBinaryTree(int[] pre, int startPre, int endPre, int[] in, int startIn, int endIn) {
-        if (startPre > endPre || startIn > endIn)
+        if (startPre > endPre || startIn > endIn) {
             return null;
+        }
         //根节点
         TreeNode root = new TreeNode(pre[startPre]);
         // 在中序中找根节点，方便划分左右子树

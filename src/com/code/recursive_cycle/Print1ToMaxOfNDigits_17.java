@@ -80,21 +80,19 @@ public class Print1ToMaxOfNDigits_17 {
     }
 
     /**
-     * 输入数字n，按顺序打印出从1最大的n位十进制数。
-     *
-     * @param n      当前处理的是第个元素，从0开始计数
+     * @param index  当前处理的是第个元素，从0开始计数
      * @param number 存放结果的数组
      */
-    public static void printOneToNthDigitsRecursely(int n, int[] number) {
+    public static void printOneToNthDigitsRecursely(int index, int[] number) {
         // 说明所有的数据排列选择已经处理完了
-        if (n >= number.length) {
+        if (index >= number.length) {
             // 可以输出数组的值
             printArray(number);
             return;
         }
         for (int i = 0; i <= 9; i++) {
-            number[n] = i;
-            printOneToNthDigitsRecursely(n + 1, number);
+            number[index] = i;
+            printOneToNthDigitsRecursely(index + 1, number);
         }
     }
 

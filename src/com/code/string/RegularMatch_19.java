@@ -24,6 +24,10 @@ public class RegularMatch_19 {
         if (strIndex != str.length && patternIndex == pattern.length) {
             return false;
         }
+        // 处理正常和.的情况
+        if (pattern[patternIndex] == str[strIndex] || (pattern[patternIndex] == '.' && strIndex != str.length)) {
+            return matchCore(str, strIndex + 1, pattern, patternIndex + 1);
+        }
         //str到尾，pattern未到尾(不一定匹配失败，因为a*可以匹配0个字符)
         if (strIndex == str.length && patternIndex != pattern.length) {
             //只有pattern剩下的部分类似a*b*c*的形式，才匹配成功
@@ -43,10 +47,6 @@ public class RegularMatch_19 {
                 //直接跳过*（*匹配到0个）
                 return matchCore(str, strIndex, pattern, patternIndex + 2);
             }
-        }
-
-        if (pattern[patternIndex] == str[strIndex] || (pattern[patternIndex] == '.' && strIndex != str.length)) {
-            return matchCore(str, strIndex + 1, pattern, patternIndex + 1);
         }
 
         return false;

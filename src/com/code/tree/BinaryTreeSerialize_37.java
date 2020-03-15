@@ -1,7 +1,11 @@
 package com.code.tree;
 
 /**
- *
+ * 根据前序遍历规则完成序列化与反序列化。
+ * 所谓序列化指的是遍历二叉树为字符串；所谓反序列化指的是依据字符串重新构造成二叉树。
+ * 依据前序遍历序列来序列化二叉树，因为前序遍历序列是从根结点开始的。
+ * 当在遍历二叉树时碰到Null指针时，这些Null指针被序列化为一个特殊的字符“#”。
+ * 另外，结点之间的数值用逗号隔开。
  */
 public class BinaryTreeSerialize_37 {
     class TreeNode {
@@ -14,10 +18,11 @@ public class BinaryTreeSerialize_37 {
         }
     }
 
-    int index = -1;   //计数变量
+    //计数变量
+    int index = -1;
 
     private String Serialize(TreeNode root) {
-        StringBuffer buffer = new StringBuffer();
+        StringBuilder buffer = new StringBuilder();
         if (root == null) {
             return buffer.append("#,").toString();
         }
@@ -29,10 +34,6 @@ public class BinaryTreeSerialize_37 {
 
     private TreeNode Deserialize(String str) {
         index++;
-        int length = str.length();
-        if (index > length) {
-            return null;
-        }
         String[] strr = str.split(",");
         TreeNode node = null;
         if (!strr[index].equals("#")) {

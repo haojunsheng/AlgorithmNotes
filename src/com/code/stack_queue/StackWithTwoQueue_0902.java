@@ -7,9 +7,6 @@ public class StackWithTwoQueue_0902 {
     private LinkedList<Integer> queue1;
     private LinkedList<Integer> queue2;
 
-    /**
-     * @param num
-     */
     public void push(int num) {
         if (queue1.isEmpty() && queue2.isEmpty()) {
             queue1.push(num);
@@ -21,9 +18,6 @@ public class StackWithTwoQueue_0902 {
         }
     }
 
-    /**
-     * @return
-     */
     public Integer pop() {
         if (queue1.isEmpty() && queue2.isEmpty()) {
             return null;
@@ -48,6 +42,5 @@ public class StackWithTwoQueue_0902 {
     public static void main(String[] args) {
 
     }
-
 }
 

@@ -7,7 +7,6 @@ public class RobotMove_13 {
 
     /**
      * 回溯算法
-     * <p>
      * 返回机器人能到达的格子数
      *
      * @param threshold 阈值
@@ -31,14 +30,14 @@ public class RobotMove_13 {
         return count;
     }
 
-    /*
-     * 判断从第row行、第col列出发可以到达的格子数
-     * 为 1+ 四个方向
-     */
+
+    // 判断从第row行、第col列出发可以到达的格子数为 1+ 四个方向
     public int movingCountCore(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
         int count = 0;
         if (check(threshold, rows, cols, row, col, visited)) {
+            // 做选择
             visited[row * cols + col] = true;
+            // 加入路径
             count = 1 + movingCountCore(threshold, rows, cols, row - 1, col, visited)
                     + movingCountCore(threshold, rows, cols, row, col - 1, visited)
                     + movingCountCore(threshold, rows, cols, row + 1, col, visited)
@@ -47,7 +46,7 @@ public class RobotMove_13 {
         return count;
     }
 
-    //检查机器人能否到达该格子
+    // 检查机器人能否到达该格子
     public boolean check(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
         if (row >= 0 && row < rows && col >= 0 && col < cols
                 && getDigitSum(row) + getDigitSum(col) <= threshold
@@ -57,7 +56,7 @@ public class RobotMove_13 {
         return false;
     }
 
-    //求一个数的各位数和
+    // 求一个数的各位数和
     public int getDigitSum(int num) {
         int sum = 0;
         while (num > 0) {

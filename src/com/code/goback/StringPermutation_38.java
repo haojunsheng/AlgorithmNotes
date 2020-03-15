@@ -18,13 +18,14 @@ public class StringPermutation_38 {
         return (ArrayList) resultList;
     }
 
-    private void PermutationHelper(char[] ch, List<String> list) {
-
-    }
-
-    private void PermutationHelper(char[] ch, List<String> list, int i) {
-        //这是递归的终止条件，就是i下标已经移到char数组的末尾的时候，考虑添加这一组字符串进入结果集中
-        if (i == ch.length - 1) {
+    /**
+     * @param ch
+     * @param list
+     * @param index
+     */
+    private void PermutationHelper(char[] ch, List<String> list, int index) {
+        //这是递归的终止条件，就是index下标已经移到char数组的末尾的时候，考虑添加这一组字符串进入结果集中
+        if (index == ch.length - 1) {
             //判断一下是否重复
             if (!list.contains(new String(ch))) {
                 list.add(new String(ch));
@@ -83,13 +84,13 @@ public class StringPermutation_38 {
 
             //5.最后退出for循环，结束。
 
-            for (int j = i; j < ch.length; j++) {
+            for (int j = index; j < ch.length; j++) {
                 // 做选择
-                swap(ch, i, j);
+                swap(ch, index, j);
                 // 下一层决策树
-                PermutationHelper(ch, list, i + 1);
+                PermutationHelper(ch, list, index + 1);
                 // 取消选择
-                swap(ch, i, j);
+                swap(ch, index, j);
             }
         }
     }

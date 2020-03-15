@@ -27,12 +27,14 @@ public class Power_16 {
 
         //定义正指数
         int absExponent = exponent;
-        if (exponent < 0)
+        if (exponent < 0) {
             absExponent = -exponent;
+        }
 
         double result = powerWithExponet(base, absExponent);
-        if (exponent < 0)
+        if (exponent < 0) {
             result = 1.0 / result;
+        }
 
         return result;
     }
@@ -61,10 +63,12 @@ public class Power_16 {
      */
     //计算指数为非负数的次方
     public double powerWithUnsignedExponet(double base, int exponent) {
-        if (exponent == 0)
+        if (exponent == 0) {
             return 1.0;
-        if (exponent == 1)
+        }
+        if (exponent == 1) {
             return base;
+        }
 
         //使用左移运算符，将exponent除以2
         double result = powerWithUnsignedExponet(base, exponent >> 1);
@@ -78,7 +82,7 @@ public class Power_16 {
 
     /**
      * 比较两个小数是否相等
-     *
+     * <p>
      * 由于计算机表示小数（包括float和double型小数）都会有误差，
      * 我们不能直接用等号（==）判断两个小数是否相等。
      * 如果两个小数的差的绝对值很小，比如小于0.0000001，就可以认为他们相等。
@@ -89,23 +93,26 @@ public class Power_16 {
      */
     public boolean equal(double num1, double num2) {
         double tmp = num1 - num2;
-        if (tmp > -0.0000001 && tmp < 0.0000001)
+        if (tmp > -0.0000001 && tmp < 0.0000001) {
             return true;
-        else
+        } else {
             return false;
-    }
-    static int f(int n,int result){
-        if(n==1)
-            return result;
-        else {
-            return f(n-1,n*result);
         }
     }
+
+    static int f(int n, int result) {
+        if (n == 1) {
+            return result;
+        } else {
+            return f(n - 1, n * result);
+        }
+    }
+
     public static void main(String[] args) {
         Power_16 test = new Power_16();
         double result = test.power(2.0, 4);
         System.out.println("是否是非法输入：" + test.invalidInput);
         System.out.println("结果是：" + result);
-        System.out.println(f(3,1));
+        System.out.println(f(3, 1));
     }
 }

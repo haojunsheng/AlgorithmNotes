@@ -22,7 +22,6 @@ public class PrintListInReversedOrder_06 {
         node3.next = null;
 
         printListReverseByStack(node1); // 调用栈方法
-        //printListReverseByRecursion(node1); // 调用递归方法
     }
 
     // 用栈的思想来实现链表的倒序输出
@@ -39,8 +38,9 @@ public class PrintListInReversedOrder_06 {
     }
 
     public static void printListReverseByRecursion(ListNode headNode) {
-        if (headNode == null)
+        if (headNode == null) {
             return;
+        }
         printListReverseByStack(headNode.next);
         System.out.println(headNode.value);
     }

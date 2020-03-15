@@ -12,7 +12,7 @@ package com.code.linkedList;
  * 1、遍历链表，复制每个结点，如复制结点A得到A1，将结点A1插到结点A后面；
  * 2、重新遍历链表，复制老结点的随机指针给新结点，如A1.random = A.random.next;
  * 3、拆分链表，将链表拆分为原链表和复制后的链表
- *
+ * <p>
  * 这样做的好处是我们可以避免用O(n^2)的时间复杂度来找复制链表的兄弟节点
  */
 public class CopyList_35 {
@@ -30,7 +30,6 @@ public class CopyList_35 {
         if (pHead == null) {
             return null;
         }
-
         //在原链表上创建复制后的链表
         cloneNodes(pHead);
         //连接复制节点的兄弟节点

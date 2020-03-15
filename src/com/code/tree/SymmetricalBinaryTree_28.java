@@ -1,7 +1,5 @@
 package com.code.tree;
 
-import com.sun.org.apache.xml.internal.security.algorithms.implementations.SignatureECDSA;
-
 /**
  * 题目描述：
  * 请实现一个函数，用来判断一颗二叉树是不是对称的。

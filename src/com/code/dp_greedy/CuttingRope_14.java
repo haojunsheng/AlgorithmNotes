@@ -2,7 +2,9 @@ package com.code.dp_greedy;
 
 /**
  * 题目：
- * 给定一根长度为n的绳子，请把绳子剪成m段（m、n都是整数，n>1并且m>1），每段绳子的长度记为k[0],k[1],…,k[m]。请问k[0]* k[1] * … *k[m]可能的最大乘积是多少？
+ * 给定一根长度为n的绳子，请把绳子剪成m段（m、n都是整数，n>1并且m>1），
+ * 每段绳子的长度记为k[0],k[1],…,k[m]。
+ * 请问k[0]* k[1] * … *k[m]可能的最大乘积是多少？
  * 例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。
  */
 public class CuttingRope_14 {
@@ -29,18 +31,22 @@ public class CuttingRope_14 {
      * @return
      */
     public static int dynamicPlan(int length) {
-        if (length <= 1)
+        if (length <= 1) {
             return 0;
-        if (length == 2)
+        }
+        if (length == 2) {
             return 1;
-        if (length == 3)
+        }
+        if (length == 3) {
             return 2;
+        }
 
         // products数组存放的是每个子问题的最优解,注意保存的是子问题，比如products[3]保存的是f(4)的最大值
         // products[i]表示长度为i的绳子剪为若干段后各段长度乘积的最大值
         // 为了求解f(i)，我们需要求出所有的f(j)*f(i-j)
         // products的长度为length+1，因为存放的是0~length
         int[] products = new int[length + 1];
+        // products[0]其实没价值
         products[0] = 0;
         products[1] = 1;
         products[2] = 2;
@@ -50,8 +56,9 @@ public class CuttingRope_14 {
         for (int i = 4; i <= length; i++) {
             max = 0;
             for (int j = 1; j <= i / 2; j++) {
-                if (products[j] * products[i - j] > max)
+                if (products[j] * products[i - j] > max) {
                     max = products[j] * products[i - j];
+                }
             }
             products[i] = max;
         }
@@ -68,12 +75,15 @@ public class CuttingRope_14 {
      * @return
      */
     public static int greedy(int length) {
-        if (length <= 1)
+        if (length <= 1) {
             return 0;
-        if (length == 2)
+        }
+        if (length == 2) {
             return 1;
-        if (length == 3)
+        }
+        if (length == 3) {
             return 2;
+        }
 
         //尽可能多的剪长度为3的绳子
         int timesOf3 = length / 3;
