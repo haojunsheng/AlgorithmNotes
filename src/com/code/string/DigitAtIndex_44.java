@@ -1,5 +1,8 @@
 package com.code.string;
 
+/**
+ * 数字序列中某一位的数字
+ */
 public class DigitAtIndex_44 {
     public static int findNthDigit(int n) {
         //base digits

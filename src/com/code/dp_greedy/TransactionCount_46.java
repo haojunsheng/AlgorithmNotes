@@ -1,9 +1,32 @@
 package com.code.dp_greedy;
 
 /**
- *
+ * 数字翻译成字符串
  */
 public class TransactionCount_46 {
+    private int len;
+    private String str;
+
+    public int translateNumCycle(int num) {
+        str = String.valueOf(num);
+        len = str.length();
+        return dfs(0);
+    }
+
+    private int dfs(int begin) {
+        if (begin == len) {
+            return 1;
+        }
+
+        int sum = dfs(begin + 1);
+        if (begin + 1 < len && str.charAt(begin) != '0') {
+            if (str.substring(begin, begin + 2).compareTo("25") <= 0) {
+                sum += dfs(begin + 2);
+            }
+        }
+        return sum;
+    }
+
     public int translateNum(int num) {
         String str = String.valueOf(num);
         int len = str.length();

@@ -9,36 +9,51 @@ public class MergeSort {
      * @param array
      * @return
      */
-    public static int[] MergeSort(int[] array) {
-        if (array.length < 2) {
+    public static int[] mergeSort(int[] array, int left, int right) {
+        if (left >= right) {
             return array;
         }
-        int mid = array.length / 2;
-        int[] left = Arrays.copyOfRange(array, 0, mid);
-        int[] right = Arrays.copyOfRange(array, mid, array.length);
-        return merge(MergeSort(left), MergeSort(right));
+        int mid = (left + right) / 2;
+        mergeSort(array, left, mid);
+        mergeSort(array, mid + 1, right);
+        merge(array, left, mid, right);
+        return array;
     }
 
     /**
      * 归并排序——将两段排序好的数组结合成一个排序数组
-     *
-     * @param left
-     * @param right
-     * @return
      */
-    public static int[] merge(int[] left, int[] right) {
-        int[] result = new int[left.length + right.length];
-        for (int index = 0, i = 0, j = 0; index < result.length; index++) {
-            if (i >= left.length) {
-                result[index] = right[j++];
-            } else if (j >= right.length) {
-                result[index] = left[i++];
-            } else if (left[i] > right[j]) {
-                result[index] = right[j++];
+    private static void merge(int[] arr, int low, int mid, int high) {
+        //temp数组用于暂存合并的结果
+        int[] temp = new int[high - low + 1];
+        //左半边的指针
+        int i = low;
+        //右半边的指针
+        int j = mid + 1;
+        //合并后数组的指针
+        int k = 0;
+
+        //将记录由小到大地放进temp数组
+        for (; i <= mid && j <= high; k++) {
+            if (arr[i] < arr[j]) {
+                temp[k] = arr[i++];
             } else {
-                result[index] = left[i++];
+                temp[k] = arr[j++];
             }
         }
-        return result;
+
+        //接下来两个while循环是为了将剩余的（比另一边多出来的个数）放到temp数组中
+        while (i <= mid) {
+            temp[k++] = arr[i++];
+        }
+
+        while (j <= high) {
+            temp[k++] = arr[j++];
+        }
+
+        //将temp数组中的元素写入到待排数组中
+        for (int l = 0; l < temp.length; l++) {
+            arr[low + l] = temp[l];
+        }
     }
 }

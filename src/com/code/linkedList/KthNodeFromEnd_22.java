@@ -26,10 +26,6 @@ public class KthNodeFromEnd_22 {
      * 第一个指针从链表的头指针开始遍历向前走k-1。第二个指针保持不动；
      * 从第k步开始，第二个指针也开始从链表的头指针开始遍历。
      * 由于两个指针的距离保持在k-1，当第一个（走在前面的）指针到达链表的尾结点时，第二个指针正好是倒数第k个结点。
-     *
-     * @param head
-     * @param k
-     * @return
      */
     private ListNode findKthToTail(ListNode head, int k) {
         if (head == null || k <= 0) {

@@ -14,11 +14,6 @@ public class FindInPartiallySortedMatrix_04 {
      * 这样每一步都可以缩减查找范围，直到找到要查找的数字，或者查找失败。
      */
 
-    /**
-     * @param target
-     * @param arr
-     * @return
-     */
     public static boolean Find(int target, int[][] arr) {
         if (arr == null || arr.length == 0) {
             return false;
