@@ -71,8 +71,14 @@
       * [7.1 第一个只出现一次的字符](#71-第一个只出现一次的字符)
       * [7.2 在排序数组中查找数字](#72-在排序数组中查找数字)
       * [7.3 和为s的数字](#73-和为s的数字)
+      * [7.4 二分查找套路](#74-二分查找套路)
    * [8. 动态规划和贪心算法](#8-动态规划和贪心算法)
       * [8.0 动态规划](#80-动态规划)
+         * [8.0.1 线性规划](#801-线性规划)
+            * [<strong>求解 dp[i] 形式一</strong>](#求解-dpi-形式一)
+            * [求解 dp[i] 形式二](#求解-dpi-形式二)
+         * [8.0.2 区间规划](#802-区间规划)
+         * [8.0.3 约束规划](#803-约束规划)
       * [8.1 <strong>斐波那契数列</strong>](#81-斐波那契数列)
       * [8.2 凑零钱问题](#82-凑零钱问题)
       * [8.3 最长增长子序列（LIS）](#83-最长增长子序列lis)
@@ -100,6 +106,7 @@
       * [9.3 机器人的运动范围](#93-机器人的运动范围)
       * [9.4 字符串的排列](#94-字符串的排列)
       * [9.5 N皇后问题](#95-n皇后问题)
+      * [9.6 数组中所有目标和为target](#96-数组中所有目标和为target)
    * [10. 位运算](#10-位运算)
       * [10.1 n&amp;(n-1)](#101-nn-1)
    * [11. 双指针法](#11-双指针法)
@@ -116,9 +123,16 @@
             * [11.2.4.2 找到字符串中所有字母异位词](#11242-找到字符串中所有字母异位词)
             * [11.2.4.3 无重复字符的最⻓子串](#11243-无重复字符的最子串)
             * [11.2.4.4 总结](#11244-总结)
+   * [12. DFS vs BFS](#12-dfs-vs-bfs)
+      * [12.1 DFS](#121-dfs)
+         * [12.1.1 走迷宫](#1211-走迷宫)
+         * [12.1.2 利用 DFS 去寻找最短的路径](#1212-利用-dfs-去寻找最短的路径)
+      * [12.2 BFS](#122-bfs)
+         * [12.2.1 BFS找最短路径](#1221-bfs找最短路径)
+         * [12.2.2 最多允许打通 3 堵墙](#1222-最多允许打通-3-堵墙)
    * [参考书籍](#参考书籍)
 
-<!-- Added by: anapodoton, at: Mon Mar 23 16:49:11 CST 2020 -->
+<!-- Added by: anapodoton, at: Sat Mar 28 08:55:24 CST 2020 -->
 
 <!--te-->
 
@@ -3243,6 +3257,8 @@ public int getMissingNumber(int[] array) {
 
 [和为s的数字57](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/array/FindNumWithSum_57.java)
 
+## 7.4 二分查找套路
+
 
 
 # 8. 动态规划和贪心算法
@@ -3284,6 +3300,156 @@ public int getMissingNumber(int[] array) {
 　　我要到哪里去？  ——设计转移
 
 　　设计状态是DP的基础。接下来的设计转移，有两种方式：一种是考虑我从哪里来（本文之前提到的两个例子，都是在考虑“我从哪里来”）；另一种是考虑我到哪里去，这常见于求出f(x)之后，**更新能从x走到的一些解**。这种DP也是不少的，我们以后会遇到。
+
+​       动态问题的分类：
+
+### 8.0.1 线性规划
+
+线性，就是说各个子问题的规模以线性的方式分布，并且子问题的最佳状态或结果可以存储在一维线性的数据结构里，例如一维数组，哈希表等。 
+
+解法中，经常会用 dp[i] 去表示第 i 个位置的结果，或者从 0 开始到第 i 个位置为止的最佳状态或结果。例如，最长上升子序列。dp[i] 表示从数组第 0 个元素开始到第i个元素为止的最长的上升子序列。
+
+求解 dp[i] 的复杂程度取决于题目的要求，但是基本上有两种形式。
+
+#### **求解 dp[i] 形式一**
+
+第一种形式，**当前所求的值仅仅依赖于有限个先前计算好的值（只有一重循环）**，也就是说，dp[i] 仅仅依赖于有限个 dp[j]，其中 j < i。
+
+- 斐波那契数列：dp[i]=dp[i−1] + dp[i−2]，可以看到，当前值只依赖于前面两个计算好的值。
+- 给定一个数组，不能选择相邻的数，求如何选才能使总数最大。
+
+解法：这道题需要运用经典的 0-1 思想，简单说就是：“选还是不选”。
+
+假设 dp[i] 表示到第 i 个元素为止我们所能收获到的最大总数。
+
+1. 如果选择了第 i 个数，则不能选它的前一个数，因此，收获的最大总数就是 dp[i−2] + nums[i]。
+
+2. 不选，则直接考虑它的前一个数 dp[i−1]。
+
+因此，可以推导出它的递归公式 dp[i]=max(nums[i] + dp[i−2], dp[i−1])，可以看到，dp[i] 仅仅依赖于有限个 dp[j]，其中 j=i−1，i−2。
+
+```java
+public int rob(int[] nums) {
+    int n = nums.length;
+  
+    // 处理当数组为空或者数组只有一个元素的情况
+    if(n == 0) return 0;
+    if(n == 1) return nums[0];
+
+    // 定义一个 dp 数组，dp[i] 表示到第 i 个元素为止我们所能收获到的最大总数
+    int[] dp = new int[n];
+
+    // 初始化 dp[0]，dp[1]
+    dp[0] = nums[0];
+    dp[1] = Math.max(nums[0], nums[1]);
+
+    // 对于每个 nums[i]，考虑两种情况，选还是不选，然后取最大值
+    for (int i = 2; i < n; i++) {
+        dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
+    }
+  
+    return dp[n - 1];
+}
+```
+
+- 机器人移动问题。一个机器人位于一个 网格的左上角（起始点在下图中标记为“Start”）。机器人每次只能向下或向右移动一步。机器人试图到达网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径？
+
+<img src="img/image-20200327172446741.png" alt="image-20200327172446741" style="zoom:33%;" />
+
+递推公式为 `dp[i][j]=dp[i−1][j] + dp[i][j−1]`。
+
+ 虽然利用一个二维数组去保存计算的结果，但是 `dp[i][j]` 所表达的意思仍然是线性的，`dp[i][j]` 表示从起点到 (i, j) 的总走法。本题不再讨论具体实现。可以看到，`dp[i][j]` 仅仅依赖于两个先前的状态。
+
+#### 求解 dp[i] 形式二
+
+第二种求解 dp[i] 的形式，**当前所求的值依赖于所有先前计算好的值**（所以需要二重循环），也就是说，dp[i] 是各个 dp[j] 的某种组合，其中 j 由 0 遍历到 i−1。
+
+举例：求解最长上升子序列。
+
+解法：dp[i]=max(dp[j]) + 1，0 <= j < i。可以看到，当前值依赖于前面所有计算好的值。
+
+### 8.0.2 区间规划
+
+区间规划，就是说各个子问题的规模由不同的区间来定义，一般子问题的最佳状态或结果存储在二维数组里。一般用 `dp[i][j]` 代表从第 i 个位置到第 j 个位置之间的最佳状态或结果。
+
+ 解这类问题的时间复杂度一般为多项式时间，对于一个大小为 n 的问题，时间复杂度不会超过 n 的多项式倍数。例如，O(n)=n^k，k 是一个常数，根据题目的不同而定。
+
+- LeetCode 第 516 题，在一个字符串 S 中求最长的回文子序列。例如给定字符串为 dccac，最长回文就是 ccc
+
+对于回文来说，必须保证两头的字符都相同。用 `dp[i][j]` 表示从字符串第 i 个字符到第 j 个字符之间的最长回文，比较这段区间外的两个字符，如果发现它们相等，它们就肯定能构成新的最长回文。而最长的回文长度会保存在 `dp[0][n−1]` 里。因此，可以推导出如下的递推公式。
+
+当首尾的两个字符相等的时候 `dp[0][n−1]=dp[1][n−2] + 2`，
+
+否则，`dp[0][n−1]=max(dp[1][n−1], dp[0][n−2])`。
+
+```java
+public static int LPS(String s) {
+    int n = s.length();
+    // 定义 dp 矩阵，dp[i][j] 表示从字符串第 i 个字符到第 j 个字符之间的最长回文
+    int[][] dp = new int[n][n];
+  
+    // 初始化 dp 矩阵，将对角线元素设为 1，即单个字符的回文长度为 1
+    for (int i = 0; i < n; i++) dp[i][i] = 1;
+  
+    // 从长度为 2 开始，尝试将区间扩大，一直扩大到 n
+    for (int len = 2; len <= n; len++) {
+        // 在扩大的过程中，每次都得出区间的其实位置i和结束位置j
+        for (int i = 0; i < n - len + 1; i++) {
+            int j = i + len - 1;
+      
+            // 比较一下区间首尾的字符是否相等，如果相等，就加2；如果不等，从规模更小的字符串中得出最长的回文长度
+            if (s.charAt(i) == s.charAt(j)) {
+                dp[i][j] = 2 + (len == 2 ? 0: dp[i + 1][j - 1]);
+              } else {
+                dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+              }
+        }
+    } 
+    return dp[0][n - 1];
+}
+```
+
+### 8.0.3 约束规划
+
+在普通的线性规划和区间规划里，一般题目有两种需求：统计和最优解。
+
+这些题目不会对输出结果中的元素有什么限制，只要满足最终的一个条件就好了。但是在很多情况下，题目会对输出结果的元素添加一定的限制或约束条件，增加了解题的难度。
+
+- 0-1 背包问题。给定 n 个物品，每个物品都有各自的价值 vi 和重量 wi，现在给你一个背包，背包所能承受的最大重量是 W，那么往这个背包里装物品，问怎么装能使被带走的物品的价值总和最大。
+
+```java
+// F(i,C)=max(F(i−1,C),v(i)+F(i−1,C−w(i)))
+public class KnapSack01 {
+    public static int knapSack(int[] w, int[] v, int C) {
+        int size = w.length;
+        if (size == 0) {
+            return 0;
+        }
+
+        int[][] dp = new int[size][C + 1];
+        //初始化第一行
+        //仅考虑容量为C的背包放第0个物品的情况
+        for (int i = 0; i <= C; i++) {
+            dp[0][i] = w[0] <= i ? v[0] : 0;
+        }
+		//填充其他行和列
+        for (int i = 1; i < size; i++) {
+            for (int j = 0; j <= C; j++) {
+                if (w[i] <= j) {
+                    dp[i][j] = Math.max(dp[i-1][j], v[i] + dp[i - 1][j - w[i]]);
+                }
+            }
+        }
+        return dp[size - 1][C];
+    }
+
+    public static void main(String[] args) {
+        int[] w = {2, 1, 3, 2};
+        int[] v = {12, 10, 20, 15};
+        System.out.println(knapSack(w, v, 5));
+    }
+}
+```
 
 ## 8.1 **斐波那契数列**
 
@@ -3395,6 +3561,80 @@ dp数组的初始化问题，找最小值，初始化为大一点的数，找最
 ![image-20200316161750318](img/image-20200316161750318.png)
 
 ![img](https://gblobscdn.gitbook.com/assets%2F-LrtQOWSnDdXhp3kYN4k%2F-LrtQYLCSR8P7gMTIQMt%2F-LrtQ_eMeRNnq_2HM-m-%2Fgif2.gif?generation=1571847823656757&alt=media)
+
+```java
+// 递归实现
+class LISRecursion {
+    // 定义一个静态变量 max，用来保存最终的最长的上升子序列的长度
+    static int max;
+
+    public int f(int[] nums, int n) {
+        if (n <= 1) {
+            return n;
+        }
+    
+        int result=0, maxEndingHere=1;
+    
+        // 从头遍历数组，递归求出以每个点为结尾的子数组中最长上升序列的长度
+        for (int i=1; i < n; i++) {
+            result=f(nums, i);
+
+            if (nums[i−1] < nums[n−1] && result + 1 > maxEndingHere) {
+                maxEndingHere=result + 1;
+            }
+        }
+
+        // 判断一下，如果那个数比目前最后一个数要小，那么就能构成一个新的上升子序列 
+        if (max < maxEndingHere) {
+            max=maxEndingHere;
+        }
+
+        // 返回以当前数结尾的上升子序列的最长长度
+        return maxEndingHere;
+    }
+
+    public int LIS(int[] nums) {
+        max=1;
+        f(nums, nums.length);
+        return max; 
+    }
+}
+```
+
+下面我们来实现记忆法：
+
+```java
+class LISMemoization {
+    static int max;
+    // 定义哈希表 cache，用来保存计算结果
+    static HashMap<Integer, Integer> cache;
+    
+    // 调用递归函数的时候，判断 cache 里是否已经保留了这个值。是，则返回；不是，继续递归调用
+    public int f(int[] nums, int n) {
+        if (cache.containsKey(n)) {
+            return cache.get(n);
+        }
+        if (n <= 1) {
+            return n;
+        }
+
+        int result=0, maxEndingHere=1; 
+        for (int i=1; i < n; i++) {
+            ...
+        }
+    
+        if (max < maxEndingHere) {
+            max=maxEndingHere;
+        }
+    
+        // 在返回当前结果前，保存到 cache
+        cache.put(n, maxEndingHere);
+        return maxEndingHere;
+    }
+}
+```
+
+下面是自底向上：
 
 ```java
 public int lengthOfLIS(int[] nums) {
@@ -4533,6 +4773,41 @@ n=piles.length
 
 我们在写backtrack函数的时候，需要**维护走过的「路径」和当前可以做的「选择列表」，当触发「结束条件」时，将「路径」记入结果集**。
 
+回溯实际上是一种试探算法，这种算法跟暴力搜索最大的不同在于，在回溯算法里，是一步一步地小心翼翼地进行向前试探，会对每一步探测到的情况进行评估，如果当前的情况已经无法满足要求，那么就没有必要继续进行下去，也就是说，它可以帮助我们避免走很多的弯路。
+
+回溯算法的特点在于，当出现非法的情况时，算法可以回退到之前的情景，可以是返回一步，有时候甚至可以返回多步，然后再去尝试别的路径和办法。这也就意味着，想要采用回溯算法，就必须保证，每次都有多种尝试的可能。
+
+**解题步骤**
+
+1. 判断当前情况是否非法，如果非法就立即返回；
+2. 当前情况是否已经满足递归结束条件，如果是就将当前结果保存起来并返回；
+3. 当前情况下，遍历所有可能出现的情况并进行下一步的尝试；
+4. 递归完毕后，立即回溯，回溯的方法就是取消前一步进行的尝试。
+
+```java
+function fn(n) {
+        // 第一步：判断输入或者状态是否非法？
+        if (input/state is invalid){
+            return;
+        }
+        // 第二步：判读递归是否应当结束?
+        if (match condition){
+            return some value;
+        }
+        // 遍历所有可能出现的情况
+        for (all possible cases) {
+            // 第三步: 尝试下一步的可能性
+            solution.push(case)
+            // 递归
+            result = fn(m)
+            // 第四步：回溯到上一步
+            solution.pop(case)
+        }
+    }
+```
+
+
+
 ## 9.1 全排列问题
 
 n 个不重复的数，全排列共有 n! 个。
@@ -4754,6 +5029,8 @@ public ArrayList<String> Permutation(String str) {
 
 ## 9.5 N皇后问题
 
+<img src="img/CgoB5l2IjnmALbFsAC7XEvsRn6M912.gif" alt="img" style="zoom:25%;" />
+
 本题深度遍历回溯方法的骨架：
 
 ```java
@@ -4897,6 +5174,60 @@ public class NQueen {
     }
 ```
 
+## 9.6 数组中所有目标和为target
+
+给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
+
+说明：所有数字（包括 target）都是正整数。解集不能包含重复的组合。 
+
+1. 从一个空的集合开始，小心翼翼地往里面添加元素。
+2. 每次添加，检查一下当前的总和是否等于给定的目标。
+3. 如果总和已经超出了目标，说明没有必要再尝试其他的元素了，返回并尝试其他的元素；
+4. 如果总和等于目标，就把当前的组合添加到结果当中，表明我们找到了一种满足要求的组合，同时返回，并试图寻找其他的集合。
+
+```java
+int[][] combinationSum(int[] candidates, int target) {
+        int[][] results;
+        backtracking(candidates, target, 0, [], results);
+        return results;
+    }
+
+    void backtracking = (int[] candidates, int target, int start, int[] solution, int[][] results) {
+        if (target < 0) {
+            return;
+        }
+
+        if (target === 0) {
+            results.push(solution);
+            return;
+        }
+
+        for (int i = start; i < candidates.length; i++) {
+            solution.push(candidates[i]);
+            backtracking(candidates, target - candidates[i], i, solution, results);
+            solution.pop();
+        }
+    }
+```
+
+在主函数里：
+
+- 定义一个 results 数组用来保存最终的结果；
+- 调用函数 backtracking，并将初始的情况以及 results 传递进去，这里的初始情况就是从第一个元素开始尝试，而且初始的子集为空。
+
+在 backtracking 函数里：
+
+- 检查当前的元素总和是否已经超出了目标给定的值，每添加进一个新的元素时，就将它从目标总和中减去；
+- 如果总和已经超出了目标给定值，就立即返回，去尝试其他的数值；
+- 如果总和刚好等于目标值，就把当前的子集添加到结果中。
+
+在循环体内：
+
+- 每次添加了一个新的元素，立即递归调用 backtracking，看是否找到了合适的子集
+- 递归完毕后，要把上次尝试的元素从子集里删除，这是最重要的。
+
+
+
 # 10. 位运算
 
 位运算：与，或，异或，左移和右移。
@@ -4948,6 +5279,8 @@ public static int numberOf1Simple(int num) {
 解决数组，字符串的问题。
 
 ### 11.2.1 二分查找
+
+
 
 
 
@@ -5074,6 +5407,211 @@ return minLen == INT_MAX ?
 #### 11.2.4.4 总结
 
 <img src="img/image-20200322183631070.png" alt="image-20200322183631070" style="zoom:33%;" />
+
+# 12. DFS vs BFS
+
+## 12.1 DFS
+
+深度优先搜索，从起点出发，从规定的方向中选择其中一个不断地向前走，直到无法继续为止，然后尝试另外一种方向，直到最后走到终点。就像走迷宫一样，尽量往深处走。
+
+DFS 解决的是连通性的问题，即，给定两个点，一个是起始点，一个是终点，判断是不是有一条路径能从起点连接到终点。起点和终点，也可以指的是某种起始状态和最终的状态。问题的要求并不在乎路径是长还是短，只在乎有还是没有。有时候题目也会要求把找到的路径完整的打印出来。
+
+### 12.1.1 走迷宫
+
+给定一个二维矩阵代表一个迷宫，迷宫里面有通道，也有墙壁，通道由数字 0 表示，而墙壁由 -1 表示，有墙壁的地方不能通过，那么，能不能从 A 点走到 B 点。
+
+<img src="img/CgoB5l2IkZOAZAaTAAEnEYY55UA254.png" alt="img" style="zoom: 50%;" />
+
+<img src="img/CgotOV2IkZmAUAsQAOl9ssa2zxE177.gif" alt="img" style="zoom:33%;" />
+
+```java
+int dx[] = {-1, 0, 1, 0};   //通过px 和 py数组来实现左下右上的移动顺序
+int dy[] = {0, -1, 0, 1};
+// x表示横坐标，y表示纵坐标
+boolean dfs(int maze[][], int x, int y) {
+        // 第一步：判断是否找到了B（B[0]是B的横坐标，B[1]是纵坐标）
+        if (x == B[0] && y == B[1]) {
+            return true;
+        }
+
+        // 第二步：标记当前的点已经被访问过
+        maze[x][y] = -1;
+
+        // 第三步：在四个方向上尝试
+        for (int d = 0; d < 4; d++) {
+            int i = x + dx[d], j = y + dy[d];
+
+            // 第四步：如果有一条路径被找到了，返回true
+            if (isSafe(maze, i, j) && dfs(maze, i, j)) {
+                return true;
+            }
+        }
+        // 付出了所有的努力还是没能找到B，返回false
+        return false;
+    }
+boolean isSafe(int maze[][], int i, int j){
+  if(i>=0 && i< maze.length() && j>=0 && j<maze[0].length() && maze[i][j]!=-1)
+    return true;
+  return false;
+}
+```
+
+非递归实现。
+
+```java
+boolean dfs(int maze[][], int x, int y) {
+        // 创建一个Stack
+        Stack<Integer[]> stack = new Stack<>();
+
+        // 将起始点压入栈，标记它访问过
+        stack.push(new Integer[]{x, y});
+        maze[x][y] = -1;
+
+        while (!stack.isEmpty()) {
+            // 取出当前点
+            Integer[] pos = stack.pop();
+            x = pos[0];
+            y = pos[1];
+
+            // 判断是否找到了目的地
+            if (x == B[0] && y == B[1]) {
+                return true;
+            }
+
+            // 在四个方向上尝试  
+            for (int d = 0; d < 4; d++) {
+                int i = x + dx[d], j = y + dy[d];
+
+                if (isSafe(maze, i, j)) {
+                    stack.push(new Integer[]{i, j});
+                    maze[i][j] = -1;
+                }
+            }
+        }
+        return false;
+    }
+```
+
+DFS 是图论里的算法，分析利用 DFS 解题的复杂度时，应当借用图论的思想。图有两种表示方式：**邻接表**、**邻接矩阵**。假设图里有 V 个顶点，E 条边。
+
+邻接表
+**访问所有顶点的时间为 O(V)，而查找所有顶点的邻居一共需要 O(E) 的时间，所以总的时间复杂度是 O(V + E)。**
+
+<img src="img/image-20200327151118745.png" alt="image-20200327151118745" style="zoom: 25%;" />
+
+邻接矩阵
+**查找每个顶点的邻居需要 O(V) 的时间，所以查找整个矩阵的时候需要 O(V2) 的时间。**
+
+<img src="img/image-20200327151149215.png" alt="image-20200327151149215" style="zoom:25%;" />
+
+### 12.1.2 利用 DFS 去寻找最短的路径
+
+**解题思路**
+
+思路 1：暴力法。
+
+寻找出所有的路径，然后比较它们的长短，找出最短的那个。此时必须尝试所有的可能。因为 DFS 解决的只是连通性问题，不是用来求解最短路径问题的。
+
+思路 2：优化法。
+
+一边寻找目的地，一边记录它和起始点的距离（也就是步数）。
+
+从某方向到达该点所需要的步数更少，则更新。
+
+<img src="img/CgotOV2IkaSAJZTIAOVn4eGgEXc393.gif" alt="img" style="zoom:25%;" />
+
+从各方向到达该点所需要的步数都更多，则不再尝试。
+
+<img src="img/CgotOV2IkamAazS1ANB4kNxFNT4453.gif" alt="img" style="zoom:25%;" />
+
+```java
+void solve(int maze[][]) {
+        // 第一步. 除了A之外，将其他等于0的地方用MAX_VALUE替换
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[0].length; j++) {
+                if (maze[i][j] == 0 && !(i == A[0] && j == A[1])) {
+                    maze[i][j] = Integer.MAX_VALUE;
+                }
+            }
+        }
+
+        // 第二步. 进行优化的DFS操作
+        dfs(maze, A[0], A[1]);
+
+        // 第三步. 看看是否找到了目的地
+        if (maze[B[0]][B[1]] < Integer.MAX_VALUE) {
+            print("Shortest path count is: " + maze[B[0]][B[1]]);
+        } else {
+            print("Cannot find B!");
+        }
+    }
+
+    void dfs(int maze[][], int x, int y) {
+        // 第一步. 判断是否找到了B
+        if (x == B[0] && y == B[1]) return;
+
+        // 第二步. 在四个方向上尝试
+        for (int d = 0; d < 4; d++) {
+            int i = x + dx[d], j = y + dy[d];
+
+            // 判断下一个点的步数是否比目前的步数+1还要大
+            if (isSafe(maze, i, j) && maze[i][j] > maze[x][y] + 1) {
+                // 如果是，就更新下一个点的步数，并继续DFS下去
+                maze[i][j] = maze[x][y] + 1;
+                dfs(maze, i, j);
+            }
+        }
+    }
+```
+
+注意：之前的题目只要找到了一个路径就返回，这里我们必须尽可能多的去尝试，直到找到最短路径。
+
+<img src="img/image-20200327152930187.png" alt="image-20200327152930187" style="zoom:25%;" />
+
+## 12.2 BFS
+
+广度优先搜索，一般用来解决最短路径的问题。和深度优先搜索不同，广度优先的搜索是从起始点出发，一层一层地进行，每层当中的点距离起始点的步数都是相同的，当找到了目的地之后就可以立即结束。广度优先的搜索可以同时从起始点和终点开始进行，称之为双端 BFS。这种算法往往可以大大地提高搜索的效率。
+
+### 12.2.1 BFS找最短路径
+
+<img src="img/CgotOV2IkbuAIX0lAHdOXp_zsxE546.gif" alt="img" style="zoom:25%;" />
+
+从起始点 A 出发，类似于涟漪，一层一层地扫描，避开墙壁，同时把每个点与 A 的距离或者步数标记上。当找到目的地的时候返回步数，这个步数保证是最短的。
+
+```java
+void bfs(int[][] maze, int x, int y) {
+    // 创建一个队列queue，将起始点A加入队列中
+    Queue<Integer[]> queue = new LinkedList<>();
+    queue.add(new Integer[] {x, y});
+  
+    // 只要队列不为空就一直循环下去  
+    while (!queue.isEmpty()) {
+        // 从队列的头取出当前点
+        Integer[] pos = queue.poll();
+        x = pos[0]; y = pos[1];
+      
+        // 从四个方向进行BFS
+        for (int d = 0; d < 4; d++) {
+            int i = x + dx[d], j = y + dy[d];
+        
+            if (isSafe(maze, i, j)) {
+                // 记录步数（标记访问过）
+                maze[i][j] = maze[x][y] + 1;
+                // 然后添加到队列中  
+                queue.add(new Integer[] {i, j});
+                // 如果发现了目的地就返回  
+                if (i == B[0] && j == B[1]) return;
+            }
+        }
+    }
+}
+```
+
+### 12.2.2 最多允许打通 3 堵墙
+
+假设从起始点 A 走到目的地 B 的过程中，最多允许打通 3 堵墙，求最短的路径的步数。
+
+
 
 # 参考书籍
 

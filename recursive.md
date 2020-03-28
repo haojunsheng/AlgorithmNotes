@@ -733,3 +733,105 @@ public int cCell(int n) {
 
 之前青蛙跳台阶时间复杂度是指数级别的，而这个方程式显然比之前的递推公式(f(n) = f(n-1) + f(n-2)) 更复杂的，所以显然也是指数级别的。
 
+# 解码的方法
+
+一条包含字母 A-Z 的消息通过以下方式进行了编码：
+
+'A' -> 1
+
+'B' -> 2
+
+…
+
+'Z' -> 26
+
+给定一个只包含数字的非空字符串，请计算解码方法的总数。
+
+解题思路就例题中的第二个例子，给定编码后的消息是字符串“226”，如果对其中“22”的解码有m种可能，那么，加多一个“6”在最后，相当于在最终解密出来的字符串里多了一个“F”字符而已，总体的解码还是只有 m 种。
+
+对于“6”而言，如果它的前面是”1”或者“2”，那么它就有可能是“16”，“26”，所以还可以再往前看一个字符，发现它是“26”。而前面的解码组合是k个，那么在这k个解出的编码里，添加一个“Z”，所以总的解码个数就是 m+k。
+
+```java
+int numDecodings(String s) {
+
+        if (s.charAt(0) == '0') return 0;
+
+        char[] chars = s.toCharArray();
+        return decode(chars, chars.length - 1);
+    }
+
+    // 字符串转换成字符数组，利用递归函数 decode，从最后一个字符向前递归
+    int decode(char[] chars, int index) {
+        // 处理到了第一个字符,只能有一种解码方法，返回 1
+        if (index <= 0) return 1;
+
+        int count = 0;
+
+        char curr = chars[index];
+        char prev = chars[index - 1];
+
+        // 当前字符比 “0” 大，则直接利用它之前的字符串所求得的结果     
+        if (curr > '0') {
+            count = decode(chars, index - 1);
+        }
+
+        // 由前一个字符和当前字符所构成的数字，值必须要在 1 到 26 之间，否则无法进行解码 
+        if (prev == '1' || (prev == '2' && curr <= '6')) {
+            count += decode(chars, index - 2);
+        }
+
+        return count;
+    }
+```
+
+# 找到所有长度为 n 的中心对称数
+
+中心对称数是指一个数字在旋转了 180 度之后看起来依旧相同的数字（或者上下颠倒地看）。
+
+输入:  n = 2
+
+输出: ["11","69","88","96"]
+
+<img src="img/CgotOV2IjniAGk33AEvgAuHp84Y570.gif" alt="img" style="zoom: 25%;" />
+
+当n=0的时候，应该输出空字符串：“”。
+
+当n=1的时候，也就是长度为1的中心对称数有：0，1，8。
+
+当n=2的时候，长度为2的中心对称数有：11，69，88，96。注意：00 并不是一个合法的结果。
+
+当 n=3 的时候，只需要在长度为 1 的合法中心对称数的基础上，不断地在两边添加 11，69，88，96 就可以了。
+
+[101,609,808,906,111,619,818,916,181,689,888,986]随着n不断地增长，我们只需要在长度为 n-2 的中心对称数两边添加 11，69，88，96 即可。
+
+```java
+List<String> helper(int n, int m) {
+        // 第一步：判断输入或者状态是否非法？
+        if (n < 0 || m < 0 || n > m) {
+            throw new IllegalArgumentException("invalid input");
+        }
+
+        // 第二步：判读递归是否应当结束?
+        if (n == 0) return new ArrayList<String>(Arrays.asList(""));
+        if (n == 1) return new ArrayList<String>(Arrays.asList("0", "1", "8"));
+
+        // 第三步：缩小问题规模
+        List<String> list = helper(n - 2, m);
+
+        // 第四步: 整合结果
+        List<String> res = new ArrayList<String>();
+
+        for (int i = 0; i < list.size(); i++) {
+            String s = list.get(i);
+
+            if (n != m) res.add("0" + s + "0");
+
+            res.add("1" + s + "1");
+            res.add("6" + s + "9");
+            res.add("8" + s + "8");
+            res.add("9" + s + "6");
+        }
+        return res;
+    }
+```
+
