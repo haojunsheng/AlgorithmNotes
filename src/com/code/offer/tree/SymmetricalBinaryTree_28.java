@@ -15,7 +15,6 @@ package com.code.offer.tree;
  * 如果遍历左子树的序列和遍历右子树的序列一样，那么该二叉树为对称的二叉树。（递归实现）
  */
 public class SymmetricalBinaryTree_28 {
-
     class TreeNode {
         int val = 0;
         TreeNode left = null;

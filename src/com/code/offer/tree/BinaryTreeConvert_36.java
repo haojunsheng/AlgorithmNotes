@@ -4,6 +4,8 @@ import java.util.Stack;
 
 /**
  * 将二叉搜索树转换成排序的双向链表
+ * 输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。
+ * 要求不能创建任何新的节点，只能调整树中节点指针的指向。
  */
 public class BinaryTreeConvert_36 {
     class TreeNode {
@@ -22,22 +24,31 @@ public class BinaryTreeConvert_36 {
      */
     TreeNode pre = null;
     TreeNode lastLeft = null;
-
-    // 中序遍历
     public TreeNode Convert(TreeNode pRootOfTree) {
         if (pRootOfTree == null) {
             return null;
         }
-        Convert(pRootOfTree.left);
-        pRootOfTree.left = pre;
-        if (pre != null) {
-            pre.right = pRootOfTree;
-        }
-        pre = pRootOfTree;
-        //头结点，中序遍历最先访问到的是最左边的节点
-        lastLeft = (lastLeft == null ? pRootOfTree : lastLeft);
-        Convert(pRootOfTree.right);
+        dfs(pRootOfTree);
         return lastLeft;
+    }
+
+    // 中序遍历
+    public void dfs(TreeNode pRootOfTree) {
+        if (pRootOfTree == null) {
+            return;
+        }
+        dfs(pRootOfTree.left);
+        // 当pre为空时： 代表正在访问链表头节点，记为 lastLeft。
+        if (pre == null) {
+            lastLeft = pRootOfTree;
+            // 当 pre 不为空时： 修改双向节点引用，即pre.right=pRootOfTree ，pRootOfTree.left=pre
+        } else {
+            pre.right = pRootOfTree;
+            pRootOfTree.left = pre;
+        }
+        // 更新pre
+        pre = pRootOfTree;
+        dfs(pRootOfTree.right);
     }
 
     //非递归，不是尾递归，无法直接转循环，需要借助于栈来帮助我们

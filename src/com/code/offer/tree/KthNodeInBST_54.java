@@ -13,8 +13,17 @@ public class KthNodeInBST_54 {
 
     int count = 0;
 
-    //本质上考察中序遍历算法,但是这个题目的要求，并不需要把二叉树全部遍历一遍，
-    // 找到结果后即可正确返回。至于加该条件，主要是考虑叶节点的情况。
+    /**
+     * 如果没有if(node != null)这句话
+     * 那么那个root就是返回给上一级的父结点的，而不是递归结束的条件了,
+     * 有了这句话过后，一旦返回了root，那么node就不会为空了，就一直一层层的递归出去到结束了。
+     * 举第一个例子{8,6,5,7,},1 答案应该是5，
+     * 如果不加的时候，开始，root=8，node=kth（6,1），
+     * 继续root=6，node=kth（5,1）root =5 返回null，
+     * 这时向下执行index=k=1了，返回 5给root=6递归的时候的node，
+     * 这时回到root=8了，往后面调右孩子的时候为空而把5给覆盖了。
+     * 现在就为空了，有了这句话后虽然为空，但不把null返回，而是继续返回5。
+     */
     TreeNode KthNode(TreeNode pRoot, int k) {
         if (pRoot == null || k <= 0) {
             return null;

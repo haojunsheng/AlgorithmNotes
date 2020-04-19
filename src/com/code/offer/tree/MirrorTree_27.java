@@ -3,6 +3,9 @@ package com.code.offer.tree;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 给定一个二叉树，将其变换为源二叉树的镜像。
+ */
 public class MirrorTree_27 {
     class TreeNode {
         int val = 0;
@@ -14,18 +17,9 @@ public class MirrorTree_27 {
         }
     }
 
-    private void swap(TreeNode root) {
-        TreeNode temp = root.left;
-        root.left = root.right;
-        root.right = temp;
-    }
-
     //递归去实现
     public void Mirror(TreeNode root) {
-        if (root == null) {
-            return;
-        }
-        if (root.left == null && root.right == null) {
+        if (root == null || (root.left == null && root.right == null)) {
             return;
         }
         TreeNode temp = root.left;
@@ -54,5 +48,11 @@ public class MirrorTree_27 {
                 }
             }
         }
+    }
+
+    private void swap(TreeNode root) {
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
     }
 }

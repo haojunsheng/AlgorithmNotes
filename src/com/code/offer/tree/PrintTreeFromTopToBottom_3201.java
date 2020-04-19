@@ -27,6 +27,7 @@ public class PrintTreeFromTopToBottom_3201 {
         //广度优先搜索，队列保存
         Queue<TreeNode> queue = new LinkedList<TreeNode>();
         queue.add(head);
+
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
         while (!queue.isEmpty()) {
             TreeNode tempNode = queue.poll();

@@ -20,11 +20,7 @@ public class ReverseList_24 {
     // 使用循环的方法
     public ListNode reverseCycle(ListNode head) {
         //判空
-        if (head == null) {
-            return null;
-        }
-        //只有一个头结点
-        if (head.next == null) {
+        if (head == null || head.next == null) {
             return head;
         }
         //当前结点

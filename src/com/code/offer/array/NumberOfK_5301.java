@@ -19,41 +19,7 @@ public class NumberOfK_5301 {
         return num;
     }
 
-    /**
-     * 最后一个k的位置
-     */
-    private int getLastK(int[] array, int k, int left, int right) {
-        if (left > right) {
-            return -1;
-        }
-        int middleIndex = (left + right) / 2;
-        int middleData = array[middleIndex];
-        //中间位置等于k，说明最后一个k的位置可能在右边
-        if (k == middleData) {
-            //中间的元素是最后一个k
-            if (middleIndex < (array.length - 1) && (array[middleIndex + 1] != k) || middleIndex == (array.length - 1)) {
-                return middleIndex;
-            } else {
-                //k在右半部分
-                left = middleIndex + 1;
-            }
-        } else if (middleData > k) {
-            right = middleIndex - 1;//k在右半部分
-        } else {
-            left = middleIndex + 1;
-        }
-        return getLastK(array, k, left, right);
-    }
-
-    /**
-     * 第一个k
-     *
-     * @param array
-     * @param k
-     * @param left
-     * @param right
-     * @return
-     */
+    // 第一个k
     public int getFirstK(int[] array, int k, int left, int right) {
         if (left > right) {
             return -1;
@@ -76,6 +42,30 @@ public class NumberOfK_5301 {
             left = middleIndex + 1;
         }
         return getFirstK(array, k, left, right);
+    }
+
+    // 最后一个k的位置
+    private int getLastK(int[] array, int k, int left, int right) {
+        if (left > right) {
+            return -1;
+        }
+        int middleIndex = (left + right) / 2;
+        int middleData = array[middleIndex];
+        //中间位置等于k，说明最后一个k的位置可能在右边
+        if (k == middleData) {
+            //中间的元素是最后一个k
+            if (middleIndex < (array.length - 1) && (array[middleIndex + 1] != k) || middleIndex == (array.length - 1)) {
+                return middleIndex;
+            } else {
+                //k在右半部分
+                left = middleIndex + 1;
+            }
+        } else if (middleData > k) {
+            right = middleIndex - 1;//k在右半部分
+        } else {
+            left = middleIndex + 1;
+        }
+        return getLastK(array, k, left, right);
     }
 
     public static void main(String[] args) {
