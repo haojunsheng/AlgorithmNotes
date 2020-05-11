@@ -15,6 +15,12 @@ import java.util.List;
  *   [2,1,3],
  *   [1,null,2,null,3]
  * ]
+ * https://leetcode.com/problems/unique-binary-search-trees-ii/discuss/31494/A-simple-recursive-solution
+ *
+ * I start by noting that 1..n is the in-order traversal for any BST with nodes 1 to n.
+ * So if I pick i-th node as my root, the left subtree will contain elements 1 to (i-1),
+ * and the right subtree will contain elements (i+1) to n.
+ * I use recursive calls to get back all possible trees for left and right subtrees and combine them in all possible ways with the root.
  */
 public class GenerateTrees_95 {
     class TreeNode {
@@ -36,31 +42,31 @@ public class GenerateTrees_95 {
     }
 
     public LinkedList<TreeNode> generateTreesHelper(int start, int end) {
-        LinkedList<TreeNode> all_trees = new LinkedList<TreeNode>();
+        LinkedList<TreeNode> all = new LinkedList<TreeNode>();
         if (start > end) {
-            all_trees.add(null);
-            return all_trees;
+            all.add(null);
+            return all;
         }
 
         // pick up a root
         for (int i = start; i <= end; i++) {
             // all possible left subtrees if i is choosen to be a root
-            LinkedList<TreeNode> left_trees = generateTreesHelper(start, i - 1);
+            LinkedList<TreeNode> left = generateTreesHelper(start, i - 1);
 
             // all possible right subtrees if i is choosen to be a root
-            LinkedList<TreeNode> right_trees = generateTreesHelper(i + 1, end);
+            LinkedList<TreeNode> right = generateTreesHelper(i + 1, end);
 
             // connect left and right trees to the root i
-            for (TreeNode l : left_trees) {
-                for (TreeNode r : right_trees) {
-                    TreeNode current_tree = new TreeNode(i);
-                    current_tree.left = l;
-                    current_tree.right = r;
-                    all_trees.add(current_tree);
+            for (TreeNode l : left) {
+                for (TreeNode r : right) {
+                    TreeNode current = new TreeNode(i);
+                    current.left = l;
+                    current.right = r;
+                    all.add(current);
                 }
             }
         }
-        return all_trees;
+        return all;
     }
 
     public List<TreeNode> generateTrees(int n) {

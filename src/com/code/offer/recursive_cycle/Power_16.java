@@ -1,14 +1,7 @@
 package com.code.offer.recursive_cycle;
 
 /**
- * 题目描述：
- * 实现函数double Power(double base,int exponent),求base的exponent次方。
- * 不得使用库函数，同时不需要考虑大数问题。
- * <p>
- * 数值的整数次方
- */
-
-/**
+ * 数值的整数次方：实现函数double Power(double base,int exponent),求base的exponent次方。
  * 我们知道当指数为负数的时候，可以先对指数求绝对值，然后算出次方的结果之后再取倒数。
  * 既然有求倒数，我们很自然的就要想到有没有可能对0求倒数，如果对0求倒数怎么办？
  * 当底数base是零且指数是负数的时候，我们不做特殊的处理，就会发现对0求倒数从而导致程序运行出错。
@@ -39,7 +32,7 @@ public class Power_16 {
 
         return result;
     }
-
+    // 循环
     public double powerWithExponet(double base, int exponent) {
         double result = 1.0;
         for (int i = 1; i <= exponent; i++) {
@@ -54,15 +47,9 @@ public class Power_16 {
      * 我们的目标是求出一个数字的32次方，如果我们已经知道了它的16次方，那么只要16次放的基础上再平方一次就可以了。
      * 而16次方又是8次方的平方。
      * 这样以此类推，我们求32次方只需要5次乘方：先求平方，在平方的基础上求4次方，在4次方的基础上求8次方，在8次方的基础上求16次方，最后在16此方的基础上求32次方。
-     * <p>
      * 我们用右移运算代替除2，用位与运算符代替了求余运算符（%)来判断一个数是奇数还是偶数。
      * 位运算的效率比乘除法及求余运算的效率要高很多。
-     *
-     * @param base
-     * @param exponent
-     * @return
      */
-    //计算指数为非负数的次方
     public double powerWithUnsignedExponet(double base, int exponent) {
         if (exponent == 0) {
             return 1.0;
@@ -71,7 +58,7 @@ public class Power_16 {
             return base;
         }
 
-        //使用左移运算符，将exponent除以2
+        //使用右移运算符，将exponent除以2
         double result = powerWithUnsignedExponet(base, exponent >> 1);
         result *= result;
         //判断是否为奇数

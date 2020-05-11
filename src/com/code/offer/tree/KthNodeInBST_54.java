@@ -1,5 +1,10 @@
 package com.code.offer.tree;
 
+/**
+ * 给定一棵二叉搜索树，请找出其中第k大的节点。
+ * 输入: root = [3,1,4,null,2], k = 1,输出: 4
+ * 输入: root = [5,3,6,2,4,null,null,1], k = 3,输出: 4
+ */
 public class KthNodeInBST_54 {
     public static class TreeNode {
         int val = 0;
@@ -11,36 +16,34 @@ public class KthNodeInBST_54 {
         }
     }
 
-    int count = 0;
+    int k = 0;
+    TreeNode res = null;
 
     /**
-     * 如果没有if(node != null)这句话
-     * 那么那个root就是返回给上一级的父结点的，而不是递归结束的条件了,
-     * 有了这句话过后，一旦返回了root，那么node就不会为空了，就一直一层层的递归出去到结束了。
-     * 举第一个例子{8,6,5,7,},1 答案应该是5，
-     * 如果不加的时候，开始，root=8，node=kth（6,1），
-     * 继续root=6，node=kth（5,1）root =5 返回null，
-     * 这时向下执行index=k=1了，返回 5给root=6递归的时候的node，
-     * 这时回到root=8了，往后面调右孩子的时候为空而把5给覆盖了。
-     * 现在就为空了，有了这句话后虽然为空，但不把null返回，而是继续返回5。
+     * 二叉搜索树的中序遍历为递增序列。
      */
     TreeNode KthNode(TreeNode pRoot, int k) {
         if (pRoot == null || k <= 0) {
             return null;
         }
-        TreeNode temp = null;
-        temp = KthNode(pRoot.left, k);
-        if (temp != null) {
-            return temp;
+        this.k = k;
+        dfs(pRoot);
+        return res;
+    }
+
+    void dfs(TreeNode root) {
+        if (root == null) {
+            return;
         }
-        if (++count == k) {
-            return pRoot;
+        dfs(root.right);
+        // 及时剪枝
+        if (k == 0) {
+            return;
         }
-        temp = KthNode(pRoot.right, k);
-        if (temp != null) {
-            return temp;
+        if (--k == 0) {
+            res = root;
         }
-        return null;
+        dfs(root.left);
     }
 
     public static void main(String[] args) {

@@ -42,52 +42,53 @@ public class OpenLock_752 {
      * 2、没有终止条件，按照题目要求，我们找到target就应该结束并返回拨动的次数。
      * 3、没有对deadends的处理，按道理这些「死亡密码」是不能出现的，也就是说你遇到这些密码的时候需要跳过。
      */
-    public int openLock(String[] deadends, String target) {
-        // 记录需要跳过的死亡密码
-        Set<String> deads = new HashSet<>();
-        for (String s : deadends) {
-            deads.add(s);
+
+    public int bfs(String[] deadends, String target) {
+        if (deadends == null || target == null) {
+            return -1;
         }
-        // 记录已经穷举过的密码，防止走回头路
+        // 记录死亡密码
+        Set<String> deadSet = new HashSet<>();
+        for (String s : deadends) {
+            deadSet.add(s);
+        }
+        // 记录已经穷举过的密码
         Set<String> visited = new HashSet<>();
-        Queue<String> q = new LinkedList<>();
-        // 从起点开始启动广度优先搜索
-        int step = 0;
-        q.offer("0000");
+        // 从起点开始进行广度搜索
+        Queue<String> queue = new LinkedList<>();
+        queue.offer("0000");
         visited.add("0000");
-
-        while (!q.isEmpty()) {
-            int sz = q.size();
-            /* 将当前队列中的所有节点向周围扩散 */
-            for (int i = 0; i < sz; i++) {
-                String cur = q.poll();
-
-                /* 判断是否到达终点 */
-                if (deads.contains(cur)) {
+        int step = 0;
+        while (!queue.isEmpty()) {
+            // 注意，size必须提前计算出来
+            int size = queue.size();
+            for (int i = 0; i < size; ++i) {
+                String cur = queue.poll();
+                // 判断是否遇到非法数字
+                if (deadSet.contains(cur)) {
                     continue;
                 }
+                // 判断是否到达终点
                 if (cur.equals(target)) {
                     return step;
                 }
-
-                /* 将一个节点的未遍历相邻节点加入队列 */
-                for (int j = 0; j < 4; j++) {
+                // 开始拨动
+                for (int j = 0; j < 4; ++j) {
                     String up = plusOne(cur, j);
+                    // 之前没遇到过
                     if (!visited.contains(up)) {
-                        q.offer(up);
                         visited.add(up);
+                        queue.offer(up);
                     }
                     String down = minusOne(cur, j);
                     if (!visited.contains(down)) {
-                        q.offer(down);
                         visited.add(down);
+                        queue.offer(down);
                     }
                 }
             }
-            /* 在这里增加步数 */
             step++;
         }
-        // 如果穷举完都没找到目标密码，那就是找不到了
         return -1;
     }
 

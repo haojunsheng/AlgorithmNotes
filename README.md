@@ -1,27 +1,28 @@
 <!--ts-->
+
    * [1.概述](#1概述)
    * [2.数组](#2数组)
-      * [2.1 数组中的重复数字](#21-数组中的重复数字)
+      * [2.1 数组中的重复数字@@@](#21-数组中的重复数字)
       * [2.2 二维数组中的查找](#22-二维数组中的查找)
-      * [2.3 旋转数组旋转数组的最小数字](#23-旋转数组旋转数组的最小数字)
+      * [2.3 旋转数组旋转数组的最小数字@@](#23-旋转数组旋转数组的最小数字)
       * [2.4 调整数组顺序使奇数位于偶数前面](#24-调整数组顺序使奇数位于偶数前面)
-      * [2.5 顺时针打印矩阵](#25-顺时针打印矩阵)
+      * [2.5 顺时针打印矩阵@@@](#25-顺时针打印矩阵)
       * [2.6 数组中出现次数超过一半的数字](#26-数组中出现次数超过一半的数字)
-      * [2.7 最小的k个数](#27-最小的k个数)
-      * [2.8 连续子数组的最大和](#28-连续子数组的最大和)
-      * [2.9 数组排成最小的数](#29-数组排成最小的数)
-      * [2.10 数组中的逆序对](#210-数组中的逆序对)
+      * [2.7 最小的k个数@@@](#27-最小的k个数)
+      * [2.8 连续子数组的最大和@@](#28-连续子数组的最大和)
+      * [2.9 数组排成最小的数@@@@](#29-数组排成最小的数)
+      * [2.10 数组中的逆序对@@@@](#210-数组中的逆序对)
       * [2.11 数字在排序数组中出现的次数](#211-数字在排序数组中出现的次数)
-      * [2.12 数组中只出现一次的数字](#212-数组中只出现一次的数字)
-      * [2.13 和为s的数字](#213-和为s的数字)
+      * [2.12 数组中只出现一次的数字@@@](#212-数组中只出现一次的数字)
+      * [2.13 和为s的数字@@@](#213-和为s的数字)
       * [2.13 扑克牌中的顺子](#213-扑克牌中的顺子)
       * [2.14 股票的最大利润](#214-股票的最大利润)
       * [2.15 构建乘积数组](#215-构建乘积数组)
    * [3. 字符串](#3-字符串)
       * [3.1 替换空格](#31-替换空格)
-      * [3.2 正则表达式匹配](#32-正则表达式匹配)
+      * [3.2 正则表达式匹配@@@](#32-正则表达式匹配)
       * [3.3 表示数值的字符串](#33-表示数值的字符串)
-      * [3.4 数字序列中某一位的数字](#34-数字序列中某一位的数字)
+      * [3.4 数字序列中某一位的数字@@@](#34-数字序列中某一位的数字)
       * [3.5 第一个只出现一次的字符](#35-第一个只出现一次的字符)
       * [3.6 反转字符串](#36-反转字符串)
       * [3.7 字符串转整数](#37-字符串转整数)
@@ -30,27 +31,28 @@
       * [3.2 删除链表中的节点](#32-删除链表中的节点)
       * [3.3 链表中倒数第k个节点](#33-链表中倒数第k个节点)
       * [3.4 链表中环的入口节点](#34-链表中环的入口节点)
-      * [3.5 反转链表](#35-反转链表)
+      * [3.5 反转链表@@@](#35-反转链表)
       * [3.6 合并两个排序的链表](#36-合并两个排序的链表)
-      * [3.7 复杂链表的复制](#37-复杂链表的复制)
-      * [3.8 二叉搜索树与双向链表](#38-二叉搜索树与双向链表)
+      * [3.7 复杂链表的复制(字节考过)](#37-复杂链表的复制字节考过)
+      * [3.8 二叉搜索树与双向链表@@@](#38-二叉搜索树与双向链表)
       * [3.9 两个链表的第一个公共节点](#39-两个链表的第一个公共节点)
-      * [3.10 圆圈中最后剩余的数字](#310-圆圈中最后剩余的数字)
+      * [3.10 圆圈中最后剩余的数字@@@](#310-圆圈中最后剩余的数字)
    * [4. 二叉树&amp;递归](#4-二叉树递归)
+      * [4.1 二叉树迭代@@@](#41-二叉树迭代)
       * [4.2 二叉树遍历类](#42-二叉树遍历类)
-         * [4.2.1 重建二叉树](#421-重建二叉树)
+         * [4.2.1 重建二叉树@@@](#421-重建二叉树)
          * [4.2.2 二叉搜索树的后序遍历序列](#422-二叉搜索树的后序遍历序列)
          * [4.2.3 树的子结构](#423-树的子结构)
          * [4.2.4 二叉树的镜像](#424-二叉树的镜像)
          * [4.2.4 对称的二叉树](#424-对称的二叉树)
-         * [4.2.5 二叉树中和为某值的路径](#425-二叉树中和为某值的路径)
-      * [4.3 二叉树的下一个节点](#43-二叉树的下一个节点)
+         * [4.2.5 二叉树中和为某值的路径@@@](#425-二叉树中和为某值的路径)
+      * [4.3 二叉树的下一个节点@@](#43-二叉树的下一个节点)
       * [4.4 从上向下打印二叉树](#44-从上向下打印二叉树)
       * [4.5 序列化二叉树](#45-序列化二叉树)
-      * [4.6 数据流中的中位数](#46-数据流中的中位数)
-      * [4.7 二叉搜索树的第k大节点](#47-二叉搜索树的第k大节点)
+      * [4.6 数据流中的中位数@@@](#46-数据流中的中位数)
+      * [4.7 二叉搜索树的第k大节点@@@](#47-二叉搜索树的第k大节点)
       * [4.8 二叉树的深度](#48-二叉树的深度)
-      * [4.9 树中两个节点的最低公共祖先](#49-树中两个节点的最低公共祖先)
+      * [4.9 树中两个节点的最低公共祖先@@@](#49-树中两个节点的最低公共祖先)
       * [4.10 二叉堆实现优先队列](#410-二叉堆实现优先队列)
       * [4.11 <strong>二叉搜索树操作集锦</strong>](#411-二叉搜索树操作集锦)
          * [4.11.1 <strong>判断</strong> <strong>BST</strong> <strong>的合法性</strong>](#4111-判断-bst-的合法性)
@@ -59,8 +61,91 @@
          * [4.11.4 在BST中删除一个数](#4114-在bst中删除一个数)
          * [4.11.5 总结](#4115-总结)
    * [5. 栈和队列](#5-栈和队列)
+      * [5.1 俩个栈实现队列@@](#51-俩个栈实现队列)
+      * [5.2 包含min函数的栈](#52-包含min函数的栈)
+      * [5.3 栈的压入、弹出序列](#53-栈的压入弹出序列)
+      * [5.4 队列的最大值](#54-队列的最大值)
+      * [5.5 单调栈](#55-单调栈)
+   * [6. 递归和循环](#6-递归和循环)
+      * [6.2 数值的整数次方](#62-数值的整数次方)
+      * [6.3  打印从1到最大的n位数](#63--打印从1到最大的n位数)
+      * [6.4 1-n整数中1出现的次数](#64-1-n整数中1出现的次数)
+      * [6.5 丑数](#65-丑数)
+      * [6.6 求1 2 … n](#66-求12n)
+   * [7. 查找和排序](#7-查找和排序)
+      * [7.1 第一个只出现一次的字符](#71-第一个只出现一次的字符)
+      * [7.2 在排序数组中查找数字](#72-在排序数组中查找数字)
+      * [7.4 二分查找套路](#74-二分查找套路)
+   * [8. 动态规划和贪心算法](#8-动态规划和贪心算法)
+      * [8.0 动态规划](#80-动态规划)
+         * [8.0.1 线性规划](#801-线性规划)
+            * [<strong>求解 dp[i] 形式一</strong>](#求解-dpi-形式一)
+            * [求解 dp[i] 形式二](#求解-dpi-形式二)
+         * [8.0.2 区间规划](#802-区间规划)
+         * [8.0.3 约束规划](#803-约束规划)
+      * [8.1 <strong>斐波那契数列</strong>](#81-斐波那契数列)
+      * [8.2 凑零钱问题](#82-凑零钱问题)
+      * [8.3 最长增长子序列（LIS）](#83-最长增长子序列lis)
+         * [8.3.1 子序列问题解题模板](#831-子序列问题解题模板)
+         * [8.3.2 <strong>最⻓回文子序列</strong>](#832-最回文子序列)
+         * [8.3.3 <strong>最⻓公共子序列</strong>](#833-最公共子序列)
+      * [8.4 编辑距离](#84-编辑距离)
+      * [8.5 剪绳子](#85-剪绳子)
+      * [8.6 连续子数组的最大和](#86-连续子数组的最大和)
+      * [8.7 数字翻译为字符串](#87-数字翻译为字符串)
+      * [8.8 礼物的最大价值](#88-礼物的最大价值)
+      * [8.9 最长不包含重复字符的子字符串](#89-最长不包含重复字符的子字符串)
+      * [8.10 <em>KMP</em>字符匹配算法](#810-kmp字符匹配算法)
+      * [8.11 高楼扔鸡蛋](#811-高楼扔鸡蛋)
+      * [8.12 n个骰子的点数](#812-n个骰子的点数)
+      * [8.13 正则表达式匹配](#813-正则表达式匹配)
+      * [8.14 打家劫舍问题](#814-打家劫舍问题)
+         * [8.14.1 打家劫舍问题2](#8141-打家劫舍问题2)
+      * [8.15 <strong>股票买卖问题</strong>](#815-股票买卖问题)
+      * [8.16 <strong>博弈问题</strong>](#816-博弈问题)
+         * [8.16.1 石头游戏](#8161-石头游戏)
+      * [8.17 <strong>四键键盘</strong>](#817-四键键盘)
+   * [9. 回溯](#9-回溯)
+      * [9.1 全排列问题](#91-全排列问题)
+      * [9.2 矩阵中的路径](#92-矩阵中的路径)
+      * [9.3 机器人的运动范围](#93-机器人的运动范围)
+      * [9.4 字符串的排列](#94-字符串的排列)
+      * [9.5 N皇后问题](#95-n皇后问题)
+      * [9.6 数组中所有目标和为target](#96-数组中所有目标和为target)
+   * [10. 位运算](#10-位运算)
+      * [10.1 n&amp;(n-1)](#101-nn-1)
+      * [10.2 不用加减乘除做加法](#102-不用加减乘除做加法)
+   * [11. 常见算法思维](#11-常见算法思维)
+      * [11.1 双指针](#111-双指针)
+         * [11.1.1 快慢指针法](#1111-快慢指针法)
+         * [11.1.2 左右指针法](#1112-左右指针法)
+         * [11.1.3 滑动窗口算法](#1113-滑动窗口算法)
+            * [11.1.3.1 <strong>最小覆盖子串</strong>](#11131-最小覆盖子串)
+            * [11.1.3.2 找到字符串中所有字母异位词](#11132-找到字符串中所有字母异位词)
+            * [11.1.3.3 无重复字符的最⻓子串](#11133-无重复字符的最子串)
+            * [11.1.3.4 总结](#11134-总结)
+      * [11.2 两数和问题](#112-两数和问题)
+      * [11.3 常用位操作](#113-常用位操作)
+      * [11.4 实现计算器](#114-实现计算器)
+      * [11.5 <strong>前缀和技巧</strong>](#115-前缀和技巧)
+      * [11.6 大数运算](#116-大数运算)
+         * [11.6.1 大数加法](#1161-大数加法)
+         * [11.6.2 大数乘法](#1162-大数乘法)
+      * [11.7 <strong>FloodFill</strong>算法详解](#117-floodfill算法详解)
+   * [12. DFS vs BFS](#12-dfs-vs-bfs)
+      * [12.1 DFS](#121-dfs)
+         * [12.1.1 走迷宫](#1211-走迷宫)
+         * [12.1.2 利用 DFS 去寻找最短的路径](#1212-利用-dfs-去寻找最短的路径)
+      * [12.2 BFS](#122-bfs)
+         * [12.2.1 二叉树的最小高度](#1221-二叉树的最小高度)
+         * [12.2.2 解开密码锁的最少次数](#1222-解开密码锁的最少次数)
+         * [12.2.1 二叉树的锯齿形层次遍历](#1221-二叉树的锯齿形层次遍历)
+         * [12.2.1 BFS找最短路径](#1221-bfs找最短路径)
+         * [12.2.2 最多允许打通 3 堵墙](#1222-最多允许打通-3-堵墙)
+   * [13. 常见](#13-常见)
+      * [13.1 LRU算法](#131-lru算法)
 
-<!-- Added by: anapodoton, at: Fri Apr 17 13:29:24 CST 2020 -->
+<!-- Added by: anapodoton, at: 2020年 4月20日 星期一 17时15分35秒 CST -->
 
 <!--te-->
 
@@ -2353,6 +2438,10 @@ public class LastRemaining_62 {
 
 # 4. 二叉树&递归
 
+**递归算法的时间复杂度怎么计算?子问题个数乘以解决一个子问题需要的时间。**
+
+
+
 ## 4.1 二叉树迭代@@@
 
 [二叉树遍历的迭代解法](https://blog.csdn.net/weixin_42322309/article/details/104177275)：
@@ -2602,6 +2691,34 @@ public boolean isSymmetrical(TreeNode root) {
         }
         return isSymmetrical(root1.left, root2.right) && isSymmetrical(root1.right, root2.left);
     }
+
+/**
+     * 时间复杂度：O(n)，因为我们遍历整个输入树一次，所以总的运行时间为 O(n)，其中 n是树中结点的总数。
+     * 空间复杂度：搜索队列需要额外的空间。在最糟糕情况下，我们不得不向队列中插入O(n)个结点。因此，空间复杂度为O(n)。
+     */
+    public boolean isSymmetric(TreeNode root) {
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        q.add(root);
+        while (!q.isEmpty()) {
+            TreeNode t1 = q.poll();
+            TreeNode t2 = q.poll();
+            if (t1 == null && t2 == null) {
+                continue;
+            }
+            if (t1 == null || t2 == null) {
+                return false;
+            }
+            if (t1.val != t2.val) {
+                return false;
+            }
+            q.add(t1.left);
+            q.add(t2.right);
+            q.add(t1.right);
+            q.add(t2.left);
+        }
+        return true;
+    }
 ```
 
 ### 4.2.5 二叉树中和为某值的路径@@@
@@ -2800,23 +2917,18 @@ public static void printFromTopToBottom(TreeNode head) {
  * 根据前序遍历规则完成序列化与反序列化。
  * 所谓序列化指的是遍历二叉树为字符串；所谓反序列化指的是依据字符串重新构造成二叉树。
  * 依据前序遍历序列来序列化二叉树，因为前序遍历序列是从根结点开始的。
- * 当在遍历二叉树时碰到Null指针时，这些Null指针被序列化为一个特殊的字符“#”。
- * 另外，结点之间的数值用逗号隔开。
+ * 当在遍历二叉树时碰到Null指针时，这些Null指针被序列化为一个特殊的字符“#”。另外，结点之间的数值用逗号隔开。
  */ 
-		//计数变量
-    int index = -1;
-
     private String Serialize(TreeNode root) {
         StringBuilder buffer = new StringBuilder();
-        if (root == null) {
-            return buffer.append("#,").toString();
-        }
+        if (root == null) return buffer.append("#,").toString();
         buffer.append(root.val + ",");
         buffer.append(Serialize(root.left));
         buffer.append(Serialize(root.right));
         return buffer.toString();
     }
-
+    //计数变量
+    int index = -1;
     private TreeNode Deserialize(String str) {
         index++;
         String[] strr = str.split(",");
@@ -2830,7 +2942,7 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.6 数据流中的中位数
+## 4.6 数据流中的中位数@@@
 
 [面试题41：数据流中的中位数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/MiddleInDataStream_41.java)
 
@@ -2891,61 +3003,54 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.7 二叉搜索树的第k大节点
+## 4.7 二叉搜索树的第k大节点@@@
 
 [面试题54：二叉搜索树的第k大节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/KthNodeInBST_54.java)
 
 ```java
-// 给定一颗二叉树，找出第K大的节点
-	int count = 0;
-
-	 /**
-     * 本质上考察中序遍历算法,但是这个题目的要求，并不需要把二叉树全部遍历一遍，找到结果后即可正确返回。至于加该条件，主要是考虑叶节点的情况。
-     * 如果没有if(node != null)这句话
-     * 那么那个root就是返回给上一级的父结点的，而不是递归结束的条件了,
-     * 有了这句话过后，一旦返回了root，那么node就不会为空了，就一直一层层的递归出去到结束了。
-     * 举第一个例子{8,6,5,7,},1 答案应该是5，
-     * 如果不加的时候，开始，root=8，node=kth（6,1），
-     * 继续root=6，node=kth（5,1）root =5 返回null，
-     * 这时向下执行index=k=1了，返回 5给root=6递归的时候的node，
-     * 这时回到root=8了，往后面调右孩子的时候为空而把5给覆盖了。
-     * 现在就为空了，有了这句话后虽然为空，但不把null返回，而是继续返回5。
+/**
+  * 给定一棵二叉搜索树，请找出其中第k大的节点。
+  * 输入: root = [3,1,4,null,2], k = 1,输出: 4
+  * 输入: root = [5,3,6,2,4,null,null,1], k = 3,输出: 4
+  */
+    int k = 0;
+    TreeNode res = null;
+    /**
+     * 二叉搜索树的中序遍历为递增序列。
      */
     TreeNode KthNode(TreeNode pRoot, int k) {
         if (pRoot == null || k <= 0) {
             return null;
         }
-        TreeNode temp = null;
-        temp = KthNode(pRoot.left, k);
-        // if(temp!=null) 说明已经找到第K大的节点
-        if (temp != null) {
-            return temp;
+        this.k = k;
+        dfs(pRoot);
+        return res;
+    }
+    void dfs(TreeNode root) {
+        if (root == null) {
+            return;
         }
-        if (++count == k) {
-            return pRoot;
+        dfs(root.right);
+        // 及时剪枝
+        if (k == 0) {
+            return;
         }
-        temp = KthNode(pRoot.right, k);
-        if (temp != null) {
-            return temp;
+        if (--k == 0) {
+            res = root;
         }
-        return null;
+        dfs(root.left);
     }
 ```
 
 ## 4.8 二叉树的深度
 
 [面试题55：二叉树的深度](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/TreeDepth_5501.java)
-在遍历二叉树的时候，优化的算法一般是每个节点尽量只遍历一次，不要进行重复遍历，而且在遍历的时候，要及时进行剪枝，如果结果已经出现，要及时的进行返回。
 
 ```java
 /**   
 		 * 输入一棵二叉树的根结点，求该树的深度。
  		 * 从根结点到叶结点依次经过的结点（含根、叶结点）形成树的一条路径，最长路径的长度为树的深度。
-     * 二叉树的深度
-     * 左子树与右子树较大的深度加1即可
-     *
-     * @param root
-     * @return
+     * 二叉树的深度，左子树与右子树较大的深度加1即可
      */
     public int TreeDepth(TreeNode root) {
         if (root == null) {
@@ -2960,14 +3065,10 @@ public static void printFromTopToBottom(TreeNode head) {
  [判断是不是平衡二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/TreeDepth_5502.java)
 
 ```java
-private boolean isBalanced = true;
-
+		private boolean isBalanced = true;
     /**
      * 二叉树的深度
      * 左子树与右子树较大的深度加1即可
-     *
-     * @param root
-     * @return
      */
     public boolean IsBalanced_Solution(TreeNode root) {
         if (root == null) {
@@ -2976,7 +3077,6 @@ private boolean isBalanced = true;
         getDepth(root);
         return isBalanced;
     }
-
     //后续遍历即可
     public int getDepth(TreeNode root) {
         if (root == null) {
@@ -2991,76 +3091,32 @@ private boolean isBalanced = true;
     }
 ```
 
-## 4.9 树中两个节点的最低公共祖先
+## 4.9 树中两个节点的最低公共祖先@@@
 
 [面试题68：树中两个节点的最低公共祖先](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/CommonParentInTree_68.java)
 
-[参考](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/er-cha-shu-de-zui-jin-gong-gong-zu-xian-by-leetcod/)
+[参考leetcode](https://leetcode-cn.com/problems/lowest-common-ancestor-of-a-binary-tree/solution/er-cha-shu-de-zui-jin-gong-gong-zu-xian-by-leetcod/)
+
+<img src="img/236_LCA_Binary_1.png" alt="在这里插入图片描述" style="zoom:33%;" />
 
 ```java
 /**
  * 给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。一个节点也可以是它自己的祖先。
- * <p>
  * 输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
  * 输出: 3
  * 解释: 节点 5 和节点 1 的最近公共祖先是节点 3。
- * <p>
  * 输入: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
  * 输出: 5
  * 解释: 节点 5 和节点 4 的最近公共祖先是节点 5。因为根据定义最近公共祖先节点可以为节点本身。
  */
 class Solution {
-
-    private TreeNode ans;
-
-    public Solution() {
-        this.ans = null;
-    }
-	  public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        this.recurseTree(root, p, q);
-        return this.ans;
-    }
-   /**
-     * 1. 从根节点开始遍历树。
-     * 2. 如果当前节点本身是 p 或 q 中的一个，我们会将变量 mid 标记为 true，
-     * 并继续搜索左右分支中的另一个节点。
-     * 3. 如果左分支或右分支中的任何一个返回 true，则表示在下面找到了两个节点中的一个。
-     * 4. 如果在遍历的任何点上，左、右或中三个标志中的任意两个变为 true，这意味着我们找到了节点 p 和 q 的最近公共祖先。
-     */
-    private boolean recurseTree(TreeNode currentNode, TreeNode p, TreeNode q) {
-
-        // If reached the end of a branch, return false.
-        if (currentNode == null) {
-            return false;
-        }
-
-        // Left Recursion. If left recursion returns true, set left = 1 else 0
-        int left = this.recurseTree(currentNode.left, p, q) ? 1 : 0;
-
-        // Right Recursion
-        int right = this.recurseTree(currentNode.right, p, q) ? 1 : 0;
-
-        // If the current node is one of p or q
-        int mid = (currentNode == p || currentNode == q) ? 1 : 0;
-
-        // If any two of the flags left, right or mid become True
-        if (mid + left + right >= 2) {
-            this.ans = currentNode;
-        }
-
-        // Return true if any one of the three bool values is True.
-        return (mid + left + right > 0);
-    }
-}
-
-   /** 另解：
+   /** 
      * 此题相当于查找以root为根节点的树上是否有p节点或者q节点,
      * 从左右子树分别进行递归，即查找左右子树上是否有p节点或者q节点。
-     * 左右子树均无p节点或q节点；
-     * 左子树找到，右子树没有找到，返回左子树的查找结果；
-     * 右子树找到，左子树没有找到，返回右子树的查找结果；
-     * 左、右子树均能找到；
-     * 说明此时的p节点和q节点在当前root节点两侧，返回root节点。
+     * 左右子树均无p节点或q节点；-》返回null
+     * 左子树找到，右子树没有找到，返回左子树的查找结果；-》left
+     * 右子树找到，左子树没有找到，返回右子树的查找结果；-》right
+     * 左、右子树均能找到；-》说明此时的p节点和q节点在当前root节点两侧，返回root节点。
      */
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root == p || root == q) {
@@ -3077,9 +3133,7 @@ class Solution {
 
 ## 4.10 二叉堆实现优先队列
 
-二叉堆(Binary Heap)没什么神秘，性质比二叉搜索树 BST 还简单。其主 要操作就两个， sink (下沉)和 swim (上浮)，用以维护二叉堆的性 质。其主要应用有两个，首先是一种排序方法「堆排序」，第二是一种很有用的数据结构「优先级队列」。
-
-二叉堆是一颗特殊的二叉树（完全二叉树），存储在数组里。
+二叉堆(Binary Heap)没什么神秘，性质比二叉搜索树 BST 还简单。其主要操作就两个， sink (下沉)和 swim (上浮)，用以维护二叉堆的性 质。其主要应用有两个，首先是一种排序方法「堆排序」，第二是一种很有用的数据结构「优先级队列」。二叉堆是一颗特殊的二叉树（完全二叉树），存储在数组里。
 
 ```java
 // 父节点的索引
@@ -3145,8 +3199,7 @@ public class MaxPQ
 
 为什么要有上浮 swim 和下沉 sink 的操作呢?为了维护堆结构。
 
-我们要讲的是最大堆，每个节点都比它的两个子节点大，但是在插入元素和删除元素时，难免破坏堆的性质，这就需要通过这两个操作来恢复堆的性质了。
-对于最大堆，会破坏堆性质的有有两种情况:
+我们要讲的是最大堆，每个节点都比它的两个子节点大，但是在插入元素和删除元素时，难免破坏堆的性质，这就需要通过这两个操作来恢复堆的性质了。对于最大堆，会破坏堆性质的有有两种情况:
 
 1. 如果某个节点 A 比它的子节点(中的一个)小，那么 A 就不配做父节 点，应该下去，下面那个更大的节点上来做父节点，这就是对 A 进行 **下沉**。
 2. 如果某个节点 A 比它的父节点大，那么 A 不应该做子节点，应该把父 节点换下来，自己去做父节点，这就是对 A 的**上浮**。
@@ -3217,7 +3270,7 @@ public Key delMax() {
 
 ## 4.11 **二叉搜索树操作集锦**
 
-### 4.11.1 **判断** **BST** **的合法性**
+### 4.11.1 **判断** **BST** 的合法性
 
 ```java
 boolean isValidBST(TreeNode root) {
@@ -3355,14 +3408,26 @@ n叉树的遍历
 
 <img src="img/image-20200316182017396.png" alt="image-20200316182017396" style="zoom:33%;" />
 
-
 # 5. 栈和队列
-## 5.1 俩个栈实现队列
+
+```
+Stack:
+peek()//打印栈顶元素
+pop()//出栈
+push()//入栈
+
+Queue:
+add()//入队
+poll()//出队，和remove的区别是对空队列的处理
+peek()//队列头部
+```
+
+## 5.1 俩个栈实现队列@@
 
 [使用两个栈实现队列9](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/QueueWithTwoStacks_09.java)
 
 ```java
-//在队列尾部插入元素,直接在stack1中插入即可，不用考虑过多
+//在队列尾部插入元素,直接在stack1中插入即可
         public void appendTail(E node) {
             stack1.push(node);
         }
@@ -3421,12 +3486,19 @@ public Integer pop() {
 
 [包含min函数的栈30](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/CustomStack_30.java)
 
-这个题目是很新颖的，我们需要借助一个辅助栈来完成任务。因为一个变量来保存最小元素，存在最小元素被弹出栈的情况，剩下的情况就无法处理了。
-
 ```java
 /**
-* 定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数。
-* 在该栈中，调用min,push及pop的时间复杂度都是O(1).
+ * 定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数。
+ * 在该栈中，调用min,push及pop的时间复杂度都是O(1).
+ * 看到这个问题，我们的第一反应可能是每次压入一个新元素进栈时，将栈里的所有元素排序，
+ * 让最小的元素位于栈顶，这样就能在O(1)时间得到最小元素了。
+ * 但这种思路不能保证最后压入的元素能够最先出栈，因此这个数据结构已经不是栈了。
+ * 我们接着想到在栈里添加一个成员变量存放最小的元素。每次压入一个新元素进栈的时候，如果该元素比当前最小的元素还要小，则更新最小元素。
+ * 面试官听到这种思路之后就会问：如果当前最小的元素被弹出栈了，如何得到下一个最小的元素呢？
+ * 分析到这里我们发现仅仅添加一个成员变量存放最小元素是不够的，也就是说当最小元素弹出栈的时候，我们希望能够得到次小元素。
+ * 因此在压入这个最小元素之前，我们要把次小元素保存起来。
+ * 是不是可以把每次的最小元素都保存起来，放在另外一个辅助栈里呢？
+ * 我们不妨举几个例子来分析一下把元素压入或者弹出栈的过程。
 */
 //进栈
     private void push(int value) {
@@ -3457,30 +3529,21 @@ public Integer pop() {
     }
 ```
 
-## 5.3 栈的压入、弹出序列
+## 5.3 栈的压入、弹出序列@@@
 
 [栈的压入、弹出序列31](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/StackSequence_31.java)
 
-需要辅助栈。
-
 ```java
 /**
- * 题目描述：
- * 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。
- * 假设压入栈的所有数字均不相等。
+ * 输入两个整数序列，第一个序列表示栈的压入顺序，请判断第二个序列是否为该栈的弹出顺序。假设压入栈的所有数字均不相等。
  * 例如序列1，2，3，4，5是某栈的压栈序列，序列4，5，3，2，1是该压栈序列对应的一个弹出序列，
  * 但4，3，5，1，2就不可能是该压栈序列的弹出序列。
  */
 public static boolean IsPopOrder(int[] pushA, int[] popA) {
-        //处理非法数据
-        if (pushA == null || popA == null || pushA.length == 0 || popA.length == 0) {
+       //处理非法数据
+        if (pushA == null || popA == null || pushA.length == 0 || popA.length == 0 || pushA.length != popA.length) {
             return false;
         }
-
-        if (pushA.length != popA.length) {
-            return false;
-        }
-
         //辅助栈
         Stack<Integer> tempStack = new Stack<Integer>();
         //弹出数组的索引
@@ -3502,23 +3565,7 @@ public static boolean IsPopOrder(int[] pushA, int[] popA) {
     }
 ```
 
-总结：考察栈类的题目，一般不会直接考察，一般需要构建一个辅助栈。
-
-**区分栈和队列的函数**
-
-```java
-Stack:
-peek()//打印栈顶元素
-pop()//出栈
-push()//入栈
-
-Queue:
-add()//入队
-poll()//出队，和remove的区别是对空队列的处理
-peek()//队列头部
-```
-
-## 5.4 队列的最大值
+## 5.4 队列的最大值@@@
 
 [滑动窗口的最大值5901](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/MaxInWindows_5901.java)
 
@@ -3528,14 +3575,19 @@ peek()//队列头部
  * 你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。返回滑动窗口中的最大值。
  * 输入: nums = [1,3,-1,-3,5,3,6,7], 和 k = 3
  * 输出: [3,3,5,5,6,7]
+ * 解释:
+ * 滑动窗口的位置                最大值
+ * ---------------               -----
+ * [1  3  -1] -3  5  3  6  7       3
+ * 1 [3  -1  -3] 5  3  6  7       3
+ * 1  3 [-1  -3  5] 3  6  7       5
+ * 1  3  -1 [-3  5  3] 6  7       5
+ * 1  3  -1  -3 [5  3  6] 7       6
+ * 1  3  -1  -3  5 [3  6  7]      7
  */
 public class MaxInWindows_5901 {
-    ArrayDeque<Integer> deq = new ArrayDeque<Integer>();
-    int[] nums;
-
     /**
      * 双端队列和普通队列最大的不同在于，它允许我们在队列的头尾两端都能在 O(1) 的时间内进行数据的查看、添加和删除。
-     * <p>
      * 与队列相似，我们可以利用一个双链表实现双端队列。
      * 双端队列最常用的地方就是实现一个长度动态变化的窗口或者连续区间，而动态窗口这种数据结构在很多题目里都有运用。
      * 可以利用一个双端队列来表示这个窗口。这个双端队列保存当前窗口中最大那个数的下标，
@@ -3543,53 +3595,56 @@ public class MaxInWindows_5901 {
      * 同时，有了这个下标，我们可以很快地知道新的窗口是否已经不再包含原来那个最大的数，
      * 如果不再包含，我们就把旧的数从双端队列的头删除。
      * 按照这样的操作，不管窗口的长度是多长，
-     * 因为数组里的每个数都分别被压入和弹出双端队列一次，所以我们可以在 O(n)O(n) 的时间里完成任务。
+     * 因为数组里的每个数都分别被压入和弹出双端队列一次，所以我们可以在 O(n)的时间里完成任务。
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
-        if (n * k == 0) {
-            return new int[0];
-        }
-        if (k == 1) {
+        if (n * k == 0 || k == 1) {
             return nums;
         }
-
-        // init deque and output
-        this.nums = nums;
-        int max_idx = 0;
-        for (int i = 0; i < k; i++) {
-            clean_deque(i, k);
-            deq.addLast(i);
-            // compute max in nums[:k]
-            if (nums[i] > nums[max_idx]) {
-                max_idx = i;
+        MonotonicQueue window = new MonotonicQueue();
+        int res[] = new int[n - k + 1];
+        for (int i = 0; i < n; i++) {
+            //先填满窗口的前 k - 1
+            if (i < k - 1) {
+                window.push(nums[i]);
+                // 窗口向前滑动
+            } else {
+                window.push(nums[i]);
+                res[i - k + 1] = window.max();
+                window.pop(nums[i - k + 1]);
             }
         }
-        int[] output = new int[n - k + 1];
-        output[0] = nums[max_idx];
-
-        // build output
-        for (int i = k; i < n; i++) {
-            clean_deque(i, k);
-            deq.addLast(i);
-            output[i - k + 1] = nums[deq.getFirst()];
-        }
-        return output;
+        return res;
     }
 
-    public void clean_deque(int i, int k) {
-        // remove indexes of elements not from sliding window
-        if (!deq.isEmpty() && deq.getFirst() == i - k) {
-            deq.removeFirst();
+    /**
+     * 单调队列,单调递减
+     */
+    class MonotonicQueue {
+        // 双端队列
+        ArrayDeque<Integer> data = new ArrayDeque<>();
+
+        // 在队尾添加元素 n,把前面比新元素小的元素都删掉：
+        public void push(int n) {
+            while (!data.isEmpty() && data.getLast() < n) {
+                data.removeLast();
+            }
+            data.addLast(n);
         }
 
-        // remove from deq indexes of all elements
-        // which are smaller than current element nums[i]
-        while (!deq.isEmpty() && nums[i] > nums[deq.getLast()]) {
-            deq.removeLast();
+        // 返回当前队列中的最大值
+        public int max() {
+            return data.getFirst();
+        }
+
+        // 队头元素如果是 n，删除它
+        public void pop(int n) {
+            if (!data.isEmpty() && data.getFirst() == n) {
+                data.removeFirst();
+            }
         }
     }
-}
 ```
 
 [队列的最大值5902](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/MaxInQueue_5902.java)
@@ -3650,30 +3705,13 @@ public class MaxInQueue_5902 {
 }
 ```
 
-## 5.5 单调栈
-
-
-
 # 6. 递归和循环
 
-- 递归的关键是递归边界和递归式。
-
-- 当递归调用是函数体中最后执行的语句并且它的返回值不属于表达式一部分时， 这个递归就是**尾递归**。并且编辑器会对尾递归进行优化，可以复用栈帧。
-
-- 那么是不是所有的递归都可以转成尾递归呢？答案是否定的。不过尾递归可以和循环相互转化，在现在的面试题目中，面试官经常让我们不要用递归，那么尾递归直接改成循环。
-- 非尾递归咋办呢？我们可以使用栈来模拟吧。
-
-下面几个本质上属于斐波那契数列：
-[斐波拉契数列10](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Fibonacci_10.java)
-跳台阶
-变态跳台阶（这个不是斐波那契）
-矩形覆盖
-
-## 6.2 数值的整数次方
+## 6.1 数值的整数次方
 
 [16-数值的整数次方](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Power_16.java)
 
-这个题目需要我们考虑到各种情况，然后还需要掌握**累乘和快速求幂**的方法。我们需要注意的是，小数最好不要使用==判断，因为是不准确的，需要判断其差的绝对值是不是小于一个很小的数即可。
+这个题目需要我们考虑到各种情况，然后还需要掌握**累乘和快速求幂**的方法。
 
 ```java
 /**
@@ -3703,7 +3741,7 @@ public class MaxInQueue_5902 {
 
         return result;
     }
-
+		// 循环
     public double powerWithExponet(double base, int exponent) {
         double result = 1.0;
         for (int i = 1; i <= exponent; i++) {
@@ -3711,20 +3749,37 @@ public class MaxInQueue_5902 {
         }
         return result;
     }
+// 快速求幂
+public double powerWithUnsignedExponet(double base, int exponent) {
+        if (exponent == 0) {
+            return 1.0;
+        }
+        if (exponent == 1) {
+            return base;
+        }
+
+        //使用右移运算符，将exponent除以2
+        double result = powerWithUnsignedExponet(base, exponent >> 1);
+        result *= result;
+        //判断是否为奇数
+        if ((exponent & 1) == 1) {
+            result *= base;
+        }
+        return result;
+    }
 ```
 
-## 6.3  打印从1到最大的n位数
+## 6.3  打印从1到最大的n位数@@@
 
 [17-打印从1到最大的n位数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Print1ToMaxOfNDigits_17.java)
 
-**大数问题**，使用字符串来模拟加法运算，还有减乘除呢，头大。
+**大数问题**，使用字符串来模拟加法运算，还有减乘除呢。
 
 一种是老老实实的模拟，二是我们发现：**n位所有10进制数其实就是n个从0到9的全排列**。
 
 ```java
 	 /**
      * 输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则打印出1、2、3 一直到最大的3位数即999。
-     * @param n 数字的最大位数
      */
     public static void printOneToNthDigits(int n) {
         // 输入值必须大于0
@@ -3733,10 +3788,6 @@ public class MaxInQueue_5902 {
         }
         // 创建一个长度为n的数组
         int[] number = new int[n];
-        // 为数组元素赋初始值
-        for (int i = 0; i < number.length; i++) {
-            number[i] = 0;
-        }
         // 求结果，如果最高位没有进位就一直进行处理，模拟大数加法
         while (addOne(number) == 0) {
             printArray(number);
@@ -3780,12 +3831,10 @@ public class MaxInQueue_5902 {
         if (n <= 0) {
             return;
         }
-
         // 创建一个数组用于打存放值
         int[] number = new int[n];
         printOneToNthDigitsRecursely(0, number);
     }
-
     /**
      * @param index  当前处理的是第个元素，从0开始计数
      * @param number 存放结果的数组
@@ -3823,9 +3872,9 @@ public class MaxInQueue_5902 {
     }
 ```
 
-## 6.4 1-n整数中1出现的次数
+## 6.4 1-n整数中1出现的次数@@@
 
-[1-n整数中1出现的次数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Numberof1Between1AndN_43.java)
+[1-n整数中1出现的次数43](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Numberof1Between1AndN_43.java)
 
 ```java
 /**
@@ -3902,13 +3951,13 @@ public class Numberof1Between1AndN_43 {
 }
 ```
 
-## 6.5 丑数
+## 6.5 丑数@@@
 
 [丑数49](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/UglyNumber_49.java)
 
 
 
-## 6.6 求1+2+…+n
+## 6.6 求1+2+…+n@@@
 
 [求1+2+…+n 64](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/sumNums_64.java)
 
@@ -3939,8 +3988,6 @@ public class sumNums_64 {
 ```
 
 
-
-
 # 7. 查找和排序
 
 **如果面试题要求在排序的数组或者部分排序的数组中查找一个数字或者统计某数字出现的次数，可以尝试使用二分查找算法。**
@@ -3949,16 +3996,9 @@ public class sumNums_64 {
 
 1、分析二分查找代码时，不要出现 else，全部展开成 else if 方便理解。
 
-2、注意「搜索区间」和 while 的终止条件，如果存在漏掉的元素，记得在 最后检查。
+2、注意「搜索区间」和 while 的终止条件，如果存在漏掉的元素，记得在最后检查。
 
-3、如需要搜索左右边界，只要在 nums[mid] == target 时做修改即可。搜索 右侧时需要减一。
-
-查找常用的有：二分查找，顺序查找，二叉排序树查找和哈希表查找。
-
-在查找中，哈希表和二叉排序树的考察重点在数据结构上，而不是算法上。哈希表的时间复杂度为O(1)，原理是空间换时间，题目代表50“第一个只出现一次的字符”，可以关注布隆过滤器的实现。
-
-在排序中，需要掌握各种排序算法的平均时间复杂度，最差时间复杂度，空间复杂度，另快排是十分重要的。
-快排的核心是随机选择一个数字，比这个数字大的移动到左边，比这个数字小的移动到右边。可以用递归和循环来实现。
+3、如需要搜索左右边界，只要在nums[mid] == target 时做修改即可。搜索 右侧时需要减一。
 
 **partition，即分治算法，十分的重要。可以用在快排算法中，还可以用来实现在长度为n的数组中查找第k大的数字**比如，面试题39，数组中出现次数超过一半的数字和面试题40，最小的k个数。其中，**我们有成熟的算法的时间复杂度为O(n)得到数组中任意第k大的数字，假设你选择的数字p在快排一轮完成后下标是m，那么比p小的数字就有m个，如果k小于m，那么第k大的数字一定在p的左边，否则在右边。**
 
@@ -4088,9 +4128,13 @@ public class FirstNotRepeatingChar_50 {
     }
 ```
 
-
-
 ```java
+/**
+ * 0～n-1中缺失的数字
+ * 一个长度为n-1的递增排序数组中的所有数字都是唯一的，并且每个数字都在范围0～n-1之内。
+ * 在范围0～n-1内的n个数字中有且只有一个数字不在该数组中，请找出这个数字。
+ * 输入: [0,1,2,3,4,5,6,7,9]，输出: 8
+ */
 public int getMissingNumber(int[] array) {
         int length = array.length;
         if (array == null || length == 0) {
@@ -4115,10 +4159,6 @@ public int getMissingNumber(int[] array) {
         return -1;
     }
 ```
-
-
-
-## 7.4 二分查找套路
 
 # 8. 动态规划和贪心算法
 
@@ -5387,7 +5427,7 @@ public int rob(int[] nums) {
     }
 ```
 
-## 8.15 **股票买卖问题**
+## 8.15 股票买卖问题
 
 <img src="img/image-20200323161234176.png" alt="image-20200323161234176" style="zoom:25%;" />
 

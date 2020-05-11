@@ -1,17 +1,13 @@
 package com.code.offer.recursive_cycle;
 
 /**
- * 打印从1到最大的n位数：使用数组表示大数
- * 题目描述：
  * 输入数字n,按顺序打印出从1到最大的n位十进制数，比如输入3,则打印出1,2,3一直到最大的3位数即999
- * <p>
  * 模拟大数的运算
  */
 
 public class Print1ToMaxOfNDigits_17 {
     /**
      * 输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则打印出1、2、3 一直到最大的3位数即999。
-     * @param n 数字的最大位数
      */
     public static void printOneToNthDigits(int n) {
         // 输入值必须大于0
@@ -63,7 +59,6 @@ public class Print1ToMaxOfNDigits_17 {
      * 输入数字n，按顺序打印出从1最大的n位十进制数。
      * 比如输入3，则打印出1、2、3 一直到最大的3位数即999。
      * 核心思想：n位所有10进制数其实就是n个从0到9的全排列。
-     *
      * @param n 数字的最大位数
      */
     public static void printOneToNthDigitsRecursely(int n) {

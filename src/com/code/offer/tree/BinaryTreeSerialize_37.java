@@ -20,9 +20,6 @@ public class BinaryTreeSerialize_37 {
         }
     }
 
-    //计数变量
-    int index = -1;
-
     private String Serialize(TreeNode root) {
         StringBuilder buffer = new StringBuilder();
         if (root == null) {
@@ -34,6 +31,8 @@ public class BinaryTreeSerialize_37 {
         return buffer.toString();
     }
 
+    //计数变量
+    int index = -1;
     private TreeNode Deserialize(String str) {
         index++;
         String[] strr = str.split(",");

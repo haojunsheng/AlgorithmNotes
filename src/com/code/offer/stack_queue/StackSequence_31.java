@@ -8,7 +8,6 @@ import java.util.Stack;
  * 假设压入栈的所有数字均不相等。
  * 例如序列1，2，3，4，5是某栈的压栈序列，序列4，5，3，2，1是该压栈序列对应的一个弹出序列，
  * 但4，3，5，1，2就不可能是该压栈序列的弹出序列。
- * <p>
  * 分析：
  * 解决这个问题很直观的想法就是建立一个辅助栈，把输入的第一个序列中的数字依次压入该辅助栈，并按照第二个序列的顺序依次从该栈中弹出数字。
  * 以弹出序列4，5，3，2，1为例分析压栈和弹出的过程。
@@ -24,11 +23,7 @@ public class StackSequence_31 {
 
     public static boolean IsPopOrder(int[] pushA, int[] popA) {
         //处理非法数据
-        if (pushA == null || popA == null || pushA.length == 0 || popA.length == 0) {
-            return false;
-        }
-
-        if (pushA.length != popA.length) {
+        if (pushA == null || popA == null || pushA.length == 0 || popA.length == 0 || pushA.length != popA.length) {
             return false;
         }
 

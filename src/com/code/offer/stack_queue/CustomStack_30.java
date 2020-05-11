@@ -6,7 +6,6 @@ import java.util.Stack;
  * 题目描述：
  * 定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的min函数。
  * 在该栈中，调用min,push及pop的时间复杂度都是O(1).
- * <p>
  * 分析：
  * 看到这个问题，我们的第一反应可能是每次压入一个新元素进栈时，将栈里的所有元素排序，
  * 让最小的元素位于栈顶，这样就能在O(1)时间得到最小元素了。
@@ -23,7 +22,6 @@ public class CustomStack_30 {
     Stack<Integer> dataStack = new Stack<Integer>();
     Stack<Integer> minStack = new Stack<Integer>();
     int minValue = 0;
-
     //进栈
     private void push(int value) {
         dataStack.push(value);
