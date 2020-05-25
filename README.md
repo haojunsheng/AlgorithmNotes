@@ -2440,55 +2440,51 @@ public class LastRemaining_62 {
 
 **递归算法的时间复杂度怎么计算?子问题个数乘以解决一个子问题需要的时间。**
 
-
-
 ## 4.1 二叉树迭代@@@
-
-[二叉树遍历的迭代解法](https://blog.csdn.net/weixin_42322309/article/details/104177275)：
 
 ```java
 // 前序
 // 首先我们想要打印根节点的数据，此时Stack里面的内容为空，所以我们优先将头结点加入Stack，然后打印。
 // 之后我们应该先打印左子树，然后右子树。所以先加入Stack的就是右子树，然后左子树。
-public void preOrderIteration(TreeNode head) {
-	if (head == null) {
-		return;
-	}
-	Stack<TreeNode> stack = new Stack<>();
-	stack.push(head);
-	while (!stack.isEmpty()) {
-		TreeNode node = stack.pop();
-		System.out.print(node.value + " ");
-		if (node.right != null) {
-			stack.push(node.right);
-		}
-		if (node.left != null) {
-			stack.push(node.left);
-		}
-	}
-}
+public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> res = new ArrayList<Integer>();
+        if (root == null) {
+            return res;
+        }
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        stack.push(root);
+        while (!stack.isEmpty()) {
+            TreeNode node = stack.pop();
+            res.add(Integer.valueOf(node.val));
+            if (node.right != null) {
+                stack.push(node.right);
+            }
+            if (node.left != null) {
+                stack.push(node.left);
+            }
+        }
+        return res;
+    }
 ```
 
 ```java
 // 中序
-public void inOrderIteration(TreeNode head) {
-	if (head == null) {
-		return;
-	}
-	TreeNode cur = head;
-	Stack<TreeNode> stack = new Stack<>();
-	while (!stack.isEmpty() || cur != null) {
-		while (cur != null) {
-			stack.push(cur);
-			cur = cur.left;
-		}
-		TreeNode node = stack.pop();
-		System.out.print(node.value + " ");
-		if (node.right != null) {
-			cur = node.right;
-		}
-	}
-}
+public List<Integer> inorderTraversal(TreeNode root) {
+            List<Integer> list = new ArrayList<>();
+            Stack<TreeNode> stack = new Stack<>();
+            TreeNode cur = root;
+            while (cur != null || !stack.isEmpty()) {
+                if (cur != null) {
+                    stack.push(cur);
+                    cur = cur.left;
+                } else {
+                    cur = stack.pop();
+                    list.add(cur.val);
+                    cur = cur.right;
+                }
+            }
+            return list;
+        }
 ```
 
 ```java
@@ -2518,6 +2514,40 @@ public void postOrderIteration(TreeNode head) {
 		}
 	}
 ```
+
+```java
+// 层次遍历
+public List<List<Integer>> levelOrder(TreeNode root) {
+    List<List<Integer>> res = new ArrayList<List<Integer>>();
+    if (root == null) return res;
+    // 每一层的节点
+    Queue<TreeNode> queue = new LinkedList<TreeNode>();
+    queue.add(root);
+    int level = 0;
+    while ( !queue.isEmpty() ) {
+      // start the current level
+      res.add(new ArrayList<Integer>());
+
+      // number of elements in the current level
+      for(int i = queue.size(); i > 0; --i) {
+        TreeNode node = queue.remove();
+
+        // fulfill the current level
+        res.get(level).add(node.val);
+
+        // add child nodes of the current level
+        // in the queue for the next level
+        if (node.left != null) queue.add(node.left);
+        if (node.right != null) queue.add(node.right);
+      }
+      // go to next level
+      level++;
+    }
+    return res;
+  }
+```
+
+
 
 ## 4.2 二叉树遍历类
 
@@ -2691,7 +2721,6 @@ public boolean isSymmetrical(TreeNode root) {
         }
         return isSymmetrical(root1.left, root2.right) && isSymmetrical(root1.right, root2.left);
     }
-
 /**
      * 时间复杂度：O(n)，因为我们遍历整个输入树一次，所以总的运行时间为 O(n)，其中 n是树中结点的总数。
      * 空间复杂度：搜索队列需要额外的空间。在最糟糕情况下，我们不得不向队列中插入O(n)个结点。因此，空间复杂度为O(n)。
