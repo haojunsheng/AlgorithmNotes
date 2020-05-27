@@ -2930,7 +2930,7 @@ public static void printFromTopToBottom(TreeNode head) {
                         stack1.add(tempNode.left);
                     }
                 }
-                System.out.println();
+                System.out.printl n();
             }
         }
     }
