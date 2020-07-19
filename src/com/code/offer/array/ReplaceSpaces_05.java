@@ -21,7 +21,6 @@ public class ReplaceSpaces_05 {
      */
 
     /**
-     *
      * @param str
      * @return
      */

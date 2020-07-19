@@ -1,4 +1,4 @@
-package com.code.offer.sort;
+package com.code.offer.sort_basic;
 
 public class QuickSort {
     /**

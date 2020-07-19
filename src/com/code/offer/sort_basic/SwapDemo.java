@@ -1,4 +1,4 @@
-package com.code.offer.sort;
+package com.code.offer.sort_basic;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package com.code.offer.sort;
+package com.code.offer.sort_basic;
 
 public class HeapSort {
     //声明全局变量，用于记录数组array的长度；
