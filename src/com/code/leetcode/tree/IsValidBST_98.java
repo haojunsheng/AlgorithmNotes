@@ -26,6 +26,28 @@ public class IsValidBST_98 {
         return isValidBST(root.left, min, root) && isValidBST(root.right, root, max);
     }
 
+    int pre = Integer.MIN_VALUE;
+
+    /**
+     * 中序遍历
+     *
+     * @param root
+     * @return
+     */
+    public boolean isValidBST1(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (!isValidBST(root.left)) {
+            return false;
+        }
+        if (root.val <= pre) {
+            return false;
+        }
+        pre = root.val;
+        return isValidBST(root.right);
+    }
+
     // a good solution using iterative inorder traversal
     // https://leetcode.com/problems/validate-binary-search-tree/discuss/32112/Learn-one-iterative-inorder-traversal-apply-it-to-multiple-tree-questions-(Java-Solution)
     public boolean isValidBSTIterative(TreeNode root) {

@@ -1,20 +1,17 @@
 package com.code.offer.stack_queue;
 
 
-import java.util.LinkedList;
+import java.util.Queue;
 
 public class StackWithTwoQueue_0902 {
-    private LinkedList<Integer> queue1;
-    private LinkedList<Integer> queue2;
+    private Queue<Integer> queue1;
+    private Queue<Integer> queue2;
 
     public void push(int num) {
-        if (queue1.isEmpty() && queue2.isEmpty()) {
-            queue1.push(num);
-            // queue1非空，压入queue1
-        } else if (!queue1.isEmpty()) {
-            queue1.push(num);
+        if (!queue2.isEmpty()) {
+            queue2.offer(num);
         } else {
-            queue2.push(num);
+            queue1.offer(num);
         }
     }
 
@@ -26,15 +23,15 @@ public class StackWithTwoQueue_0902 {
         // queue1中有值，除了最后一个全部移动到q2,然后q2弹出即可
         if (!queue1.isEmpty()) {
             while (queue1.size() > 1) {
-                queue2.push(queue1.pop());
+                queue2.offer(queue1.poll());
             }
-            value = queue1.pop();
+            value = queue1.poll();
         } else {
             // 同上
             while (queue2.size() > 1) {
-                queue1.push(queue2.pop());
+                queue1.offer(queue2.poll());
             }
-            value = queue2.pop();
+            value = queue2.poll();
         }
         return value;
     }

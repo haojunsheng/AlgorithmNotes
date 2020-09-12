@@ -1,5 +1,11 @@
 package com.code.offer.string;
 
+import java.util.LinkedList;
+import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * 数字序列中某一位的数字，数字以0123456789101112131415…的格式序列化到一个字符序列中。
  * 在这个序列中，第5位（从下标0开始计数）是5，第13位是1，第19位是4，等等。请写一个函数，求任意第n位对应的数字。
@@ -27,6 +33,7 @@ public class DigitAtIndex_44 {
             base *= 10;
             digits++;
         }
+
         // 数字索引，n现在表示digits位数的第n个数字
         // index是目标数字在number中的索引，如果index=0，表示目标数字是number中的最后一个数字。
         int index = n % digits;

@@ -6,9 +6,7 @@ package com.code.offer.recursive_cycle;
  */
 
 public class Print1ToMaxOfNDigits_17 {
-    /**
-     * 输入数字n，按顺序打印出从1最大的n位十进制数。比如输入3，则打印出1、2、3 一直到最大的3位数即999。
-     */
+
     public static void printOneToNthDigits(int n) {
         // 输入值必须大于0
         if (n < 1) {
@@ -16,10 +14,6 @@ public class Print1ToMaxOfNDigits_17 {
         }
         // 创建一个长度为n的数组
         int[] number = new int[n];
-        // 为数组元素赋初始值
-        for (int i = 0; i < number.length; i++) {
-            number[i] = 0;
-        }
         // 求结果，如果最高位没有进位就一直进行处理，模拟大数加法
         while (addOne(number) == 0) {
             printArray(number);
@@ -29,6 +23,7 @@ public class Print1ToMaxOfNDigits_17 {
     /**
      * 对number表示的数组的最低位加1
      * number中的每个数都不能超过9不能小于0，每个位置模拟一个数位
+     *
      * @param number 待加数组
      * @return 判断最高位是否有进位，如果有进位就返回1，否则返回0
      */
@@ -59,6 +54,7 @@ public class Print1ToMaxOfNDigits_17 {
      * 输入数字n，按顺序打印出从1最大的n位十进制数。
      * 比如输入3，则打印出1、2、3 一直到最大的3位数即999。
      * 核心思想：n位所有10进制数其实就是n个从0到9的全排列。
+     *
      * @param n 数字的最大位数
      */
     public static void printOneToNthDigitsRecursely(int n) {
@@ -67,14 +63,14 @@ public class Print1ToMaxOfNDigits_17 {
         }
         // 创建一个数组用于打存放值
         int[] number = new int[n];
-        printOneToNthDigitsRecursely(0, number);
+        dfs(0, number);
     }
 
     /**
      * @param index  当前处理的是第个元素，从0开始计数
      * @param number 存放结果的数组
      */
-    public static void printOneToNthDigitsRecursely(int index, int[] number) {
+    public static void dfs(int index, int[] number) {
         // 说明所有的数据排列选择已经处理完了
         if (index >= number.length) {
             // 可以输出数组的值
@@ -83,14 +79,12 @@ public class Print1ToMaxOfNDigits_17 {
         }
         for (int i = 0; i <= 9; i++) {
             number[index] = i;
-            printOneToNthDigitsRecursely(index + 1, number);
+            dfs(index + 1, number);
         }
     }
 
     /**
      * 输入数组的元素，从左到右，从第一个非0值到开始输出到最后的元素。
-     *
-     * @param arr 要输出的数组
      */
     public static void printArray(int[] arr) {
         // 找第一个非0的元素

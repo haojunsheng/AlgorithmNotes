@@ -74,7 +74,7 @@ public class RegularMatch_19 {
      * 回溯法
      */
     public boolean match(String str, String pattern) {
-        //如果正则串p为空字符串s也为空这匹配成功，如果正则串p为空但是s不是空则说明匹配失败
+        //如果正则串p为空字符串s也为空则匹配成功，如果正则串p为空但是s不是空则说明匹配失败
         if (pattern.isEmpty()) {
             return str.isEmpty();
         }
@@ -84,11 +84,11 @@ public class RegularMatch_19 {
         // 匹配0个，例如s：bc、pattern：a*bc，我们就保持s不变，减掉p的"a*"，调用isMatch(str:bc,pattern:bc)。
         // 匹配多个，例如s：aabb、pattern：a*bb，就保持p不变，减掉s的首元素，调用isMatch(str:abb,pattern:a*bb)。
         if (pattern.length() >= 2 && pattern.charAt(1) == '*') {
-            return isMatch(str, pattern.substring(2)) ||
-                    (headMatched && isMatch(str.substring(1), pattern));
+            return match(str, pattern.substring(2)) ||
+                    (headMatched && match(str.substring(1), pattern));
             // 如果s和p的首字符相等
         } else if (headMatched) {
-            return isMatch(str.substring(1), pattern.substring(1));
+            return match(str.substring(1), pattern.substring(1));
         } else {
             return false;
         }

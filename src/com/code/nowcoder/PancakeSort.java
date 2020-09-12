@@ -1,4 +1,4 @@
-package com.code.newcoder;
+package com.code.nowcoder;
 
 public class PancakeSort {
     /**

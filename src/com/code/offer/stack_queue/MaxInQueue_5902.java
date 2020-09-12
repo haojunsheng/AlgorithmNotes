@@ -31,26 +31,34 @@ public class MaxInQueue_5902 {
     Deque<Integer> deq;
 
     public MaxInQueue_5902() {
-        que = new LinkedList<>();  //队列：插入和删除
-        deq = new LinkedList<>();  //双端队列：获取最大值
+        //队列：插入和删除
+        que = new LinkedList<>();
+        //双端队列：获取最大值，构造单调队列
+        deq = new LinkedList<>();
     }
 
     public int max_value() {
-        return deq.size() > 0 ? deq.peek() : -1;  //双端队列的队首为que的最大值
+        //双端队列的队首为que的最大值
+        return deq.size() > 0 ? deq.peek() : -1;
     }
 
     public void push_back(int value) {
-        que.offer(value);  //value入队
+        //value入队
+        que.offer(value);
         while (deq.size() > 0 && deq.peekLast() < value) {
-            deq.pollLast();  //将deq队尾小于value的元素删掉
+            //将deq队尾小于value的元素删掉
+            deq.pollLast();
         }
-        deq.offerLast(value);  //将value放在deq队尾
+        //将value放在deq队尾
+        deq.offerLast(value);
     }
 
     public int pop_front() {
-        int tmp = que.size() > 0 ? que.poll() : -1;  //获得队首元素
+        //获得队首元素
+        int tmp = que.size() > 0 ? que.poll() : -1;
         if (deq.size() > 0 && tmp == deq.peek()) {
-            deq.poll();  //如果出队的元素是当前最大值，将deq的队首出队
+            //如果出队的元素是当前最大值，将deq的队首出队
+            deq.poll();
         }
         return tmp;
     }

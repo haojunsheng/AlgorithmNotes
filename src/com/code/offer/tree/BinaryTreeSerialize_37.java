@@ -1,7 +1,12 @@
 package com.code.offer.tree;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 /**
- * 请实现两个函数，分别用来序列化和反序列化二叉树。
+ * 请实现两个函数，分别用来
+ * 。
  * <p>
  * 根据前序遍历规则完成序列化与反序列化。
  * 所谓序列化指的是遍历二叉树为字符串；所谓反序列化指的是依据字符串重新构造成二叉树。
@@ -21,27 +26,35 @@ public class BinaryTreeSerialize_37 {
     }
 
     private String Serialize(TreeNode root) {
-        StringBuilder buffer = new StringBuilder();
-        if (root == null) {
-            return buffer.append("#,").toString();
-        }
-        buffer.append(root.val + ",");
-        buffer.append(Serialize(root.left));
-        buffer.append(Serialize(root.right));
-        return buffer.toString();
+        return serializeHelper(root, new StringBuilder("")).toString();
     }
 
-    //计数变量
-    int index = -1;
-    private TreeNode Deserialize(String str) {
-        index++;
-        String[] strr = str.split(",");
-        TreeNode node = null;
-        if (!strr[index].equals("#")) {
-            node = new TreeNode(Integer.valueOf(strr[index]));
-            node.left = Deserialize(str);
-            node.right = Deserialize(str);
+    private StringBuilder serializeHelper(TreeNode root, StringBuilder sb) {
+        if (root == null) {
+            return sb.append("#,");
         }
-        return node;
+        sb.append(root.val).append(",");
+        serializeHelper(root.left, sb);
+        serializeHelper(root.right, sb);
+        return sb;
+    }
+
+    private TreeNode Deserialize(String str) {
+        String[] strData = str.split(",");
+        List<String> list = new LinkedList<>(Arrays.asList(strData));
+        return deserializeHelper(list);
+    }
+
+    private TreeNode deserializeHelper(List<String> list) {
+        if (list.get(0).equals("#")) {
+            list.remove(0);
+            return null;
+        }
+        int val = Integer.valueOf(list.get(0));
+        TreeNode root = new TreeNode(val);
+        list.remove(0);
+        root.left = deserializeHelper(list);
+        root.right = deserializeHelper(list);
+        return root;
     }
 }

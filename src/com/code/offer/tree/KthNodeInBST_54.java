@@ -20,7 +20,7 @@ public class KthNodeInBST_54 {
     TreeNode res = null;
 
     /**
-     * 二叉搜索树的中序遍历为递增序列。
+     * 二叉搜索树的中序遍历为递增序列,所以先处理右子树
      */
     TreeNode KthNode(TreeNode pRoot, int k) {
         if (pRoot == null || k <= 0) {
@@ -42,6 +42,7 @@ public class KthNodeInBST_54 {
         }
         if (--k == 0) {
             res = root;
+            return;
         }
         dfs(root.left);
     }

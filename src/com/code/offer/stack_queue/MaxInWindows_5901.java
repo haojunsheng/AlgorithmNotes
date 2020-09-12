@@ -26,8 +26,7 @@ public class MaxInWindows_5901 {
      * 这个双端队列保存当前窗口中最大那个数的下标，双端队列新的头总是当前窗口中最大的那个数。
      * 同时，有了这个下标，我们可以很快地知道新的窗口是否已经不再包含原来那个最大的数，
      * 如果不再包含，我们就把旧的数从双端队列的头删除。
-     * 按照这样的操作，不管窗口的长度是多长，
-     * 因为数组里的每个数都分别被压入和弹出双端队列一次，所以我们可以在 O(n)的时间里完成任务。
+     * 因为nums里的每个数都分别被压入和弹出双端队列一次，所以我们可以在 O(n)的时间里完成任务。
      */
     public int[] maxSlidingWindow(int[] nums, int k) {
         int n = nums.length;
@@ -35,12 +34,12 @@ public class MaxInWindows_5901 {
             return nums;
         }
         MonotonicQueue window = new MonotonicQueue();
-        int res[] = new int[n - k + 1];
+        int[] res = new int[n - k + 1];
         for (int i = 0; i < n; i++) {
             //先填满窗口的前 k - 1
             if (i < k - 1) {
                 window.push(nums[i]);
-                // 窗口向前滑动
+                // 窗口向前滑动,nums[i - k + 1] 就是窗口最后的元素
             } else {
                 window.push(nums[i]);
                 res[i - k + 1] = window.max();

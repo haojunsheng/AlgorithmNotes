@@ -22,6 +22,7 @@ public class CustomStack_30 {
     Stack<Integer> dataStack = new Stack<Integer>();
     Stack<Integer> minStack = new Stack<Integer>();
     int minValue = 0;
+
     //进栈
     private void push(int value) {
         dataStack.push(value);

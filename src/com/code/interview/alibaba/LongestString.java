@@ -1,4 +1,4 @@
-package com.code.interview;
+package com.code.interview.alibaba;
 
 import java.util.*;
 

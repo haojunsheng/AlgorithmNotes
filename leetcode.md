@@ -690,7 +690,7 @@ public class FindDiagonalOrder_498 {
 /**
  * 回文链表
  * 输入: 1->2
- * 输出: false
+ * 输出: fal se
  * 输入: 1->2->2->1
  * 输出: true
  */
