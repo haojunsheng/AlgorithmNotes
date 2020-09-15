@@ -1,5 +1,10 @@
 package com.code.offer.dp_greedy;
 
+/**
+ * 输入: haystack = "hello", needle = "ll"
+ * 输出: 2
+ * https://leetcode-cn.com/problems/implement-strstr/solution/kmp-suan-fa-xiang-jie-by-labuladong/
+ */
 public class KMP {
     private int[][] dp;
     private String pat;

@@ -1,10 +1,19 @@
 package com.code.leetcode.other;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * LRU缓存机制:最近最少使用，按照访问时间进行排序
  * https://leetcode-cn.com/problems/lru-cache/
+ * <p>
+ * 缓存容量为2,你可以把 cache 理解成一个队列,假设左边是队头，右边是队尾,最近使用的排在队头，久未使用的排在队尾
+ * cache.put(1, 1);cache = [(1, 1)]
+ * cache = [(2, 2), (1, 1)];cache = [(2, 2), (1, 1)]
+ * cache.get(1); 返回 1,因为最近访问了键 1，所以提前至队头
+ * cache.put(3,3);cache = [(3, 3), (1, 1)],缓存容量已满，需要删除内容空出位置,优先删除久未使用的数据，也就是队尾的数据
+ * cache.get(2); 返回 -1 (未找到)
  *
  * @author 俊语
  * @date 2020/7/25 11:41
@@ -60,6 +69,9 @@ public class LRU_146 {
      * 删除最后一个节点
      */
 
+    /**
+     * 双链表
+     */
     class DoubleList {
         private Node dummyHead;
         private Node dummyTail;
@@ -109,6 +121,9 @@ public class LRU_146 {
         }
     }
 
+    /**
+     * 节点类
+     */
     class Node {
         public int key, val;
         Node pre, next;
@@ -116,6 +131,38 @@ public class LRU_146 {
         public Node(int key, int val) {
             this.key = key;
             this.val = val;
+        }
+    }
+
+    /**
+     * 使用LinkedHashMap来完成
+     */
+    class LRUCache extends LinkedHashMap<Integer, Integer> {
+        private int capacity;
+
+        public LRUCache(int capacity) {
+            // 访问顺序排序
+            super(capacity, 0.75f, true);
+            this.capacity = capacity;
+        }
+
+        public int get(int key) {
+            return super.getOrDefault(key, -1);
+        }
+
+        public void put(int key, int value) {
+            super.put(key, value);
+        }
+
+        /**
+         * 是否删除最旧的元素
+         *
+         * @param eldest
+         * @return
+         */
+        @Override
+        public boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+            return size() > capacity;
         }
     }
 }

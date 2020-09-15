@@ -2,17 +2,19 @@ package com.code.leetcode.dp;
 
 /**
  * 887. 鸡蛋掉落
+ * 输入：K = 1, N = 2
+ * 输出：2
+ * 输入：K = 2, N = 6
+ * 输出：3
+ * 输入：K = 3, N = 14
+ * 输出：4
  * https://leetcode-cn.com/problems/super-egg-drop/
  */
 public class SuperEggDrop_887 {
     /**
-     * 动态规划
-     *
-     * @param egg
-     * @param floor
-     * @return
+     * 动态规划，超时
      */
-    public static int dp(int egg, int floor) {
+    public static int superEggDrop2(int egg, int floor) {
         // 当egg个数为1时，只可以线性扫描
         if (egg == 1) {
             return floor;
@@ -25,8 +27,8 @@ public class SuperEggDrop_887 {
         // 待扫描的楼层
         for (int i = 1; i <= floor; ++i) {
             res = Math.min(res, 1 + Math.max(
-                    dp(egg - 1, i - 1),//蛋碎
-                    dp(egg, floor - i)//蛋没碎
+                    superEggDrop2(egg - 1, i - 1),//蛋碎
+                    superEggDrop2(egg, floor - i)//蛋没碎
             ));
         }
         return res;
@@ -35,13 +37,13 @@ public class SuperEggDrop_887 {
     static int[][] memo;
 
     /**
-     * 带缓冲的动态规划,时间复杂度O(KN^2)
+     * 带缓冲的动态规划,时间复杂度O(KN^2)，超时
      *
      * @param egg
      * @param floor
      * @return
      */
-    public static int superEggDrop(int egg, int floor) {
+    public static int superEggDrop4(int egg, int floor) {
         memo = new int[egg + 1][floor + 1];
         for (int i = 1; i <= egg; ++i) {
             for (int j = 1; j <= floor; ++j) {
@@ -75,60 +77,49 @@ public class SuperEggDrop_887 {
         return res;
     }
 
-    // 自底向上，还是超时，妈的
-    public static int superEggDrop2(int eggs, int floors) {
-        if (eggs <= 0 || floors <= 0) {
-            return -1;
+    /**
+     * 时间复杂度O（kN^2）,k是鸡蛋数，n是楼层数，在leetcode超时
+     *
+     * @param egg
+     * @param floor
+     * @return
+     */
+    public static int superEggDrop(int egg, int floor) {
+        if (egg <= 0 || floor <= 0) {
+            return 0;
         }
-        int dp[][] = new int[eggs + 1][floors + 1];
-        // 初始化dp数组
-        for (int i = 1; i <= eggs; ++i) {
-            for (int j = 1; j <= floors; ++j) {
+        int[][] dp = new int[egg + 1][floor + 1];
+        //base case
+        for (int i = 1; i <= egg; ++i) {
+            for (int j = 1; j <= floor; ++j) {
+                // 最坏的次数
                 dp[i][j] = j;
             }
         }
-        for (int i = 2; i <= eggs; ++i) {
-            for (int j = 1; j <= floors; ++j) {
-                // 处理i个鸡蛋，j层楼情况
-                for (int k = 1; k <= j; ++k) {
-                    dp[i][j] = Math.min(dp[i][j], 1 + Math.max(dp[i][j - k], dp[i - 1][k - 1]));
+        for (int i = 2; i <= egg; ++i) {
+            for (int j = 2; j <= floor; ++j) {
+                for (int k = 1; k < j; ++k) {
+                    //最坏情况下扔鸡蛋的次数，所以鸡蛋在第i层楼碎没碎，取决于那种情况的结果更大
+                    int max = 1 + Math.max(
+                            dp[i][j - k],//没碎
+                            dp[i - 1][k - 1]);//碎了
+                    dp[i][j] = Math.min(dp[i][j], max);
                 }
             }
         }
-        return dp[eggs][floors];
+        return dp[egg][floor];
     }
 
-    /**
-     * Drop eggs is a very classical problem.
-     * Some people may come up with idea O(KN^2)
-     * where dp[K][N] = 1 + max(dp[K - 1][i - 1], dp[K][N - i]) for i in 1...N.
-     * However this idea is very brute force, for the reason that you check all possiblity.
-     * <p>
-     * So I consider this problem in a different way:
-     * dp[M][K]means that, given K eggs and M moves,
-     * what is the maximum number of floor that we can check.
-     * <p>
-     * The dp equation is:
-     * dp[m][k] = dp[m - 1][k - 1] + dp[m - 1][k] + 1,
-     * which means we take 1 move to a floor,
-     * if egg breaks, then we can check dp[m - 1][k - 1] floors.
-     * if egg doesn't breaks, then we can check dp[m - 1][k] floors.
-     * <p>
-     * dp[m][k] is the number of combinations and it increase exponentially to N
-     * <p>
-     * <p>
-     * Complexity
-     * For time, O(NK) decalre the space, O(KlogN) running,
-     * For space, O(NK).
-     *
-     * @param eggs
-     * @param floors
-     * @return
-     */
     public static int superEggDrop3(int eggs, int floors) {
         if (eggs <= 0 || floors <= 0) {
             return -1;
         }
+        // dp[k][m]表示k个鸡蛋，移动m次可以确定多少楼层
+        // dp[k][m]=1 + dp[egg][move - 1] + dp[egg - 1][move - 1]
+        // dp[egg - 1][move - 1]:鸡蛋碎了（向下搜索），k-1个鸡蛋在move-1步可以搜索的楼层数，dp[egg - 1][move - 1]
+        // dp[egg][move - 1]:鸡蛋没碎(向上搜索)，k个鸡蛋在move-1步可以搜索的楼层数，dp[egg - 1][move - 1]
+        // 最后加上本层楼
+        // 时间复杂度O(klgN),空间复杂度O(NK)
         int dp[][] = new int[eggs + 1][floors + 1];
         int move = 0;
         while (dp[eggs][move] < floors) {

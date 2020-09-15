@@ -4162,31 +4162,9 @@ public int getMissingNumber(int[] array) {
 
 [参考](https://www.zhihu.com/question/23995189)
 
-【如何设计DP算法】
-
-　　下面介绍比较通用的设计DP算法的步骤。
-
-　　首先，把我们面对的**局面**表示为x。这一步称为**设计状态**。
-　　对于状态x，记我们要求出的答案为f(x).我们的目标是求出f(T).
-**找出f(x)与哪些局面有关（记为p）**，写出一个式子（称为**状态转移方程**），通过f(p)来推出f(x).
-
-【DP三连】
-
-　　设计DP算法，往往可以遵循DP三连：
-
-　　我是谁？  ——设计状态，表示局面
-　　我从哪里来？
-　　我要到哪里去？  ——设计转移
-
-　　设计状态是DP的基础。接下来的设计转移，有两种方式：一种是考虑我从哪里来（本文之前提到的两个例子，都是在考虑“我从哪里来”）；另一种是考虑我到哪里去，这常见于求出f(x)之后，**更新能从x走到的一些解**。这种DP也是不少的，我们以后会遇到。
-
 ### 8.0.1 线性规划
 
-线性，就是说各个子问题的规模以线性的方式分布，并且子问题的最佳状态或结果可以存储在一维线性的数据结构里，例如一维数组，哈希表等。 
-
-解法中，经常会用 dp[i] 去表示第 i 个位置的结果，或者从 0 开始到第 i 个位置为止的最佳状态或结果。例如，最长上升子序列。dp[i] 表示从数组第 0 个元素开始到第i个元素为止的最长的上升子序列。
-
-求解 dp[i] 的复杂程度取决于题目的要求，但是基本上有两种形式。
+线性，就是说各个子问题的规模以线性的方式分布，并且子问题的最佳状态或结果可以存储在一维线性的数据结构里，例如一维数组，哈希表等。 解法中，经常会用 dp[i] 去表示第 i 个位置的结果，或者从 0 开始到第 i 个位置为止的最佳状态或结果。例如，最长上升子序列。dp[i] 表示从数组第 0 个元素开始到第i个元素为止的最长的上升子序列。
 
 #### **求解 dp[i] 形式一**
 
@@ -4195,9 +4173,7 @@ public int getMissingNumber(int[] array) {
 - 斐波那契数列：dp[i]=dp[i−1] + dp[i−2]，可以看到，当前值只依赖于前面两个计算好的值。
 - 给定一个数组，不能选择相邻的数，求如何选才能使总数最大。
 
-解法：这道题需要运用经典的 0-1 思想，简单说就是：“选还是不选”。
-
-假设 dp[i] 表示到第 i 个元素为止我们所能收获到的最大总数。
+解法：这道题需要运用经典的 0-1 思想，简单说就是：“选还是不选”。假设 dp[i] 表示到第 i 个元素为止我们所能收获到的最大总数。
 
 1. 如果选择了第 i 个数，则不能选它的前一个数，因此，收获的最大总数就是 dp[i−2] + nums[i]。
 
@@ -4233,17 +4209,13 @@ public int rob(int[] nums) {
 
 <img src="img/image-20200327172446741.png" alt="image-20200327172446741" style="zoom:33%;" />
 
-递推公式为 `dp[i][j]=dp[i−1][j] + dp[i][j−1]`。
-
- 虽然利用一个二维数组去保存计算的结果，但是 `dp[i][j]` 所表达的意思仍然是线性的，`dp[i][j]` 表示从起点到 (i, j) 的总走法。可以看到，`dp[i][j]` 仅仅依赖于两个先前的状态。
+递推公式为 `dp[i][j]=dp[i−1][j] + dp[i][j−1]`。虽然利用一个二维数组去保存计算的结果，但是 `dp[i][j]` 所表达的意思仍然是线性的，`dp[i][j]` 表示从起点到 (i, j) 的总走法。可以看到，`dp[i][j]` 仅仅依赖于两个先前的状态。
 
 #### 求解 dp[i] 形式二
 
 第二种求解 dp[i] 的形式，**当前所求的值依赖于所有先前计算好的值**（所以需要二重循环），也就是说，dp[i] 是各个 dp[j] 的某种组合，其中 j 由 0 遍历到 i−1。
 
-举例：求解最长上升子序列。
-
-解法：dp[i]=max(dp[j]) + 1，0 <= j < i。可以看到，当前值依赖于前面所有计算好的值。
+举例：求解最长上升子序列。解法：dp[i]=max(dp[j]) + 1，0 <= j < i。可以看到，当前值依赖于前面所有计算好的值。
 
 ### 8.0.2 区间规划
 
@@ -4288,9 +4260,7 @@ public static int LPS(String s) {
 
 ### 8.0.3 约束规划
 
-在普通的线性规划和区间规划里，一般题目有两种需求：统计和最优解。
-
-这些题目不会对输出结果中的元素有什么限制，只要满足最终的一个条件就好了。但是在很多情况下，题目会对输出结果的元素添加一定的限制或约束条件，增加了解题的难度。
+在普通的线性规划和区间规划里，一般题目有两种需求：统计和最优解。这些题目不会对输出结果中的元素有什么限制，只要满足最终的一个条件就好了。但是在很多情况下，题目会对输出结果的元素添加一定的限制或约束条件，增加了解题的难度。
 
 - 0-1 背包问题。给定 n 个物品，每个物品都有各自的价值 vi 和重量 wi，现在给你一个背包，背包所能承受的最大重量是 W，那么往这个背包里装物品，问怎么装能使被带走的物品的价值总和最大。
 
@@ -4310,7 +4280,6 @@ public class KnapSack01 {
         for (int i = 0; i <= C; i++) {
             dp[0][i] = w[0] <= i ? v[0] : 0;
         }
-		//填充其他行和列
         for (int i = 1; i < size; i++) {
             for (int j = 0; j <= C; j++) {
                 if (w[i] <= j) {
@@ -4363,7 +4332,7 @@ public class KnapSack01 {
 
 ## 8.2 背包问题
 
-### 8.2.1 0-1背包
+### 8.2.1 0-1背包（约束规划）
 
 给你一个可装载重量为`W`的背包和`N`个物品，每个物品有重量和价值两个属性。其中第`i`个物品的重量为`wt[i]`，价值为`val[i]`，现在让你用这个背包装物品，最多能装的价值是多少？
 
@@ -4443,16 +4412,7 @@ public class CoinChange2_518 {
     }
 ```
 
-### 8.2.3 零钱兑换
-
-给你 k 种面值的硬币，面值分别为 c1, c2 ... ck ，每种硬币的数量无限，再给一个总金额 amount ，问你**最少**需要几枚硬币凑出这个金额，如果不可能凑出，算法返回 -1 。
-
-```
-/ coins 中是可选硬币面值，amount 是目标金额 
-int coinChange(int[] coins, int amount);
-```
-
-面值分别为 1，2，5，总金额 amount = 11 。那么最少需 要 3 枚硬币凑出，即 11 = 5 + 5 + 1。
+## 8.3 零钱兑换（线性规划）
 
 1. 先来暴力递归。核心是如何写出状态转移方程？
 
@@ -4462,29 +4422,59 @@ int coinChange(int[] coins, int amount);
 
    **然后确定「选择」并择优**，也就是对于每个状态，可以做出什么选择改变当前状态。具体到这个问题，无论当的目标金额是多少，选择就是从面额列表coins 中选择一个硬币，然后目标金额就会减少:
 
-   <img src="img/image-20200308204444357.png" alt="image-20200308204444357" style="zoom:50%;" />
-
    **最后明确** **base case**，显然目标金额为 0 时，所需硬币数量为 0;当目标金额小于 0 时，无解，返回 -1:
-
-   <img src="img/image-20200308204502664.png" alt="image-20200308204502664" style="zoom:50%;" />
 
    <img src="img/image-20200308204140947.png" alt="image-20200308204140947" style="zoom:50%;" />
 
    <img src="img/image-20200321152037481.png" alt="image-20200321152037481" style="zoom:50%;" />
 
-2. 通过备忘录来消解子问题
-
-   <img src="img/image-20200329101515706.png" alt="image-20200329101515706" style="zoom:25%;" />
-
 3. **dp**数组的迭代解法
 
 **dp[i] = x** **表示，当目标金额为** **i** **时，至少需要** **x** **枚硬币**。
 
-<img src="img/image-20200308204717854.png" alt="image-20200308204717854" style="zoom:50%;" />
-
 > dp数组的初始化问题，找最小值，初始化为大一点的数，找最大值，初始化为较小的值。
 >
 > 因为dp[i]依赖于前面已经算出的所有值，所以是双重循环。
+
+```java
+/**
+ * 零钱兑换
+ * https://leetcode-cn.com/problems/coin-change/
+ * <p>
+ * 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。
+ * 如果没有任何一种硬币组合能组成总金额，返回 -1。
+ * 输入: coins = [1, 2, 5], amount = 11
+ * 输出: 3
+ * 解释: 11 = 5 + 5 + 1
+ */
+public class CoinChange_322 {
+    public static void main(String[] args) {
+        int[] coins = {1, 2, 5};
+        int amount = 11;
+        System.out.println(coinChange(coins, amount));
+    }
+
+    /**
+     * 核心是定义状态，不变的量可以充当状态，所以是当前的目标金额是 n ，至少需要 dp(n) 个硬币凑出该金额。
+     * 下一步的核心是状态的转换：从coins中选择一个，和dp(n)进行比较，选择一个较小的；
+     * 然后是basecase,目标金额为 0 时，所需硬币数量为 0，这里基本就做出来了，求；最小值，所以数组初始化为一个较大的数；
+     */
+    public static int coinChange(int[] coins, int amount) {
+        int[] dp = new int[amount + 1];
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        for (int i = 1; i < dp.length; ++i) {
+            for (int coin : coins) {
+                if (i - coin < 0) {
+                    continue;
+                }
+                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+            }
+        }
+        return (dp[amount] == amount + 1 ? -1 : dp[amount]);
+    }
+}
+```
 
 下面看一个核心的问题，dp数组的遍历方向，有时候正向，有时候反向，有时候斜着。
 
@@ -4496,21 +4486,35 @@ int coinChange(int[] coins, int amount);
 
 2**、遍历的终点必须是存储结果的那个位置**。
 
-## 8.3 最长增长子序列（LIS）
+## 8.4 子序列问题
 
-设计动态规划的通用技巧:数学归纳思想。
+1. **一个一维的** **dp** **数组**
+
+   <img src="img/image-20200316170219065.png" alt="image-20200316170219065" style="zoom:50%;" />
+
+   **在子数组** **array[0..i]** **中，我们要求的子序列(最⻓递增子序列)的⻓度 是** **dp[i]** 。
+
+2. **一个二维的** **dp** **数组**
+
+<img src="img/image-20200316170416514.png" alt="image-20200316170416514" style="zoom:50%;" />
+
+涉及**两个字符串/数组的子序列**，比如前文讲的「最⻓公共子序列」。本思路中 dp 数组含义又分为「只涉及一个字符串」和「涉及两个字符串」两种情况。
+
+**2.1** 涉及两个字符/数组时(比如最⻓公共子序列)，dp 数组的含义如 下:
+
+**在子数组** **arr1[0..i]** **和子数组** **arr2[0..j]** **中，我们要求的子序列(最⻓ 公共子序列)⻓度为** `dp[i][j]` 。
+
+**2.2** **只涉及一个字符串**/数组时(比如本文要讲的最⻓回文子序列)，dp 数组的含义如下:
+
+**在子数组** **array[i..j]** **中，我们要求的子序列(最⻓回文子序列)的⻓度 为** `dp[i][j]` 。
+
+
+
+### 8.4.1 最长增长子序列（LIS,区间规划）
 
 <img src="img/image-20200312114752760.png" alt="image-20200312114752760" style="zoom:50%;" />
 
 **我们的定义是这样的：dp[i] 表示以 nums[i] 这个数结尾的最长递增子序列的长度。**
-
-算法演进的过程是这样的。
-
-下面我们将使用数学归纳法的思想，来推导状态转移。根据刚才我们对 dp 数组的定义，现在想求 dp[5] 的值，也就是想求以 nums[5] 为结尾的最长递增子序列。nums[5] = 3，既然是递增子序列，我们只要**找到前面那些结尾比 3 小的子序列，然后把 3 接到最后**，就可以形成一个新的递增子序列，而且这个新的子序列长度加一。
-
-![image-20200316161750318](img/image-20200316161750318.png)
-
-下面是自底向上：
 
 ```java
 public int lengthOfLIS(int[] nums) {
@@ -4519,7 +4523,6 @@ public int lengthOfLIS(int[] nums) {
     Arrays.fill(dp, 1);
     // 因为dp[i]依赖于前面算出的每个值，所以是双重循环
     for (int i = 0; i < dp.length; i++) {
-      // 算dp[i]
         for (int j = 0; j < i; j++) {
             if (nums[i] > nums[j]) 
                 dp[i] = Math.max(dp[i], dp[j] + 1);
@@ -4534,55 +4537,13 @@ public int lengthOfLIS(int[] nums) {
 }
 ```
 
-至此，这道题就解决了，时间复杂度 O(N^2)。总结一下动态规划的设计流程：
-
-首先明确 dp 数组所存数据的含义。这步很重要，如果不得当或者不够清晰，会阻碍之后的步骤。
-
-然后根据 dp 数组的定义，运用数学归纳法的思想，假设 $dp[0...i-1]$ 都已知，想办法求出 $dp[i]$，一旦这一步完成，整个题目基本就解决了。
-
-但如果无法完成这一步，很可能就是 dp 数组的定义不够恰当，需要重新定义 dp 数组的含义；或者可能是 dp 数组存储的信息还不够，不足以推出下一步的答案，需要把 dp 数组扩大成二维数组甚至三维数组。
-
-最后想一想问题的 base case 是什么，以此来初始化 dp 数组，以保证算法正确运行。
-
-### 8.3.1 子序列问题解题模板
-
-既然要用动态规划，那就要定义 dp 数组，找状态转移关系。我们说的两种 思路模板，就是 dp 数组的定义思路。不同的问题可能需要不同的 dp 数组定 义来解决。
-
-1. **一个一维的** **dp** **数组**
-
-   <img src="img/image-20200316170219065.png" alt="image-20200316170219065" style="zoom:50%;" />
-
-   举个我们写过的例子「最⻓递增子序列」，在这个思路中 dp 数组的定义 是:
-
-   **在子数组** **array[0..i]** **中，我们要求的子序列(最⻓递增子序列)的⻓度 是** **dp[i]** 。
-
-2. **一个二维的** **dp** **数组**
-
-<img src="img/image-20200316170416514.png" alt="image-20200316170416514" style="zoom:50%;" />
-
-这种思路运用相对更多一些，尤其是涉及**两个字符串/数组的子序列**，比如 前文讲的「最⻓公共子序列」。本思路中 dp 数组含义又分为「只涉及一个 字符串」和「涉及两个字符串」两种情况。
-
-**2.1** 涉及两个字符/数组时(比如最⻓公共子序列)，dp 数组的含义如 下:
-
-**在子数组** **arr1[0..i]** **和子数组** **arr2[0..j]** **中，我们要求的子序列(最⻓ 公共子序列)⻓度为** `dp[i][j]` 。
-
-**2.2** **只涉及一个字符串**/数组时(比如本文要讲的最⻓回文子序列)，dp 数组的含义如下:
-
-**在子数组** **array[i..j]** **中，我们要求的子序列(最⻓回文子序列)的⻓度 为** `dp[i][j]` 。
-
-第一种情况可以参考这两篇旧文:「编辑距离」「公共子序列」
-
-下面就借最⻓回文子序列这个问题，详解一下第二种情况下如何使用动态规划。
-
-### 8.3.2 **最⻓回文子序列**
+### 8.4.2 **最⻓回文子序列**
 
 这个问题对 dp 数组的定义是:**在子串** **s[i..j]** **中，最⻓回文子序列的⻓度为** `dp[i][j]` 
 
 <img src="img/image-20200330215913769.png" alt="image-20200330215913769" style="zoom:25%;" />
 
-如果s[i]和s[j]相等，那么s[i+1..j-1] 中的最⻓回文子序列就是 s[i..j] 的最⻓回文子序列。
-
-**如果它俩不相等**，说明它俩**不可能同时**出现在 s[i..j] 的最⻓回文子序列 中，那么把它俩**分别**加入 s[i+1..j-1] 中，看看哪个子串产生的回文子序列更⻓即可:
+如果s[i]和s[j]相等，那么s[i+1..j-1] 中的最⻓回文子序列就是 s[i..j] 的最⻓回文子序列。**如果它俩不相等**，说明它俩**不可能同时**出现在 s[i..j] 的最⻓回文子序列 中，那么把它俩**分别**加入 s[i+1..j-1] 中，看看哪个子串产生的回文子序列更⻓即可:
 
 首先明确一下 base case，如果只有一个字符，显然最⻓回文子序列⻓度是 1，也就是 `dp[i][j] = 1 ，(i == j)` 。
 
@@ -4593,36 +4554,34 @@ public int lengthOfLIS(int[] nums) {
 <img src="img/image-20200330220532840.png" alt="image-20200330220532840" style="zoom:33%;" />
 
 ```java
-int longestPalindromeSubseq(string s) {
-        int n = s.size();
-// dp 数组全部初始化为 0
-        vector<vector<int>> dp (n, vector < int>(n, 0)); // base case
-        for (int i = 0; i < n; i++)
+public static int longestPalindromeSubseq(String s) {
+        int length = s.length();
+        if (length <= 0) {
+            return 0;
+        }
+        int[][] dp = new int[length][length];
+        // 初始化
+        for (int i = 0; i < length; ++i) {
             dp[i][i] = 1;
-// 反着遍历保证正确的状态转移
-        for (int i = n - 1; i >= 0; i--) {
-            for (int j = i + 1; j < n; j++) { // 状态转移方程
-                if (s[i] == s[j])
+        }
+        for (int i = length - 1; i >= 0; --i) {
+            for (int j = i + 1; j < length; ++j) {
+                if (s.charAt(i) == s.charAt(j)) {
                     dp[i][j] = dp[i + 1][j - 1] + 2;
-                else
-                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1]);
+                } else {
+                    dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
+                }
             }
         }
-// 整个 s 的最⻓回文子串⻓度
-        return dp[0][n - 1];
+        return dp[0][length - 1];
     }
 ```
 
-
-
-### 8.3.3 **最⻓公共子序列**
+### 8.4.3 **最⻓公共子序列**
 
 [最⻓公共子序列](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/dp_greedy/LCS.java)
 
-**第一步，一定要明确** **dp** **数组的含义**。对于两个字符串的动态规划问题，
-
-套路是通用的。
- 比如说对于字符串 s1 和 s2 ，一般来说都要构造一个这样的 DP table:
+**第一步，一定要明确** **dp** **数组的含义**。对于两个字符串的动态规划问题，比如说对于字符串 s1 和 s2 ，一般来说都要构造一个这样的 DP table:
 
 <img src="img/image-20200321154800108.png" alt="image-20200321154800108" style="zoom:50%;" />
 
@@ -4648,8 +4607,6 @@ int longestPalindromeSubseq(string s) {
 <img src="img/image-20200321155041705.png" alt="image-20200321155041705" style="zoom:50%;" />
 
 ```java
-package com.code.offer.dp_greedy;
-
 import java.util.Arrays;
 
 // 求两个字符串的 LCS ⻓度
@@ -4664,7 +4621,6 @@ public class LCS {
         int length2 = s2.length();
         // dp[i][j]:对于 s1[1..i] 和 s2[1..j] ， 它们的LCS⻓度是 dp[i][j] 。
         int dp[][] = new int[length1 + 1][length2 + 1];
-        Arrays.fill(dp, 0);
         //定义一个二维数组 dp 用来存储最长公共子序列的长度，其中 dp[i][j] 表示 S1 的前 i 个字符与 S2 的前 j 个字符最长公共子序列的长度。考虑 S1i 与 S2j 值是否相等，分为两种情况：
         //当 S1i==S2j 时，那么就能在 S1 的前 i-1 个字符与 S2 的前 j-1 个字符最长公共子序列的基础上再加上 S1i 这个值，最长公共子序列长度加 1，即 dp[i][j] = dp[i-1][j-1] + 1。
         //当 S1i != S2j 时，此时最长公共子序列为 S1 的前 i-1 个字符和 S2 的前 j 个字符最长公共子序列，或者 S1 的前 i 个字符和 S2 的前 j-1 个字符最长公共子序列，取它们的最大者，即 dp[i][j] = max{ dp[i-1][j], dp[i][j-1] }。
@@ -4682,32 +4638,17 @@ public class LCS {
 }
 ```
 
-## 8.4 编辑距离
+### 8.4.4 编辑距离
 
 [原题](https://github.com/labuladong/fucking-algorithm/blob/master/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%B3%BB%E5%88%97/%E7%BC%96%E8%BE%91%E8%B7%9D%E7%A6%BB.md)
 
 <img src="img/image-20200312144545292.png" alt="image-20200312144545292" style="zoom: 33%;" />
 
-前文「最⻓公共子序列」说过，**解决两个字符串的动态规划问题，一般都是 用两个指针** **i,j** **分别指向两个字符串的最后，然后一步步往前走，缩小问 题的规模**。
-
-设两个字符串分别为 "rad" 和 "apple"，为了把 `s1` 变成 `s2`，算法会这样进行：
-
-![img](img/edit.gif)
-
-
-
-
-
-动态规划用于求某个问题的**最优解**(通常是最大值和最小值)，并且该问题可以分解为多个子问题。
-需要符合几个特点：1.求最优解，即求最值。2.整体的最优解依赖于各个子问题的最优解。3.子问题之间有相互重叠的更小的子问题。4.根据第三点，子问题之间有重叠，所以从上向下分析问题，从下向上求解问题。
-
-贪婪算法和动态规划是不同的，需要用数学的方法来证明我们是正确的。
+**解决两个字符串的动态规划问题，一般都是 用两个指针** **i,j** **分别指向两个字符串的最后，然后一步步往前走，缩小问题的规模**。
 
 <img src="img/image-20200322113618577.png" alt="image-20200322113618577" style="zoom: 33%;" />
 
 ```java
-package com.code.offer.dp_greedy;
-
 import java.util.Scanner;
 
 /**
@@ -4813,15 +4754,11 @@ public class EditDistance {
 }
 ```
 
-扩展：
-
 一般来说，处理两个字符串的动态规划问题，都是按本文的思路处理，建立 DP table。为什么呢，因为易于找出状态转移的关系，比如编辑距离的 DP table：
 
 <img src="img/image-20200322113733409.png" alt="image-20200322113733409" style="zoom:50%;" />
 
-你可能还会问，**这里只求出了最小的编辑距离，那具体的操作是什么**？你之前举的修改公众号文章的例子，只有一个最小编辑距离肯定不够，还得知道具体怎么修改才行。
-
-这个其实很简单，代码稍加修改，给 dp 数组增加额外的信息即可：
+你可能还会问，**这里只求出了最小的编辑距离，那具体的操作是什么**？你之前举的修改公众号文章的例子，只有一个最小编辑距离肯定不够，还得知道具体怎么修改才行。这个其实很简单，代码稍加修改，给 dp 数组增加额外的信息即可：
 
 ```java
 // int[][] dp;
@@ -4841,17 +4778,12 @@ class Node {
 
 [14-剪绳子](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/dp_greedy/CuttingRope_14.java)
 
-可以采用动态规划和贪婪算法来求解，其中贪婪算法较为常规，贪婪算法基本需要提前做过，面试的时候想是想不到的。
-
 动态规划：
 1、定义函数**f(n)表示为把长度为n的绳子剪成若干段后各段长度乘积的最大值**。绳子的长度n是确定的，所以是状态。
 2、对于第一刀，我们有n-1种可能的选择，可推导出f(n)=max{f(i)* f(n-i)};
-3、很明显这是一个从上至下的递归，但是这个递归存在很多重复的计算，所以使用至下而上的动态规划，将子问题的最优解保存。
-4、注意绳子剪成ix(n-i)和(n-i)xi是相同的；
-5、注意不符合切割条件的输入n，以及输入为2、3长度时的结果，因为题中规定m>1。
 
 ```java
-public static int dynamicPlan(int length) {
+public int cutRope(int length) {
         if (length <= 1) {
             return 0;
         }
@@ -4861,29 +4793,17 @@ public static int dynamicPlan(int length) {
         if (length == 3) {
             return 2;
         }
-
-        // products数组存放的是每个子问题的最优解,注意保存的是子问题，比如products[3]保存的是f(4)的最大值
-        // products[i]表示长度为i的绳子剪为若干段后各段长度乘积的最大值
-        // 为了求解f(i)，我们需要求出所有的f(j)*f(i-j)
-        // products的长度为length+1，因为存放的是0~length
-        int[] products = new int[length + 1];
-  // products[0]其实没价值
-        products[0] = 0;
-        products[1] = 1;
-        products[2] = 2;
-        products[3] = 3;
-
-        int max = 0;
-        for (int i = 4; i <= length; i++) {
-            max = 0;
-            for (int j = 1; j <= i / 2; j++) {
-                if (products[j] * products[i - j] > max) {
-                    max = products[j] * products[i - j];
-                }
+        // dp[i]表示绳子长度为i时的参与计算乘积的最大值
+        int[] dp = new int[length + 1];
+        dp[1] = 1;
+        dp[2] = 2;
+        dp[3] = 3;
+        for (int i = 4; i <= length; ++i) {
+            for (int j = 2; j <= i / 2; ++j) {
+                dp[i] = Math.max(dp[i], dp[j] * dp[i - j]);
             }
-            products[i] = max;
         }
-        return products[length];
+        return dp[length];
     }
 ```
 
@@ -4958,29 +4878,27 @@ public int FindGreatestSumOfSubArray(int[] array) {
     }
 ```
 
-## 8.7 数字翻译为字符串
-
-和斐波那契数列差不多，f(i)表示长度为i时，翻译的方法数，f(i)=f(i-1)+gf(i-2)，只是添加了一些条件，当两位表示的字符大于26时,或者前面的字符为0时，g为0。
+## 8.7 数字翻译为字符串(线性规划)
 
 [数字翻译为字符串46](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/dp_greedy/TransactionCount_46.java)
 
 ```java
-
-public int translateNum(int num) {
+    public static int translateNum(int num) {
         String str = String.valueOf(num);
-        int len = str.length();
-        int[] dp = new int[len + 1];
+        int length = str.length();
+        // dp[i]表示长度为s[i]时的方法数
+        // dp[i+1]=dp[i]+m * dp[i-1],当两位表示的字符大于26时,或者前面的字符为0时，g为0。
+        int[] dp = new int[length + 1];
         dp[0] = 1;
         dp[1] = 1;
-        for (int i = 1; i < len; ++i) {
+        for (int i = 1; i < length; ++i) {
             if (str.charAt(i - 1) == '0' || str.substring(i - 1, i + 1).compareTo("25") > 0) {
-                //beginIndex -- 起始索引（包括）, 索引从 0 开始。 endIndex -- 结束索引（不包括）
                 dp[i + 1] = dp[i];
             } else {
                 dp[i + 1] = dp[i] + dp[i - 1];
             }
         }
-        return dp[len];
+        return dp[length];
     }
 ```
 
@@ -5022,71 +4940,15 @@ public int translateNum(int num) {
     }
 ```
 
-## 8.9 最长不包含重复字符的子字符串
-
-[最长不包含重复字符的子字符串48](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/array/MaxValue_47.java)
-
-```java
-public int lengthOfLongestSubstring(String s) {
-        //边界情况
-        int length = s.length();
-        if (length < 2) {
-            return length;
-        }
-        int result = 1;
-        //记录最长无重复字串的起始位置
-        int[] dp = new int[length + 1];
-        for (int i = 1; i <= length; i++) {
-            dp[i] = i - 1;
-        }
-        for (int i = 2; i <= length; i++) {
-            //当前要判断的字符
-            String currentChar = String.valueOf(s.charAt(i - 1));
-            //前一个最长无重复子串
-            String sub = s.substring(dp[i - 1], i - 1);
-            //如果前一个子串不包含当前字符，就将起始位置赋值给当前位置
-            if (!sub.contains(currentChar)) {
-                dp[i] = dp[i - 1];
-            } else {
-                //如果包含的话，就将起始位置设置为重复字符的下一个
-                dp[i] = dp[i - 1] + sub.indexOf(currentChar) + 1;
-            }
-            result = Math.max(result, i - dp[i]);
-        }
-        return result;
-    }
-
-   /**
-     * map (k, v)，其中 key 值为字符，value 值为字符位置;
-     */
-    public int lengthOfLongestSubstring(String s) {
-        int length = s.length();
-        int max = 0;
-
-        Map<Character, Integer> map = new HashMap<>();
-        for(int start = 0, end = 0; end < length; end++){
-            char element = s.charAt(end);
-            if(map.containsKey(element)){
-                start = Math.max(map.get(element) + 1, start); //map.get()的地方进行+1操作
-            }
-            max = Math.max(max, end - start + 1);
-            map.put(element, end);
-        }
-        return max;
-    }
-```
-
-## 8.10 *KMP*字符匹配算法
+## 8.9 *KMP*字符匹配算法TODO
 
 [kmp](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/dp_greedy/KMP.java)
 
 **KMP** **算法永不回退** **txt** **的指针** **i** **，不走回头路(不会重复扫描txt** **)，而是借助** **dp** **数组中储存的信息把** **pat** **移到正确的位置继续匹**配，时间复杂度只需 O(N)，用空间换时间，所以我认为它是一种动态规划算法。
 
-**先在开头约定，本文用** **pat** **表示模式串，⻓度为** **M** **，** **txt** **表示文本串， ⻓度为** **N** **。KMP **算法是在txt** **中查找子串** **pat** **，如果存在，返回这个 子串的起始索引，否则返回** **-1**。
+**先在开头约定，本文用** **pat** **表示模式串，⻓度为** **M** **，** **txt** **表示文本串， ⻓度为** **N** **。KMP **算法是在txt **中查找子串** **pat** **，如果存在，返回这个 子串的起始索引，否则返回** **-1**。
 
 ```java
-package com.code.offer.dp_greedy;
-
 public class KMP {
     private int[][] dp;
     private String pat;
@@ -5130,158 +4992,103 @@ public class KMP {
 }
 ```
 
-## 8.11 高楼扔鸡蛋
+## 8.10 高楼扔鸡蛋
 
 你面前有一栋从 1 到 N 共 N 层的楼，然后给你 K 个鸡蛋 ( K 至少为 1)。现在确定这栋楼存在楼层 0 <= F <= N ，在这层楼将鸡蛋扔下去，鸡蛋**恰好没摔碎**(高于 F 的楼层都会碎，低于 F 的楼层都不 会碎)。现在问你，**最坏**情况下，你**至少**要扔几次鸡蛋，才能**确定**这个楼层F 呢?
 
-对动态规划问题，直接套我们以前多次强调的框架即可:这个问题有什么「状态」，有什么「选择」，然后穷举。
-
-**「状态」很明显，就是当前拥有的鸡蛋数** **K** **和需要测试的楼层数** **N** 。随着测试的进行，鸡蛋个数可能减少，楼层的搜索范围会减小，这就是状态的变化。
-
-**「选择」其实就是去选择哪层楼扔鸡蛋**。回顾刚才的线性扫描和二分思路， 二分查找每次选择到楼层区间的中间去扔鸡蛋，而线性扫描选择一层层向上 测试。不同的选择会造成状态的转移。
-
-现在明确了「状态」和「选择」，**动态规划的基本思路就形成了**:肯定是个 二维的 dp 数组或者带有两个状态参数的 dp 函数来表示状态转移;外加 一个 for 循环来遍历所有选择，择最优的选择更新状态:
-
-<img src="img/image-20200316165036417.png" alt="image-20200316165036417" style="zoom:50%;" />
-
-我们选择在第 i 层楼扔了鸡蛋之后，可能出现两种情况:鸡蛋碎了，鸡蛋 没碎。**注意，这时候状态转移就来了**:
-
-**如果鸡蛋碎了**，那么鸡蛋的个数 K 应该减一，搜索的楼层区间应该从 [1..N] 变为 [1..i-1] 共 i-1 层楼;
-
-**如果鸡蛋没碎**，那么鸡蛋的个数 K 不变，搜索的楼层区间应该从 [1..N] 变为 [i+1..N] 共 N-i 层楼。
-
-<img src="img/image-20200316165435470.png" alt="image-20200316165435470" style="zoom:50%;" />
-
-<img src="img/image-20200316165537309.png" alt="image-20200316165537309" style="zoom: 25%;" />
-
 ```java
-package com.code.offer.dp_greedy;
-
-import java.util.Scanner;
-
-public class ThrowEgg {
-
-    public int dp(int egg, int floor) {
-        // 当鸡蛋数K为1时，显然只能线性扫描所有楼层
-        if (egg == 1) {
-            return n;
+/**
+ * 887. 鸡蛋掉落
+ * 输入：K = 1, N = 2
+ * 输出：2
+ * 输入：K = 2, N = 6
+ * 输出：3
+ * 输入：K = 3, N = 14
+ * 输出：4
+ * https://leetcode-cn.com/problems/super-egg-drop/
+ */
+public class SuperEggDrop_887 {
+     public static int superEggDrop3(int eggs, int floors) {
+        if (eggs <= 0 || floors <= 0) {
+            return -1;
         }
-        // 当楼层数 N 等于 0 时，显然不需要扔鸡蛋
-        if (floor == 0) {
-            return 0;
+        // dp[k][m]表示k个鸡蛋，移动m次可以确定多少楼层
+        // dp[k][m]=1 + dp[egg][move - 1] + dp[egg - 1][move - 1]
+        // dp[egg - 1][move - 1]:鸡蛋碎了（向下搜索），k-1个鸡蛋在move-1步可以搜索的楼层数，dp[egg - 1][move - 1]
+        // dp[egg][move - 1]:鸡蛋没碎(向上搜索)，k个鸡蛋在move-1步可以搜索的楼层数，dp[egg - 1][move - 1]
+        // 最后加上本层楼
+        // 时间复杂度O(klgN),空间复杂度O(NK)
+        int dp[][] = new int[eggs + 1][floors + 1];
+        int move = 0;
+        while (dp[eggs][move] < floors) {
+            move++;
+            for (int egg = 1; egg <= eggs; ++egg) {
+                dp[egg][move] = 1 + dp[egg][move - 1] + dp[egg - 1][move - 1];
+            }
         }
-        int res = 65535;//给res一个很大的值
-        for (int i = 1; i <= floor; ++i) {
-            res = Math.min(res, 1 + Math.max(
-                    dp(egg, floor - i),
-                    dp(egg - 1, i - 1)));
-        }
-        return res;
+        return move;
     }
-
-    // 动态规划+自顶向下+备忘录
-    int memo[][];
-
-    public int superEggDrop(int egg, int floor) {
-        memo = new int[egg + 1][floor + 1];
-        //把备忘录每个元素初始化成最大的尝试次数
-      for(int i = 1;i<=egg;i++){
-          for (int j = 1; j <= floor; j++)
-              cache[i][j] = j;
-          }
-      }
-        return dpMemo(egg, floor);
-    }
-
-    private int dpMemo(int egg, int floor) {
-        // 当鸡蛋数K为1时，显然只能线性扫描所有楼层
+    /**
+     * 动态规划，超时
+     */
+    public static int superEggDrop2(int egg, int floor) {
+        // 当egg个数为1时，只可以线性扫描
         if (egg == 1) {
             return floor;
         }
-        // 当楼层数 N 等于 0 时，显然不需要扔鸡蛋
+        // 当楼层floor等于0时，不需要扔鸡蛋
         if (floor == 0) {
             return 0;
         }
-        if (memo[egg][floor] != 0) {
-            return memo[egg][floor];
+        int res = Integer.MAX_VALUE;
+        // 待扫描的楼层
+        for (int i = 1; i <= floor; ++i) {
+            res = Math.min(res, 1 + Math.max(
+                    superEggDrop2(egg - 1, i - 1),//蛋碎
+                    superEggDrop2(egg, floor - i)//蛋没碎
+            ));
         }
-        int res = 65535;
-        for (int i = 1; i <= n; ++i) {
-            res = Math.min(res, Math.max(dpMemo(k, n - i), dpMemo(k - 1, i - 1)) + 1);
-        }
-        memo[k][n] = res;
         return res;
     }
 
+    static int[][] memo;
+
     /**
-     * @param k 鸡蛋数
-     * @param n 楼层数
+     * 时间复杂度O（kN^2）,k是鸡蛋数，n是楼层数，在leetcode超时
+     *
+     * @param egg
+     * @param floor
      * @return
      */
-    public int throwEgg(int egg, int floor) {
+    public static int superEggDrop(int egg, int floor) {
         if (egg <= 0 || floor <= 0) {
-            return -1;
+            return 0;
         }
-        int dp[][] = new int[egg + 1][floor + 1];
+        int[][] dp = new int[egg + 1][floor + 1];
+        //base case
         for (int i = 1; i <= egg; ++i) {
             for (int j = 1; j <= floor; ++j) {
+                // 最坏的次数
                 dp[i][j] = j;
             }
         }
-
         for (int i = 2; i <= egg; ++i) {
-            for (int m = 1; m <= floor; ++m) {
-                for (int j = 1; j < m; ++j) {
-                    //扔鸡蛋的楼层从1到m枚举一遍，如果当前算出的尝试次数小于上一次算出的尝试次数，则取代上一次的尝试次数。
-                    dp[i][m] = Math.min(dp[i][m], 1 + Math.max(dp[i][m - j], dp[i - 1][j - 1]));
+            for (int j = 2; j <= floor; ++j) {
+                for (int k = 1; k < j; ++k) {
+                    //最坏情况下扔鸡蛋的次数，所以鸡蛋在第i层楼碎没碎，取决于那种情况的结果更大
+                    int max = 1 + Math.max(
+                            dp[i][j - k],//没碎
+                            dp[i - 1][k - 1]);//碎了
+                    dp[i][j] = Math.min(dp[i][j], max);
                 }
             }
         }
         return dp[egg][floor];
     }
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        int k = scanner.nextInt();
-        int n = scanner.nextInt();
-        ThrowEgg throwEgg = new ThrowEgg();
-        System.out.println(throwEgg.throwEgg(k, n));
-    }
 }
-
-// 优化版本
-public int getMinSteps(int eggNum, int floorNum) {
-        if (eggNum < 1 || floorNum < 1) {
-            return 0;
-        }
-        //上一层备忘录，存储鸡蛋数量-1的floorNum层楼条件下的最优化尝试次数
-        int[] preCache = new int[floorNum + 1];
-        //当前备忘录，存储当前鸡蛋数量的floorNum层楼条件下的最优化尝试次数
-        int[] currentCache = new int[floorNum + 1];
-        //把备忘录每个元素初始化成最大的尝试次数
-        for (int i = 1; i <= floorNum; i++) {
-            currentCache[i] = i;
-        }
-        for (int n = 2; n <= eggNum; n++) {
-            //当前备忘录拷贝给上一次备忘录，并重新初始化当前备忘录
-            preCache = currentCache.clone();
-            for (int i = 1; i <= floorNum; i++) {
-                currentCache[i] = i;
-            }
-            for (int m = 1; m <= floorNum; m++) {
-                for (int k = 1; k < m; k++) {
-                    //扔鸡蛋的楼层从1到m枚举一遍，如果当前算出的尝试次数小于上一次算出的尝试次数，则取代上一次的尝试次数。
-                    //这里可以打印k的值，从而知道第一个鸡蛋是从第几次扔的。
-                    currentCache[m] = Math.min(currentCache[m],
-                            1 + Math.max(preCache[k - 1], currentCache[m - k]));
-                }
-            }
-        }
-        return currentCache[floorNum];
-    }
 ```
 
-## 8.12 n个骰子的点数
+## 8.12 n个骰子的点数TODO
 
 [n个骰子的点数60](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/dp_greedy/PrintProbability_60.java)
 
@@ -5327,85 +5134,84 @@ public class PrintProbability_60 {
 }
 ```
 
-## 8.13 正则表达式匹配
+## 8.13 正则表达式匹配@@@
 
 [正则表达式匹配19](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/string/RegularMatch_19.java)
-
-<img src="img/image-20200321160119043.png" alt="image-20200321160119043" style="zoom: 33%;" />
 
 <img src="img/image-20200321161222083.png" alt="image-20200321161222083" style="zoom:33%;" />
 
 
 
 ```java
-// 题目：请实现一个函数用来匹配包含'.'和'*'的正则表达式。模式中的字符'.'
-// 表示任意一个字符，而'*'表示它前面的字符可以出现任意次（含0次）。在本题
-// 中，匹配是指字符串的所有字符匹配整个模式。例如，字符串"aaa"与模式"a.a"
-// 和"ab*ac*a"匹配，但与"aa.a"及"ab*a"均不匹配。
-public boolean match(char[] str, char[] pattern) {
-        if (str == null || pattern == null) {
-            return false;
-        }
-        int strIndex = 0;
-        int patternIndex = 0;
-        return matchCore(str, strIndex, pattern, patternIndex);
+/**
+ * 正则表达式匹配
+ * 给你一个字符串 s 和一个字符规律 p，请你来实现一个支持 '.' 和 '*' 的正则表达式匹配。
+ * '.' 匹配任意单个字符, '*' 匹配零个或多个前面的那一个元素
+ * <p>
+ * 输入: s = "aa", p = "a", 输出: false
+ * 解释: "a" 无法匹配 "aa" 整个字符串。
+ * <p>
+ * 输入: s = "aa", p = "a*", 输出: true
+ * 解释: 因为 '*' 代表可以匹配零个或多个前面的那一个元素, 在这里前面的元素就是 'a'。因此，字符串 "aa" 可被视为 'a' 重复了一次。
+ * <p>
+ * https://leetcode-cn.com/problems/regular-expression-matching/
+ *
+ * @author 俊语
+ * @date 2020/9/15 11:11
+ */
+public class IsMatch_10 {
+    public static void main(String[] args) {
+        String str = "";
+        String pattern = "";
+        System.out.println(isMatch(str, pattern));
     }
 
-    public boolean matchCore(char[] str, int strIndex, char[] pattern, int patternIndex) {
-        //str到尾，pattern到尾，匹配成功
-        if (strIndex == str.length && patternIndex == pattern.length) {
-            return true;
+    /**
+     * @param str
+     * @param pattern
+     * @return
+     */
+    public static boolean isMatch(String str, String pattern) {
+        //如果正则串p为空字符串s也为空这匹配成功，如果正则串p为空但是s不是空则说明匹配失败
+        if (pattern.isEmpty()) {
+            return str.isEmpty();
         }
-        //str未到尾，pattern到尾，匹配失败
-        if (strIndex != str.length && patternIndex == pattern.length) {
+        // 判断s和p的首字符是否匹配，注意要先判断s不为空,即正常和.的情况
+        boolean headMatched = !str.isEmpty() && (str.charAt(0) == pattern.charAt(0) || pattern.charAt(0) == '.');
+        // 如果p的第一个元素的下一个元素是*,匹配0个或者多个
+        // 匹配0个，例如s：bc、pattern：a*bc，我们就保持s不变，减掉p的"a*"，调用isMatch(str:bc,pattern:bc)。
+        // 匹配多个，例如s：aabb、pattern：a*bb，就保持p不变，减掉s的首元素，调用isMatch(str:abb,pattern:a*bb)。
+        if (pattern.length() >= 2 && pattern.charAt(1) == '*') {
+            return isMatch(str, pattern.substring(2)) ||
+                    (headMatched && isMatch(str.substring(1), pattern));
+            // 如果s和p的首字符相等
+        } else if (headMatched) {
+            return isMatch(str.substring(1), pattern.substring(1));
+        } else {
             return false;
         }
-        //str到尾，pattern未到尾(不一定匹配失败，因为a*可以匹配0个字符)
-        if (strIndex == str.length && patternIndex != pattern.length) {
-            //只有pattern剩下的部分类似a*b*c*的形式，才匹配成功
-            if (patternIndex + 1 < pattern.length && pattern[patternIndex + 1] == '*') {
-                return matchCore(str, strIndex, pattern, patternIndex + 2);
-            }
-            return false;
-        }
-
-        //str未到尾，pattern未到尾
-        if (patternIndex + 1 < pattern.length && pattern[patternIndex + 1] == '*') {
-            if (pattern[patternIndex] == str[strIndex] || (pattern[patternIndex] == '.' && strIndex != str.length)) {
-                return matchCore(str, strIndex, pattern, patternIndex + 2)//*匹配0个，跳过
-                        || matchCore(str, strIndex + 1, pattern, patternIndex + 2)//*匹配1个，跳过
-                        || matchCore(str, strIndex + 1, pattern, patternIndex);//*匹配1个，再匹配str中的下一个
-            } else {
-                //直接跳过*（*匹配到0个）
-                return matchCore(str, strIndex, pattern, patternIndex + 2);
-            }
-        }
-        // 处理.的情况
-        if (pattern[patternIndex] == str[strIndex] || (pattern[patternIndex] == '.' && strIndex != str.length)) {
-            return matchCore(str, strIndex + 1, pattern, patternIndex + 1);
-        }
-
-        return false;
     }
+}
 ```
-
-我们如何来寻找重叠子问题呢？
-
-![image-20200321161442259](img/image-20200321161442259.png)
-
-看着这个框架，请问原问题 f(n) 如何触达子问题 f(n - 2) ?有两种路径，一 是 f(n) -> #1 -> #1, 二是 f(n) -> #2。前者经过两次递归，后者进过一次递归 而已。两条不同的计算路径都到达了同一个问题，这就是「重叠子问题」， 而且可以肯定的是，**只要你发现一条重复路径，这样的重复路径一定存在千 万条，意味着巨量子问题重叠。**
-
-<img src="img/image-20200321161505729.png" alt="image-20200321161505729" style="zoom:50%;" />
 
 ## 8.14 打家劫舍问题
 
-
-
-<img src="img/image-20200321173344601.png" alt="image-20200321173344601" style="zoom:50%;" />
+### 8.14.1 打家劫舍1
 
 <img src="img/image-20200321173514430.png" alt="image-20200321173514430" style="zoom: 33%;" />
 
 ```java
+/**
+ * 打家劫舍I
+ * 每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。
+ * 给定一个代表每个房屋存放金额的非负整数数组，计算你 不触动警报装置的情况下 ，一夜之内能够偷窃到的最高金额。
+ * 输入：[1,2,3,1], 输出：4
+ * 解释：偷窃 1 号房屋 (金额 = 1) ，然后偷窃 3 号房屋 (金额 = 3)。偷窃到的最高金额 = 1 + 3 = 4 。
+ * <p>
+ * 输入：[2,7,9,3,1], 输出：12
+ * 解释：偷窃 1 号房屋 (金额 = 2), 偷窃 3 号房屋 (金额 = 9)，接着偷窃 5 号房屋 (金额 = 1)。偷窃到的最高金额 = 2 + 9 + 1 = 12 。
+ * https://leetcode-cn.com/problems/house-robber/
+ */
 public int rob(int[] nums) {
     return dp(nums, 0);
 }
@@ -5452,41 +5258,45 @@ private int dp(int[] nums, int start) {
 
 ```java
 int rob(int[] nums) {
-        int n = nums.length;
-        // dp[i] = x 表示:
-        // 从第 i 间房子开始抢劫，最多能抢到的钱为 x
-        // base case: dp[n] = 0
-        int[] dp = new int[n + 2];
-        for (int i = n - 1; i >= 0; i--) {
-            dp[i] = Math.max(dp[i + 1], nums[i] + dp[i + 2]);
+        if (nums.length <= 0) {
+            return 0;
         }
-        return dp[0];
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        // dp[i]表示第i号房子可以抢到的最大值
+        int[] dp = new int[nums.length + 1];
+        dp[0] = 0;
+        dp[1] = nums[0];
+        for (int i = 2; i < dp.length; ++i) {
+            dp[i] = Math.max(dp[i - 1], //抢了上家
+                    nums[i - 1] + dp[i - 2]);//抢当前的
+        }
+        return dp[nums.length];
     }
 ```
 
-### 8.14.1 打家劫舍问题2
+### 8.14.2 打家劫舍2
 
-**这些房子不是一排，而是围成了一个圈**
-
-也就是说，现在第一间房子和最后一间房子也相当于是相邻的，不能同时 抢。比如说输入数组 nums=[2,3,2] ，算法返回的结果应该是3而不是4， 因为开头和结尾不能同时被抢。这个约束条件看起来应该不难解决，我们前文「单调栈解决 Next Greater Number」说过一种解决环形数组的方案，那么在这个问题上怎么处理呢?
-
-首先，首尾房间不能同时被抢，那么只可能有三种不同情况:要么都不被 抢;要么第一间房子被抢最后一间不抢;要么最后一间房子被抢第一间不抢。
+**这些房子不是一排，而是围成了一个圈**。现在第一间房子和最后一间房子也相当于是相邻的，不能同时抢。比如说输入数组 nums=[2,3,2] ，算法返回的结果应该是3而不是4， 因为开头和结尾不能同时被抢。
 
 ```java
-public int rob(int[] nums) {
-        int n = nums.length;
-        if (n == 1) return nums[0];
-        return Math.max(robRange(nums, 0, n - 2),
-                robRange(nums, 1, n - 1));
+public static int rob(int[] nums) {
+        int length = nums.length;
+        if (length <= 0) {
+            return 0;
+        }
+        if (length == 1) {
+            return nums[0];
+        }
+        return Math.max(robRange(nums, 0, length - 1), robRange(nums, 1, length));
     }
 
-    // 仅计算闭区间 [start,end] 的最优结果
-    int robRange(int[] nums, int start, int end) {
-        int n = nums.length;
+    public static int robRange(int[] nums, int start, int end) {
         int dp_i_1 = 0, dp_i_2 = 0;
         int dp_i = 0;
-        for (int i = end; i >= start; i--) {
-            dp_i = Math.max(dp_i_1, nums[i] + dp_i_2);
+        for (int i = start; i < end; ++i) {
+            dp_i = Math.max(dp_i_1, dp_i_2 + nums[i]);
             dp_i_2 = dp_i_1;
             dp_i_1 = dp_i;
         }
@@ -5494,9 +5304,69 @@ public int rob(int[] nums) {
     }
 ```
 
-## 8.15 股票买卖问题
+### 8.14.3 打家劫舍3(树形动态规划)
 
-<img src="img/image-20200323161234176.png" alt="image-20200323161234176" style="zoom:25%;" />
+```java
+/**
+ * 打家劫舍 III
+ * 第三题又想法设法地变花样了，此强盗发现现在面对的房子不是一排，不是 一圈，而是一棵二叉树!房子在二叉树的节点上，相连的两个房子不能同时被抢劫。
+ * 输入: [3,2,3,null,3,null,1]
+ * 3
+ * / \
+ * 2   3
+ * \   \
+ * 3   1
+ * 输出: 7
+ * 解释: 小偷一晚能够盗取的最高金额 = 3 + 3 + 1 = 7.
+ */
+public class Rob3_337 {
+    Map<TreeNode, Integer> memo = new HashMap<>();
+
+    public int rob(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (memo.containsKey(root)) {
+            return memo.get(root);
+        }
+        //不抢，去下家
+        int notRob = rob(root.left) + rob(root.right);
+        // 抢，去下下家
+        int doRob = root.val
+                + (root.left == null ? 0 : rob(root.left.left) + rob(root.left.right))
+                + (root.right == null ? 0 : rob(root.right.left) + rob(root.right.right));
+        int res = Math.max(notRob, doRob);
+        memo.put(root, res);
+        return res;
+    }
+}
+
+public int rob2(TreeNode root) {
+        int[] res = dfs(root);
+        return Math.max(res[0], res[1]);
+    }
+
+    private int[] dfs(TreeNode node) {
+        if (node == null) {
+            return new int[]{0, 0};
+        }
+
+        // 分类讨论的标准是：当前结点偷或者不偷
+        // 由于需要后序遍历，所以先计算左右子结点，然后计算当前结点的状态值
+        int[] left = dfs(node.left);
+        int[] right = dfs(node.right);
+
+        // dp[0]：以当前 node 为根结点的子树能够偷取的最大价值，规定 node 结点不偷
+        // dp[1]：以当前 node 为根结点的子树能够偷取的最大价值，规定 node 结点偷
+        int[] dp = new int[2];
+
+        dp[0] = Math.max(left[0], left[1]) + Math.max(right[0], right[1]);
+        dp[1] = node.val + left[0] + right[0];
+        return dp;
+    }
+```
+
+## 8.15 股票买卖问题
 
 1. **穷举框架**
 
@@ -5599,55 +5469,44 @@ dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
    ```
 
 ```java
-int n = prices.length;
-int[][] dp = new int[n][2];
-for (int i = 0; i < n; i++) {
-    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
-    dp[i][1] = Math.max(dp[i-1][1], -prices[i]);
-}
-return dp[n - 1][0];
+public int maxProfit(int[] prices) {
+        int length = prices.length;
+        if (length <= 0) {
+            return 0;
+        }
+        // dp[i][0]表示第i天卖出股票的利润
+        // dp[i][1]表示第i天买入股票的利润
+        int[][] dp = new int[length][2];
+        // base case
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        for (int i = 1; i < length; ++i) {
+            //第i天卖出的最大收益
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            //第i天买入的最大收益
+            dp[i][1] = Math.max(dp[i - 1][1], -prices[i]);
+        }
+        return dp[length - 1][0];
+    }
 ```
 
-显然 `i = 0` 时 `dp[i-1]` 是不合法的。这是因为我们没有对 `i` 的 base case 进行处理。可以这样处理：
+状态转移方程，新状态只和相邻的一个状态有关，其实不用整个 dp 数组，只需要一个变量储存相邻的那个状态就足够了，这样可以把空间复杂度降到 O(1):
 
 ```java
-for (int i = 0; i < n; i++) {
-    if (i - 1 == -1) {
-        dp[i][0] = 0;
-        // 解释：
-        //   dp[i][0] 
-        // = max(dp[-1][0], dp[-1][1] + prices[i])
-        // = max(0, -infinity + prices[i]) = 0
-        dp[i][1] = -prices[i];
-        //解释：
-        //   dp[i][1] 
-        // = max(dp[-1][1], dp[-1][0] - prices[i])
-        // = max(-infinity, 0 - prices[i]) 
-        // = -prices[i]
-        continue;
+public int maxProfit(int[] prices) {
+        int length = prices.length;
+        // dp[i][0]表示第i天卖出股票的利润
+        // dp[i][1]表示第i天买入股票的利润
+        int dp0 = 0;
+        int dp1 = -prices[0];
+        for (int i = 1; i < length; ++i) {
+            //第i天卖出的最大收益
+            dp0 = Math.max(dp0, dp1 + prices[i]);
+            //第i天买入的最大收益
+            dp1 = Math.max(dp1, -prices[i]);
+        }
+        return dp0;
     }
-    dp[i][0] = Math.max(dp[i-1][0], dp[i-1][1] + prices[i]);
-    dp[i][1] = Math.max(dp[i-1][1], -prices[i]);
-}
-return dp[n - 1][0];
-```
-
-第一题就解决了，但是这样处理 base case 很麻烦，而且注意一下状态转移方程，新状态只和相邻的一个状态有关，其实不用整个 dp 数组，只需要一个变量储存相邻的那个状态就足够了，这样可以把空间复杂度降到 O(1):
-
-```java
-// k == 1
-int maxProfit_k_1(int[] prices) {
-    int n = prices.length;
-    // base case: dp[-1][0] = 0, dp[-1][1] = -infinity
-    int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
-    for (int i = 0; i < n; i++) {
-        // dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-        dp_i_0 = Math.max(dp_i_0, dp_i_1 + prices[i]);
-        // dp[i][1] = max(dp[i-1][1], -prices[i])
-        dp_i_1 = Math.max(dp_i_1, -prices[i]);
-    }
-    return dp_i_0;
-}
 ```
 
 2. **k = +infinity**，如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的。可以这样改写框架：
@@ -5679,7 +5538,28 @@ int maxProfit_k_1(int[] prices) {
 dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
 dp[i][1] = max(dp[i-1][1], dp[i-2][0] - prices[i])
 解释：第 i 天选择 buy 的时候，要从 i-2 的状态转移，而不是 i-1 。
-翻译成代码：
+public static int maxProfit(int[] prices) {
+        int length = prices.length;
+        if (length <= 1) {
+            return 0;
+        }
+        // dp[i][0]表示第i天卖出股票的利润
+        // dp[i][1]表示第i天买入股票的利润
+        int[][] dp = new int[length][2];
+        // base case
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0];
+        dp[1][0] = prices[1] > prices[0] ? prices[1] - prices[0] : 0;
+        dp[1][1] = Math.max(-prices[0], -prices[1]);
+        for (int i = 2; i < length; ++i) {
+            //今天没有持有股票：昨天已经卖出；昨天持有，今天卖出
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            //今天持有：昨天持有；今天买入,买入的状态是从i-2进行转移，因为冻结期为1天；
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 2][0] - prices[i]);
+        }
+        return dp[length - 1][0];
+    }
+
 int maxProfit_with_cool(int[] prices) {
     int n = prices.length;
     int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
@@ -5701,7 +5581,25 @@ dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
 dp[i][1] = max(dp[i-1][1], dp[i-1][0] - prices[i] - fee)
 解释：相当于买入股票的价格升高了。
 在第一个式子里减也是一样的，相当于卖出股票的价格减小了。
-
+public static int maxProfit(int[] prices, int fee) {
+        int length = prices.length;
+        if (length <= 0) {
+            return 0;
+        }
+        // dp[i][0]表示第i天卖出股票的利润
+        // dp[i][1]表示第i天买入股票的利润
+        int[][] dp = new int[length][2];
+        // base case
+        dp[0][0] = 0;
+        dp[0][1] = -prices[0] - fee;
+        for (int i = 1; i < length; ++i) {
+            //今天没有持有股票：昨天已经卖出；昨天持有，今天卖出
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+            //今天持有：昨天持有；今天买入
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i] - fee);
+        }
+        return dp[length - 1][0];
+    }
 int maxProfit_with_fee(int[] prices, int fee) {
     int n = prices.length;
     int dp_i_0 = 0, dp_i_1 = Integer.MIN_VALUE;
@@ -5714,22 +5612,33 @@ int maxProfit_with_fee(int[] prices, int fee) {
 }
 ```
 
-5. k=2,k = 2 和前面题目的情况稍微不同，因为上面的情况都和 k 的关系不太大。要么 k 是正无穷，状态转移和 k 没关系了；要么 k = 1，跟 k = 0 这个 base case 挨得近，最后也没有存在感。
+5. k=2,前面题目的情况稍微不同，因为上面的情况都和 k 的关系不太大。要么 k 是正无穷，状态转移和 k 没关系了；要么 k = 1，跟 k = 0 这个 base case 挨得近，最后也没有存在感。
 
 这道题 k = 2 和后面要讲的 k 是任意正整数的情况中，对 k 的处理就凸显出来了。我们直接写代码，边写边分析原因。
 
-```
-int max_k = 2;
-int[][][] dp = new int[n][max_k + 1][2];
-for (int i = 0; i < n; i++) {
-    for (int k = max_k; k >= 1; k--) {
-        if (i - 1 == -1) { /*处理 base case */ }
-        dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
-        dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);
+```java
+public int maxProfit(int[] prices) {
+        int length = prices.length;
+        if (length <= 1) {
+            return 0;
+        }
+        int max_k = 2;
+        int[][][] dp = new int[length][max_k + 1][2];
+        dp[0][0][0] = 0;
+        dp[0][0][1] = -prices[0];
+        dp[0][1][0] = 0;
+        dp[0][1][1] = -prices[0];
+        dp[0][2][0] = 0;
+        dp[0][2][1] = -prices[0];
+        for (int i = 1; i < length; i++) {
+            for (int k = max_k; k >= 1; k--) {
+                dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
+                dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+            }
+        }
+        // 穷举了 n × max_k × 2 个状态，正确。
+        return dp[length - 1][max_k][0];
     }
-}
-// 穷举了 n × max_k × 2 个状态，正确。
-return dp[n - 1][max_k][0];
 ```
 
 6. **k = any integer**
@@ -5738,44 +5647,49 @@ return dp[n - 1][max_k][0];
 
 一次交易由买入和卖出构成，至少需要两天。所以说有效的限制 k 应该不超过 n/2，如果超过，就没有约束作用了，相当于 k = +infinity。这种情况是之前解决过的。
 
-直接把之前的代码重用：
-
 ```java
-int maxProfit_k_any(int max_k, int[] prices) {
-    int n = prices.length;
-    if (max_k > n / 2) 
-        return maxProfit_k_inf(prices);
-
-    int[][][] dp = new int[n][max_k + 1][2];
-    for (int i = 0; i < n; i++) 
-        for (int k = max_k; k >= 1; k--) {
-            if (i - 1 == -1) { /* 处理 base case */ }
-            dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i]);
-            dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i]);     
+public int maxProfit(int k, int[] prices) {
+        int length = prices.length;
+        if (length <= 1) {
+            return 0;
         }
-    return dp[n - 1][max_k][0];
-}
+        //当k非常大时转为无限次交易
+        if (k >= length / 2) {
+            int dp0 = 0, dp1 = -prices[0];
+            for (int i = 1; i < length; ++i) {
+                dp0 = Math.max(dp0, dp1 + prices[i]);
+                dp1 = Math.max(dp1, dp0 - prices[i]);
+            }
+            return Math.max(dp0, dp1);
+        }
+        //定义二维数组，交易了多少次、当前的买卖状态
+        int[][] dp = new int[k + 1][2];
+        for (int i = 0; i <= k; ++i) {
+            dp[i][0] = 0;
+            dp[i][1] = -prices[0];
+        }
+        for (int i = 1; i < length; ++i) {
+            for (int j = k; j > 0; --j) {
+                //处理第k次买入
+                dp[j - 1][1] = Math.max(dp[j - 1][1], dp[j - 1][0] - prices[i]);
+                //处理第k次卖出
+                dp[j][0] = Math.max(dp[j][0], dp[j - 1][1] + prices[i]);
+
+            }
+        }
+        return dp[k][0];
+    }
 ```
 
-
-
-## 8.16 **博弈问题**
+## 8.16 **博弈问题（两人足够聪明）**
 
 ### 8.16.1 石头游戏
 
-你和你的朋友面前有一排石头堆，用一个数组 piles 表示，piles[i] 表示第 i 堆石子有多少个。你们轮流拿石头，一次拿一堆，但是只能拿走最左边或者 最右边的石头堆。所有石头被拿完后，谁拥有的石头多，谁获胜。
+你和你的朋友面前有一排石头堆，用一个数组 piles 表示，piles[i] 表示第 i 堆石子有多少个。你们轮流拿石头，一次拿一堆，但是只能拿走最左边或者最右边的石头堆。所有石头被拿完后，谁拥有的石头多，谁获胜。石头的堆数可以是任意正整数，石头的总数也可以是任意正整数，这样就能 打破先手必胜的局面了。比如有三堆石头 piles = [1, 100, 3] ，先手不管 拿 1 还是 3，能够决定胜负的 100 都会被后手拿走，后手会获胜。**假设两人都很聪明**，请你设计一个算法，返回先手和后手的最后得分(石头 总数)之差。比如上面那个例子，先手能获得 4 分，后手会获得 100 分，你 的算法应该返回 -96。
 
-石头的堆数可以是任意正整数，石头的总数也可以是任意正整数，这样就能 打破先手必胜的局面了。比如有三堆石头 piles = [1, 100, 3] ，先手不管 拿 1 还是 3，能够决定胜负的 100 都会被后手拿走，后手会获胜。
+<img src="img/image-20200915210437620.png" alt="image-20200915210437620" style="zoom:33%;" />
 
-**假设两人都很聪明**，请你设计一个算法，返回先手和后手的最后得分(石头 总数)之差。比如上面那个例子，先手能获得 4 分，后手会获得 100 分，你 的算法应该返回 -96。
-
-<img src="img/image-20200322232804357.png" alt="image-20200322232804357" style="zoom:33%;" />
-
-<img src="img/image-20200322232856098.png" alt="image-20200322232856098" style="zoom:33%;" />
-
-下面来定义状态转移方程：
-
-根据前面对 dp 数组的定义，**状态显然有三个:开始的索引** i，结束的索引 **j**，当前轮到的人。
+下面来定义状态转移方程：根据前面对 dp 数组的定义，**状态显然有三个:开始的索引** i，结束的索引 **j**，当前轮到的人。
 
 ```
 dp[i][j][fir or sec] 其中:
@@ -5783,59 +5697,67 @@ dp[i][j][fir or sec] 其中:
 i <= j < piles.length
 ```
 
-对于这个问题的每个状态，可以做的**选择有两个:选择最左边的那堆石头， 或者选择最右边的那堆石头。** 我们可以这样穷举所有状态:
+对于这个问题的每个状态，可以做的**选择有两个:选择最左边的那堆石头， 或者选择最右边的那堆石头。** 
 
 ```java
-n=piles.length
-        for 0<=i<n:
-            for j<=i<n:
-                for who in{fir,sec}:
-                    dp[i][j][who]=max(left,right)
-```
-
-<img src="img/image-20200330221537289.png" alt="image-20200330221537289" style="zoom:33%;" />
-
-```java
-class Pair {
-        int fir, sec;
-        Pair(int fir, int sec) {
-            this.fir = fir;
-            this.sec = sec;
-        }
+/**
+ * 石子游戏
+ * 输入：[5,3,4,5]
+ * 输出：true
+ * 解释：
+ * 亚历克斯先开始，只能拿前 5 颗或后 5 颗石子 。
+ * 假设他取了前 5 颗，这一行就变成了 [3,4,5] 。
+ * 如果李拿走前 3 颗，那么剩下的是 [4,5]，亚历克斯拿走后 5 颗赢得 10 分。
+ * 如果李拿走后 5 颗，那么剩下的是 [3,4]，亚历克斯拿走后 4 颗赢得 9 分。
+ * 这表明，取前 5 颗石子对亚历克斯来说是一个胜利的举动，所以我们返回 true 。
+ *
+ * <p>
+ * https://leetcode-cn.com/problems/stone-game/
+ *
+ * @author 俊语
+ * @date 2020/9/15 18:14
+ */
+public class StoneGame_877 {
+    public static void main(String[] args) {
+        int[] piles = {5, 3, 4, 5};
+        System.out.println(stoneGame(piles));
     }
 
-    /* 返回游戏最后先手和后手的得分之差 */
-    int stoneGame(int[] piles) {
-        int n = piles.length;
-// 初始化 dp 数组
-        Pair[][] dp = new Pair[n][n];
-        for (int i = 0; i < n; i++)
-            for (int j = i; j < n; j++)
-                dp[i][j] = new Pair(0, 0);
-// 填入 base case
-        for (int i = 0; i < n; i++) {
-            dp[i][i].fir = piles[i];
-            dp[i][i].sec = 0;
+    public static boolean stoneGame(int[] piles) {
+        int length = piles.length;
+        // dp[i][j][0]表示[i,j]范围内，先手的最大得分
+        // dp[i][j][1]表示[i,j]范围内，后手的最大得分
+        // dp[i][j].fir = max(选择最左边的石头堆 , 选择最右边的石头堆)
+        // 作为先手，面对 piles[i...j] 时，有两种选择:要么我选择最左边的那一堆石头，然后面对 piles[i+1...j];此时轮到对方，相当于我变成了后手;
+        int[][][] dp = new int[length][length][2];
+        // base case
+        for (int i = 0; i < length; ++i) {
+            dp[i][i][0] = piles[i];
+            dp[i][i][1] = 0;
         }
-// 斜着遍历数组
-        for (int l = 2; l <= n; l++) {
-            for (int i = 0; i <= n - l; i++) {
-                int j = l + i - 1;
-// 先手选择最左边或最右边的分数
-                int left = piles[i] + dp[i + 1][j].sec;
-                int right = piles[j] + dp[i][j - 1].sec; // 套用状态转移方程
+        //注意最后的结果是右上角,要斜着遍历
+        for (int i = length - 2; i >= 0; --i) {
+            for (int j = i + 1; j < length; ++j) {
+                //先手选择左边或者右边
+                // 选择最左边的那一堆石头，然后面对 piles[i+1...j]
+                int left = piles[i] + dp[i + 1][j][1];
+                // 选择最右边的那一堆石头，然后面对 piles[i...j-1]
+                int right = piles[j] + dp[i][j - 1][1];
+
+                // 先手选左边
                 if (left > right) {
-                    dp[i][j].fir = left;
-                    dp[i][j].sec = dp[i + 1][j].fir;
+                    dp[i][j][0] = left;
+                    // 如果先手选择了最左边那堆，给我剩下了 piles[i+1...j],此时轮到我，我变成了先手;
+                    dp[i][j][1] = dp[i + 1][j][0];
                 } else {
-                    dp[i][j].fir = right;
-                    dp[i][j].sec = dp[i][j - 1].fir;
+                    dp[i][j][0] = right;
+                    dp[i][j][1] = dp[i][j - 1][0];
                 }
             }
         }
-        Pair res = dp[0][n - 1];
-        return res.fir - res.sec;
+        return dp[0][length - 1][0] > dp[0][length - 1][1];
     }
+}
 ```
 
 ## 8.17 **四键键盘**
@@ -7661,6 +7583,16 @@ void bfs(int[][] maze, int x, int y) {
 ## 13.1 LRU
 
 LRU按访问时间进行淘汰，LFU按访问频次进行淘汰。
+
+要让 put 和 get 方法的时间复杂度为 O(1)，我们可以总结出 cache 这个数据结构必要的条件：查找快，插入快，删除快，有顺序之分。
+
+哈希表查找快，但是数据无固定顺序；链表有顺序之分，插入删除快，但是查找慢。所以结合一下，形成一种新的数据结构：哈希链表。
+
+<img src="img/b84cf65debb43b28bd212787ca63d34c9962696ed427f638763be71a3cb8f89d-20200912185117579.jpg" alt="HashLinkedList" style="zoom:33%;" />
+
+
+
+
 
 ```java
 /**
