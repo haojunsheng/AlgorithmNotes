@@ -1,17 +1,31 @@
-package com.code.nowcoder;
+package com.code.leetcode.array_string;
 
 import java.util.HashMap;
 
 /**
- * 算出一共有几个和为k的连续子数组
+ * 和为K的子数组
+ * 给定一个整数数组和一个整数 k，你需要找到该数组中和为 k 的连续的子数组的个数。
+ * 输入:nums = [1,1,1], k = 2
+ * 输出: 2 , [1,1] 与 [1,1] 为两种不同的情况。
+ * https://leetcode-cn.com/problems/subarray-sum-equals-k/
+ *
+ * @author 俊语
+ * @date 2020/9/18 11:33
  */
-public class PreSum {
-    // 时间复杂度过高
-    int subarraySum(int[] nums, int k) {
+public class SubarraySum_560 {
+    public static void main(String[] args) {
+        int[] nums = {1, 1, 1};
+        int k = 2;
+        System.out.println(subarraySum(nums, k));
+    }
+
+    /**
+     * 前缀和，主要用于处理数组区间的问题
+     * preSum[i] 就是 nums[0..i- 1] 的和，
+     * 如果我们想求 nums[i..j] 的和，只需要一步操作,preSum[j+1]-preSum[i] 即可，而不需要重新去遍历数组了
+     */
+    private static int subarraySum(int[] nums, int k) {
         int n = nums.length;
-        // 前缀和数组
-        // preSum[i] 就是 nums[0..i- 1] 的和。
-        // 那么如果我们想求 nums[i..j] 的和，只需要一步操作,preSum[j+1]-preSum[i] 即可，而不需要重新去遍历数组了。
         int[] preSum = new int[n + 1];
         preSum[0] = 0;
         for (int i = 0; i < n; ++i) {
@@ -34,13 +48,10 @@ public class PreSum {
     /**
      * hashmap版本,我直接记录下有几个sum[j]和sum[i]-k相等，直接更新结果，
      * 就避免了内层的for循环。我们可以用哈希表，在记录前缀和的同时记录该前缀和出现的次数。
-     *
-     * @param nums
-     * @param k
-     * @return
      */
     int subarraySumHashMap(int[] nums, int k) {
         int n = nums.length;
+        // 前缀和 -》该前缀和出现的次数
         HashMap<Integer, Integer> preSum = new HashMap<>();
         preSum.put(0, 1);
         int ans = 0, sum0_i = 0;
@@ -55,9 +66,5 @@ public class PreSum {
             preSum.put(sum0_i, preSum.getOrDefault(sum0_i, 0) + 1);
         }
         return ans;
-    }
-
-    public static void main(String args[]) {
-
     }
 }

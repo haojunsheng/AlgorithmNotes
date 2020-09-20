@@ -1,4 +1,4 @@
-package com.code.nowcoder;
+package com.code.leetcode.window;
 
 import java.util.HashMap;
 
@@ -8,29 +8,38 @@ import java.util.HashMap;
  * 如S：ADOBECODEBANC, T：ABC
  * 输出：BANC
  * 如果不存在，输出""，如果存在，保证唯一
+ * https://leetcode-cn.com/problems/minimum-window-substring/
  */
-public class MinOverSubString {
+public class MinWindow_76 {
     /**
+     * 时间复杂度是O(M + N),两个while循环最多执行2M次
+     * 因为while执行的次数就是双指针left和right走的总路程
      * @param s
      * @param t
      * @return
      */
-    public String minWindow(String s, String t) {
+    public static String minWindow(String s, String t) {
         // 记录最短子串的开始位置和⻓度
         int start = 0, minLen = Integer.MAX_VALUE;
         int left = 0, right = 0;
+        // needs记录字符串t中包含的字符及出现次数
+        // window记录当前「窗口」中包含的字符及出现的次数
         HashMap<Character, Integer> window = new HashMap<>();
         HashMap<Character, Integer> needs = new HashMap<>();
-        for (int i = 0; i < t.length(); ++i) {
-            needs.put(t.charAt(i), needs.get(t.charAt(i)) + 1);
+
+        // 初始化
+        for (char ch : t.toCharArray()) {
+            needs.put(ch, needs.getOrDefault(ch, 0) + 1);
         }
+
         // 记录window中已经有多少字符符合要求了
         int match = 0;
         while (right < s.length()) {
             char c1 = s.charAt(right);
             // needs包含c1
-            if (needs.get(c1) != 0) {
-                window.put(c1, window.get(c1) + 1);
+            if (needs.containsKey(c1)) {
+                int temp = window.getOrDefault(c1, 0) + 1;
+                window.put(c1, temp);
                 // 字符 c1 的出现次数符合要求了
                 if (window.get(c1).equals(needs.get(c1))) {
                     match++;
@@ -45,10 +54,10 @@ public class MinOverSubString {
                     minLen = right - left;
                 }
                 char c2 = s.charAt(left);
-                if (needs.get(c2) != 0) {
+                if (needs.containsKey(c2)) {
                     // 移除window
                     window.put(c2, window.get(c2) - 1);
-                    if (!window.get(c1).equals(needs.get(c1))) {
+                    if (window.get(c2) < needs.get(c2)) {
                         // 字符 c2 出现次数不再符合要求
                         match--;
                     }
@@ -56,10 +65,11 @@ public class MinOverSubString {
                 left++;
             }
         }
-        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, minLen);
+        return minLen == Integer.MAX_VALUE ? "" : s.substring(start, start + minLen);
     }
 
     public static void main(String args[]) {
-
+        String s = "ADOBECODEBANC", t = "ABC";
+        System.out.println(minWindow(s, t));
     }
 }

@@ -18,15 +18,12 @@ public class MergeKLists_23 {
     /**
      * 可以使用优先队列来解决
      * 时间复杂度:O(nlog(k))
-     * @param lists
-     * @return
      */
     public ListNode mergeKLists(ListNode[] lists) {
         if (lists == null || lists.length == 0) {
             return null;
         }
-        // java8 的lambda表达式
-        PriorityQueue<ListNode> queue1 = new PriorityQueue<>(lists.length, (a, b) -> Integer.compare(a.val, b.val));
+        // 从小到大排序
         PriorityQueue<ListNode> queue = new PriorityQueue<>(lists.length, new Comparator<ListNode>() {
             @Override
             public int compare(ListNode o1, ListNode o2) {

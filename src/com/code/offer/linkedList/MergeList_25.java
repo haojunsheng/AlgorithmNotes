@@ -28,7 +28,6 @@ public class MergeList_25 {
         } else if (list2 == null) {
             return list1;
         }
-
         ListNode merge = null;
         if (list1.value < list2.value) {
             merge = list1;

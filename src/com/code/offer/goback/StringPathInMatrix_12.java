@@ -6,7 +6,7 @@ package com.code.offer.goback;
  * 如果一条路径经过了矩阵中的某一个格子，则该路径不能再进入该格子。
  * 例如 a b c e s f c s a d e e 矩阵中包含一条字符串"bcced"的路径，但是矩阵中不包含"abcb"路径，
  * 因为字符串的第一个字符b占据了矩阵中的第一行第二个格子之后，路径不能再次进入该格子。
- *
+ * <p>
  * 基本思想（递归）：
  * 0.根据给定数组，初始化一个标志位数组，初始化为false，表示未走过，true表示已经走过，不能走第二次
  * 1.根据行数和列数，遍历数组，先找到一个与str字符串的第一个元素相匹配的矩阵元素，进入judge
@@ -17,6 +17,9 @@ package com.code.offer.goback;
  * 6.走到这一步，说明本次是不成功的，我们要还原一下标志位数组index处的标志位，进入下一轮的判断。
  */
 public class StringPathInMatrix_12 {
+    public static void main(String[] args) {
+
+    }
 
     public boolean hasPath(char[] matrix, int rows, int cols, char[] str) {
         //标志位，初始化为false
@@ -24,7 +27,7 @@ public class StringPathInMatrix_12 {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
                 //循环遍历二维数组，找到起点等于str第一个元素的值，再递归判断四周是否有符合条件的----回溯法
-                if (judge(matrix, i, j, rows, cols, flag, str, 0)) {
+                if (dfs(matrix, i, j, rows, cols, flag, str, 0)) {
                     return true;
                 }
             }
@@ -33,7 +36,7 @@ public class StringPathInMatrix_12 {
     }
 
     //judge(初始矩阵，索引行坐标i，索引纵坐标j，矩阵行数，矩阵列数，标志位，待判断的字符串，字符串索引初始为0即先判断字符串的第一位)
-    private boolean judge(char[] matrix, int i, int j, int rows, int cols, boolean[] flag, char[] str, int k) {
+    private boolean dfs(char[] matrix, int i, int j, int rows, int cols, boolean[] flag, char[] str, int k) {
         //先根据i和j计算匹配的第一个元素转为一维数组的位置
         int index = i * cols + j;
         //递归终止条件
@@ -48,10 +51,10 @@ public class StringPathInMatrix_12 {
         flag[index] = true;
 
         //回溯，递归寻找，每次找到了就给k加一，找不到，还原
-        if (judge(matrix, i - 1, j, rows, cols, flag, str, k + 1) ||
-                judge(matrix, i + 1, j, rows, cols, flag, str, k + 1) ||
-                judge(matrix, i, j - 1, rows, cols, flag, str, k + 1) ||
-                judge(matrix, i, j + 1, rows, cols, flag, str, k + 1)) {
+        if (dfs(matrix, i - 1, j, rows, cols, flag, str, k + 1) ||
+                dfs(matrix, i + 1, j, rows, cols, flag, str, k + 1) ||
+                dfs(matrix, i, j - 1, rows, cols, flag, str, k + 1) ||
+                dfs(matrix, i, j + 1, rows, cols, flag, str, k + 1)) {
             return true;
         }
         //走到这，说明这一条路不通，还原，再试其他的路径，撤销选择

@@ -6,8 +6,12 @@ package com.code.leetcode.list;
  * 输出: false
  * 输入: 1->2->2->1
  * 输出: true
+ * https://leetcode-cn.com/problems/palindrome-linked-list/
  */
 public class PalindromeList_234 {
+    public static void main(String[] args) {
+        System.out.println();
+    }
     public boolean isPalindrome(ListNode head) {
         if (head == null || head.next == null) {
             return true;

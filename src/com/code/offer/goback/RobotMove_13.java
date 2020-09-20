@@ -31,22 +31,22 @@ public class RobotMove_13 {
             visited[i] = false;
         }
 
-        int count = movingCountCore(threshold, rows, cols, 0, 0, visited);
+        int count = dfs(threshold, rows, cols, 0, 0, visited);
         return count;
     }
 
 
     // 判断从第row行、第col列出发可以到达的格子数为 1+ 四个方向
-    public int movingCountCore(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
+    public int dfs(int threshold, int rows, int cols, int row, int col, boolean[] visited) {
         int count = 0;
         if (check(threshold, rows, cols, row, col, visited)) {
             // 做选择
             visited[row * cols + col] = true;
             // 加入路径
-            count = 1 + movingCountCore(threshold, rows, cols, row - 1, col, visited)
-                    + movingCountCore(threshold, rows, cols, row, col - 1, visited)
-                    + movingCountCore(threshold, rows, cols, row + 1, col, visited)
-                    + movingCountCore(threshold, rows, cols, row, col + 1, visited);
+            count = 1 + dfs(threshold, rows, cols, row - 1, col, visited)
+                    + dfs(threshold, rows, cols, row, col - 1, visited)
+                    + dfs(threshold, rows, cols, row + 1, col, visited)
+                    + dfs(threshold, rows, cols, row, col + 1, visited);
         }
         return count;
     }

@@ -20,7 +20,7 @@ import java.util.Map;
  */
 public class LRU_146 {
     /**
-     * 头结点和尾节点
+     * 双向链表
      */
     private DoubleList list;
     /**
@@ -34,6 +34,19 @@ public class LRU_146 {
         this.capacity = capacity;
         map = new HashMap<>(capacity);
         list = new DoubleList();
+    }
+
+    public static void main(String[] args) {
+        LRU_146 cache = new LRU_146(2);
+        cache.put(1, 1);
+        cache.put(2, 2);
+        cache.get(1);       // 返回  1
+        cache.put(3, 3);    // 该操作会使得关键字 2 作废
+        cache.get(2);       // 返回 -1 (未找到)
+        cache.put(4, 4);    // 该操作会使得关键字 1 作废
+        cache.get(1);       // 返回 -1 (未找到)
+        cache.get(3);       // 返回  3
+        cache.get(4);// 返回  4
     }
 
     public int get(int key) {
@@ -54,26 +67,24 @@ public class LRU_146 {
             node.val = value;
         } else {//key不存在
             Node newNode = new Node(key, value);
+            // 如果map已满，删除最旧的
             if (map.size() == capacity) {
                 Node tail = list.getTail();
                 map.remove(tail.key);
                 list.removeTail();
             }
             map.put(key, newNode);
-            list.moveToHead(newNode);
+            list.addToHead(newNode);
         }
     }
 
-
     /**
-     * 删除最后一个节点
-     */
-
-    /**
-     * 双链表
+     * 封装双向链表的相关操作
      */
     class DoubleList {
+        // 虚拟头结点
         private Node dummyHead;
+        // 虚拟尾节点
         private Node dummyTail;
 
         DoubleList() {
@@ -96,7 +107,7 @@ public class LRU_146 {
         /**
          * 把节点移动到头部
          */
-        void moveToHead(Node node) {
+        public void moveToHead(Node node) {
             node.pre.next = node.next;
             node.next.pre = node.pre;
             addToHead(node);

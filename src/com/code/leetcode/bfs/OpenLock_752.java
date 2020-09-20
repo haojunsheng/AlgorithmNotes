@@ -28,20 +28,15 @@ import java.util.Set;
  * 解释：无法旋转到目标数字且不被锁定。
  * 4. 输入: deadends = ["0000"], target = "8888"
  * 输出：-1
+ * https://leetcode-cn.com/problems/open-the-lock/
  */
 public class OpenLock_752 {
-    /**
-     * 第一步，我们不管所有的限制条件，不管deadends和target的限制，
-     * 就思考一个问题：如果让你设计一个算法，穷举所有可能的密码组合，你怎么做？
-     * 穷举呗，再简单一点，如果你只转一下锁，有几种可能？总共有 4 个位置，每个位置可以向上转，也可以向下转，也就是有 8 种可能对吧。
-     * 比如说从"0000"开始，转一次，可以穷举出"1000", "9000", "0100", "0900"...共 8 种密码。
-     * 然后，再以这 8 种密码作为基础，对每个密码再转一下，穷举出所有可能…
-     * 仔细想想，这就可以抽象成一幅图，每个节点有 8 个相邻的节点，又让你求最短距离，这不就是典型的BFS嘛。
-     * 我们还需要解决下面的问题：
-     * 1、会走回头路。比如说我们从"0000"拨到"1000"，但是等从队列拿出"1000"时，还会拨出一个"0000"，这样的话会产生死循环。
-     * 2、没有终止条件，按照题目要求，我们找到target就应该结束并返回拨动的次数。
-     * 3、没有对deadends的处理，按道理这些「死亡密码」是不能出现的，也就是说你遇到这些密码的时候需要跳过。
-     */
+    public static void main(String[] args) {
+        String[] dead = {"0201", "0101", "0102", "1212", "2002"};
+        String target = "0202";
+        OpenLock_752 openLock_752=new OpenLock_752();
+        System.out.println(openLock_752.bfs(dead,target));
+    }
 
     public int bfs(String[] deadends, String target) {
         if (deadends == null || target == null) {
@@ -52,7 +47,7 @@ public class OpenLock_752 {
         for (String s : deadends) {
             deadSet.add(s);
         }
-        // 记录已经穷举过的密码
+        // 记录已经穷举过的密码,防止重复访问
         Set<String> visited = new HashSet<>();
         // 从起点开始进行广度搜索
         Queue<String> queue = new LinkedList<>();
@@ -60,7 +55,6 @@ public class OpenLock_752 {
         visited.add("0000");
         int step = 0;
         while (!queue.isEmpty()) {
-            // 注意，size必须提前计算出来
             int size = queue.size();
             for (int i = 0; i < size; ++i) {
                 String cur = queue.poll();
@@ -148,7 +142,9 @@ public class OpenLock_752 {
         return -1;
     }
 
-    // 将 s[j] 向上拨动一次
+    /**
+     * 将 s[j] 向上拨动一次
+     */
     String plusOne(String s, int j) {
         char[] ch = s.toCharArray();
         if (ch[j] == '9') {
@@ -159,7 +155,9 @@ public class OpenLock_752 {
         return new String(ch);
     }
 
-    // 将 s[i] 向下拨动一次
+    /**
+     * 将 s[i] 向下拨动一次
+     */
     String minusOne(String s, int j) {
         char[] ch = s.toCharArray();
         if (ch[j] == '0') {
