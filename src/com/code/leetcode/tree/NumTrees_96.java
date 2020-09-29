@@ -1,5 +1,7 @@
 package com.code.leetcode.tree;
 
+import java.math.BigInteger;
+
 /**
  * 96. 不同的二叉搜索树
  * 给定一个整数 n，求以 1 ... n 为节点组成的二叉搜索树有多少种？
@@ -37,5 +39,25 @@ public class NumTrees_96 {
             }
         }
         return dp[n];
+    }
+
+    /**
+     * 卡特兰数公式
+     * res=2*(2*n-1)*res/(n+1)=res*(4*n-2)/n+1
+     *
+     * @param n
+     * @return
+     */
+    public static BigInteger numTrees2(int n) {
+        BigInteger res = BigInteger.valueOf(1);
+        BigInteger one = BigInteger.valueOf(1);
+        BigInteger two = BigInteger.valueOf(2);
+        BigInteger four = BigInteger.valueOf(4);
+        for (int i = 2; i <= n; ++i) {
+            BigInteger bigIntegerI = BigInteger.valueOf(i);
+            res = res.multiply(four.multiply(bigIntegerI).subtract(two)).divide(bigIntegerI.add(one));
+        }
+        System.out.println(res);
+        return res;
     }
 }
