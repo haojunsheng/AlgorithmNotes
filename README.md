@@ -2407,9 +2407,9 @@ public class StringToInt_67 {
     }
 ```
 
-# 3 链表
+# 4. 链表
 
-## 3.1 从尾到头打印链表
+## 4.1 从尾到头打印链表
 
 [从尾到头打印链表6](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/PrintListInReversedOrder_06.java)
 
@@ -2441,7 +2441,7 @@ public static void printListReverseByStack(ListNode headNode) {
     }
 ```
 
-## 3.2 删除链表中的节点
+## 4.2 删除链表中的节点
 
 [面试题18：删除链表中的节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/DeleteNodeInList_18.java)
 把下一个节点的值保存到该节点，然后删除下一个节点即可，需要考虑只有一个节点和删除尾节点的特殊情况。
@@ -2512,7 +2512,7 @@ private ListNode deleteDuplication(ListNode head) {
     }
 ```
 
-## 3.3 链表中倒数第k个节点
+## 4.3 链表中倒数第k个节点
 
 [面试题22：链表中倒数第k个节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/KthNodeFromEnd_22.java)
 
@@ -2560,7 +2560,7 @@ private ListNode findKthToTail(ListNode head, int k) {
     }
 ```
 
-## 3.4 链表中环的入口节点
+## 4.4 链表中环的入口节点
 
 [面试题23:链表中环的入口节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/offer/linkedList/EnterNodeInLink_23.java)
 
@@ -2636,7 +2636,7 @@ public ListNode getEnterNode(ListNode head) {
     }
 ```
 
-## 3.5 反转链表@@@
+## 4.5 反转链表@@@
 
 [面试题24：反转链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/ReverseList_24.java)
 
@@ -2724,7 +2724,7 @@ public ListNode reverseN(ListNode head, int n) {
     }
 ```
 
-## 3.6 合并两个排序的链表
+## 4.6 合并两个排序的链表
 
 [面试题25：合并两个排序链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/MergeList_25.java)
 
@@ -2787,7 +2787,7 @@ private ListNode merge(ListNode list1, ListNode list2) {
     }
 ```
 
-### 3.6.1 合并k个已排序的链表
+### 4.6.1 合并k个已排序的链表
 
 ```java
 package com.code.leetcode.list;
@@ -2883,7 +2883,7 @@ public class MergeKLists_23 {
 }
 ```
 
-## 3.7 复杂链表的复制(字节考过)
+## 4.7 复杂链表的复制(字节考过)
 
 [面试题35：复杂链表的复制](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/CopyList_35.java)
 
@@ -2943,7 +2943,7 @@ public static RandomListNode Clone(RandomListNode pHead) {
     }
 ```
 
-## 3.8 二叉搜索树与双向链表@@@
+## 4.8 二叉搜索树与双向链表@@@
 
 [面试题36：二叉搜索树与双向链表](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/BinaryTreeConvert_36.java)
 <img src="img/963f2da36712b57f870a5e81d839a03737a347f19bab268cf1fd6fd60649711e-Picture14.png" alt="Picture14.png" style="zoom:33%;" />
@@ -2980,7 +2980,7 @@ public static RandomListNode Clone(RandomListNode pHead) {
     }
 ```
 
-## 3.9 两个链表的第一个公共节点
+## 4.9 两个链表的第一个公共节点
 
 [面试题52：两个链表的第一个公共节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/FirstCommonNodesInLists_52.java)
 
@@ -3026,7 +3026,7 @@ public ListNode FindFirstCommonNode(ListNode pHead1, ListNode pHead2) {
     }
 ```
 
-## 3.10 圆圈中最后剩余的数字@@@
+## 4.10 圆圈中最后剩余的数字@@@
 
 [面试题62：圆圈中最后剩余的数字](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/linkedList/LastRemaining_62.java)
 
@@ -3082,7 +3082,7 @@ public class LastRemaining_62 {
 
 <img src="img/9dda886441be8d249abb76e35f53f29fd6e780718d4aca2ee3c78f947fb76e75-image.png" alt="image.png" style="zoom: 50%;" />
 
-## 3.11回文链表
+## 4.11回文链表
 
 ```java
 package com.code.leetcode.list;
@@ -3129,7 +3129,7 @@ public class PalindromeList_234 {
 }
 ```
 
-## 3.12 奇升偶降链表排序
+## 4.12 奇升偶降链表排序
 
 ```java
 package com.code.leetcode.list;
@@ -3215,11 +3215,11 @@ public class OddIncreaseEvenDecrease {
 
 
 
-# 4. 二叉树&递归
+# 5. 二叉树&递归
 
 **递归算法的时间复杂度怎么计算?子问题个数乘以解决一个子问题需要的时间。**
 
-## 4.1 二叉树迭代@@@
+## 5.1 二叉树迭代@@@
 
 ```java
 // 前序
@@ -3324,9 +3324,9 @@ public List<List<Integer>> levelOrder(TreeNode root) {
   }
 ```
 
-## 4.2 二叉树遍历类
+## 5.2 二叉树遍历类
 
-### 4.2.1 重建二叉树@@@
+### 5.2.1 重建二叉树@@@
 
 [重建二叉树7](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/ConstructBinaryTree_07.java)
 
@@ -3358,7 +3358,7 @@ public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
     }
 ```
 
-### 4.2.2 二叉搜索树的后序遍历序列
+### 5.2.2 二叉搜索树的后序遍历序列
 
 [面试题33：二叉搜索树的后序遍历](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/SquenceOfBST_33.java)
 
@@ -3402,7 +3402,7 @@ public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
     }
 ```
 
-### 4.2.3 树的子结构
+### 5.2.3 树的子结构
 
 [面试题26：树的子结构](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/IsSubTree_26.java) 
 
@@ -3446,7 +3446,7 @@ public static TreeNode reConstructBinaryTree(int[] pre, int[] in) {
     }
 ```
 
-### 4.2.4 二叉树的镜像
+### 5.2.4 二叉树的镜像
 
  [面试题27：二叉树的镜像](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/MirrorTree_27.java)
 
@@ -3467,7 +3467,7 @@ public void Mirror(TreeNode root) {
     }
 ```
 
-### 4.2.4 对称的二叉树
+### 5.2.5 对称的二叉树
 
 [面试题28：对称的二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/SymmetricalBinaryTree_28.java)
 
@@ -3525,7 +3525,7 @@ public boolean isSymmetrical(TreeNode root) {
     }
 ```
 
-### 4.2.5 二叉树中和为某值的路径@@@
+### 5.2.6 二叉树中和为某值的路径@@@
 
 [面试题34：二叉树中和为某值的路径](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/PathInTree_34.java)
 
@@ -3569,7 +3569,7 @@ public boolean isSymmetrical(TreeNode root) {
     }
 ```
 
-## 4.3 二叉树的下一个节点@@
+## 5.3 二叉树的下一个节点@@
 
 [面试题8:二叉树的下一个节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/NextNodeInBinaryTrees_08.java)
 
@@ -3605,7 +3605,7 @@ public TreeLinkNode getNextNode(TreeLinkNode pNode) {
     }
 ```
 
-## 4.4 从上向下打印二叉树
+## 5.4 从上向下打印二叉树
 
 [从上向下打印二叉树不分行](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/PrintTreeFromTopToBottom_3201.java)
 
@@ -3711,7 +3711,7 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.5 序列化二叉树
+## 5.5 序列化二叉树
 
 [37序列化二叉树](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/BinaryTreeSerialize_37.java)
 
@@ -3757,7 +3757,7 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.6 数据流中的中位数
+## 5.6 数据流中的中位数
 
 [面试题41：数据流中的中位数](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/MiddleInDataStream_41.java)
 
@@ -3821,7 +3821,7 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.7 二叉搜索树的第k大节点@@@
+## 5.7 二叉搜索树的第k大节点@@@
 
 [面试题54：二叉搜索树的第k大节点](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/KthNodeInBST_54.java)
 
@@ -3861,7 +3861,7 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.8 二叉树的深度
+## 5.8 二叉树的深度
 
 [面试题55：二叉树的深度](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/TreeDepth_5501.java)
 
@@ -3910,7 +3910,7 @@ public static void printFromTopToBottom(TreeNode head) {
     }
 ```
 
-## 4.9 树中两个节点的最低公共祖先@@@
+## 5.9 树中两个节点的最低公共祖先@@@
 
 [面试题68：树中两个节点的最低公共祖先](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/tree/CommonParentInTree_68.java)
 
@@ -3950,7 +3950,7 @@ class Solution {
     }
 ```
 
-## 4.10 二叉堆实现优先队列 TODO
+## 5.10 二叉堆实现优先队列 TODO
 
 二叉堆(Binary Heap)没什么神秘，性质比二叉搜索树 BST 还简单。其主要操作就两个， sink (下沉)和 swim (上浮)，用以维护二叉堆的性 质。其主要应用有两个，首先是一种排序方法「堆排序」，第二是一种很有用的数据结构「优先级队列」。
 
@@ -4087,9 +4087,9 @@ public Key delMax() {
     }
 ```
 
-## 4.11 **二叉搜索树操作集锦**
+## 5.11 **二叉搜索树操作集锦**
 
-### 4.11.1 **判断** **BST** 的合法性
+### 5.11.1 **判断** **BST** 的合法性
 
 ```java
 boolean isValidBST(TreeNode root) {
@@ -4105,7 +4105,7 @@ boolean isValidBST(TreeNode root) {
     }
 ```
 
-### 4.11.2 **在** **BST** **中查找一个数是否存在**
+### 5.11.2 **在** **BST** **中查找一个数是否存在**
 
 ```java
 boolean isInBST(TreeNode root, int target) {
@@ -4132,7 +4132,7 @@ void BST(TreeNode root, int target) {
     }
 ```
 
-### 4.11.3 **在** **BST** 中插入一个数
+### 5.11.3 **在** **BST** 中插入一个数
 ```java
 TreeNode insertIntoBST(TreeNode root, int val) { // 找到空位置插入新节点
         if (root == null) return new TreeNode(val);
@@ -4146,7 +4146,7 @@ TreeNode insertIntoBST(TreeNode root, int val) { // 找到空位置插入新节�
     }
 ```
 
-### 4.11.4 在BST中删除一个数
+### 5.11.4 在BST中删除一个数
 
 ```java
 // 框架
@@ -4218,7 +4218,7 @@ TreeNode deleteNode(TreeNode root, int key) {
     }
 ```
 
-### 4.11.5 总结
+### 5.11.5 总结
 
 1. 二叉树算法设计的总路线:把当前节点要做的事做好，其他的交给递归框架，不用当前节点操心。
 2. 如果当前节点会对下面的子节点有整体影响，可以通过辅助函数增⻓参 数列表，借助参数传递信息。
@@ -4227,7 +4227,7 @@ n叉树的遍历
 
 <img src="img/image-20200316182017396.png" alt="image-20200316182017396" style="zoom:33%;" />
 
-## 4.12 实现字典树
+## 5.12 实现字典树
 
 字典树的应用：搜索补全，IP路由的最长前缀匹配机制。
 
@@ -4324,7 +4324,7 @@ public class Trie_208 {
 }
 ```
 
-## 4.13 不同的二叉搜索树(卡特兰数)
+## 5.13 不同的二叉搜索树(卡特兰数)
 
 ![image-20200924113301619](https://raw.githubusercontent.com/haojunsheng/ImageHost/master/img/20200924113302.png)
 
@@ -4386,7 +4386,7 @@ public static BigInteger numTrees2(int n) {
 - n 个元素进栈序列为：`1，2，3，4，...，n`，则有多少种出栈序列
 - n 对括号，则有多少种 “括号匹配” 的括号序列
 
-## 4.14 二叉树右视图
+## 5.14 二叉树右视图
 
 ```java
 package com.code.leetcode.tree;
@@ -4460,7 +4460,7 @@ public class RightSideView_199 {
 }
 ```
 
-## 4.15 合并二叉树
+## 5.15 合并二叉树
 
 ```java
 package com.code.leetcode.tree;
@@ -4562,7 +4562,7 @@ public class MergeTrees_617 {
 }
 ```
 
-## 4.16 判断完全二叉树
+## 5.16 判断完全二叉树
 
 ```java
 package com.code.leetcode.tree;
@@ -4608,9 +4608,9 @@ public class IsCompleteTree_958 {
     }
 ```
 
-# 5. 栈和队列
+# 6. 栈和队列
 
-## 5.1 俩个栈实现队列@@
+## 6.1 俩个栈实现队列@@
 
 [使用两个栈实现队列9](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/QueueWithTwoStacks_09.java)
 
@@ -4670,7 +4670,7 @@ public Integer pop() {
 }
 ```
 
-## 5.2 包含min函数的栈
+## 6.2 包含min函数的栈
 
 [包含min函数的栈30](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/CustomStack_30.java)
 
@@ -4721,7 +4721,7 @@ private void pop() {
 }
 ```
 
-## 5.3 栈的压入、弹出序列@@@
+## 6.3 栈的压入、弹出序列@@@
 
 [栈的压入、弹出序列31](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/StackSequence_31.java)
 
@@ -4756,7 +4756,7 @@ public static boolean IsPopOrder(int[] pushA, int[] popA) {
     }
 ```
 
-## 5.4 队列的最大值@@@
+## 6.4 队列的最大值@@@
 
 [滑动窗口的最大值5901](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/stack_queue/MaxInWindows_5901.java)
 
@@ -4909,13 +4909,15 @@ public class MaxInQueue_5902 {
     }
 ```
 
-# 6. 图
+# 7. 图
+
+参考leetcode的[图](https://leetcode-cn.com/tag/graph/)。
 
 
 
-# 6. 递归和循环
+# 8. 递归和循环
 
-## 6.1 数值的整数次方
+## 8.1 数值的整数次方
 
 [16-数值的整数次方](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Power_16.java)
 
@@ -4977,7 +4979,7 @@ public double powerWithUnsignedExponet(double base, int exponent) {
     }
 ```
 
-## 6.2 1-n整数中1出现的次数@@@TODO
+## 8.2 1-n整数中1出现的次数@@@TODO
 
 [1-n整数中1出现的次数43](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/Numberof1Between1AndN_43.java)
 
@@ -5056,7 +5058,7 @@ public class Numberof1Between1AndN_43 {
 }
 ```
 
-## 6.3 丑数@@@
+## 8.3 丑数@@@
 
 [丑数49](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/UglyNumber_49.java)
 
@@ -5104,7 +5106,7 @@ public class UglyNumber_49 {
 }
 ```
 
-## 6.4 求1+2+…+n@@@
+## 8.4 求1+2+…+n@@@
 
 [求1+2+…+n 64](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/recursive_cycle/sumNums_64.java)
 
@@ -5134,13 +5136,13 @@ public class sumNums_64 {
 }
 ```
 
-# 7. DFS vs BFS
+# 9. DFS vs BFS
 
-## 7.1 DFS
+## 9.1 DFS
 
 深度优先搜索，从起点出发，从规定的方向中选择其中一个不断地向前走，直到无法继续为止，然后尝试另外一种方向，直到最后走到终点。就像走迷宫一样，尽量往深处走。DFS 解决的是连通性的问题，一个是起始点，一个是终点，判断是不是有一条路径能从起点连接到终点。
 
-### 7.1.1 走迷宫
+### 9.1.1 走迷宫
 
 给定一个二维矩阵代表一个迷宫，迷宫里面有通道，也有墙壁，通道由数字 0 表示，而墙壁由 -1 表示，有墙壁的地方不能通过，那么，能不能从 A 点走到 B 点。
 
@@ -5220,7 +5222,7 @@ DFS 是图论里的算法，分析利用 DFS 解题的复杂度时，应当借�
 
 <img src="img/image-20200327151149215.png" alt="image-20200327151149215" style="zoom:25%;" />
 
-### 7.1.2 矩阵中的最长递增路径（二维数组最长上升序列）
+### 9.1.2 矩阵中的最长递增路径（二维数组最长上升序列）
 
 ```java
 package com.code.leetcode.dfs;
