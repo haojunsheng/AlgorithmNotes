@@ -705,7 +705,27 @@ TODO
 
 贪心算法(greedy algorithm)。
 
+<img src="https://cdn.jsdelivr.net/gh/haojunsheng/ImageHost/img/20201107103849.png" alt="image-20201107103848050" style="zoom:50%;" />
 
+哈夫曼编码具体case：
+
+<img src="https://cdn.jsdelivr.net/gh/haojunsheng/ImageHost/img/20201107103330.png" alt="image-20201107103329909" style="zoom:50%;" />
+
+我们把每个字符看作一个节点，并且辅带着把频率放到优先级队列中。我们从队列中取出频 率最小的两个节点 A、B，然后新建一个节点 C，把频率设置为两个节点的频率之和，并把 这个新节点 C 作为节点 A、B 的父节点。最后再把 C 节点放入到优先级队列中。重复这个 过程，直到队列中没有数据。
+
+<img src="https://cdn.jsdelivr.net/gh/haojunsheng/ImageHost/img/20201107103430.png" alt="image-20201107103429798" style="zoom:50%;" />
+
+现在，我们给每一条边加上画一个权值，指向左子节点的边我们统统标记为 0，指向右子节 点的边，我们统统标记为 1，那从根节点到叶节点的路径就是叶节点对应字符的霍夫曼编码。
+
+![image-20201107103555679](../../../Library/Application Support/typora-user-images/image-20201107103555679.png)
+
+课后练习：
+
+1. 在一个非负整数 a 中，我们希望从中移除 k 个数字，让剩下的数字值最小，如何选择移 除哪 k 个数字呢?
+
+2. 假设有 n 个人等待被服务，但是服务窗口只有一个，每个人需要被服务的时间长度是不 同的，如何安排被服务的先后顺序，才能让这 n 个人总的等待时间最短?
+
+## 分治算法
 
 
 
