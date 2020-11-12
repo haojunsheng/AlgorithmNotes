@@ -1,4 +1,4 @@
-package com.code.geekbang.trie;
+package com.code.geekbang.trie_35;
 
 /**
  * Trie树

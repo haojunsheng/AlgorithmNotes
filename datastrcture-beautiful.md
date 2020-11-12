@@ -554,6 +554,20 @@ private void recurDfs(int w, int t, boolean[] visited, int[] prev) {
 
 ![image-20201103103745072](https://raw.githubusercontent.com/haojunsheng/ImageHost/master/img/20201103103745.png)
 
+## 拓扑排序
+
+场景：**确定代码源文件的编译依赖关系**。
+
+## 最短路径
+
+
+
+
+
+
+
+
+
 # 17. 字符串匹配算法
 
 ## 单模式串匹配算法
@@ -595,7 +609,7 @@ Trie 树，也叫“字典树”。是一种专门处理字符串匹配的数据
 下面我们看如何实现一颗Trie树，操作分为：将字符串插入Trie树，在Trie树中查询一个字符串。
 
 ```java
-package com.code.geekbang.trie;
+package com.code.geekbang.trie_35;
 
 /**
  * Trie树
@@ -727,11 +741,74 @@ TODO
 
 ## 分治算法
 
+<img src="https://cdn.jsdelivr.net/gh/haojunsheng/ImageHost/img/20201107143937.png" alt="image-20201107143936119" style="zoom:50%;" />
 
+常见应用：
+
+- 求逆序对的个数
+
+最笨的方法，把每个数字和他后面的数字进行比较，这样的时间复杂度为O(n^2)。
+
+![image-20201107212430520](https://cdn.jsdelivr.net/gh/haojunsheng/ImageHost/img/20201107212431.png)
+
+<img src="https://cdn.jsdelivr.net/gh/haojunsheng/ImageHost/img/20201107212448.png" alt="image-20201107212448776" style="zoom:50%;" />
+
+```java
+package com.code.geekbang.divideConquer_38;
+
+public class ReversePairs {
+    private int num = 0;
+
+    public int count(int[] a) {
+        num = 0;
+        mergeSortCounting(a, 0, a.length - 1);
+        return num;
+    }
+
+    private void mergeSortCounting(int[] a, int p, int r) {
+        if (p >= r) {
+            return;
+        }
+        int q = (p + r) / 2;
+        mergeSortCounting(a, p, q);
+        mergeSortCounting(a, q + 1, r);
+        merge(a, p, q, r);
+    }
+
+    private void merge(int[] a, int p, int q, int r) {
+        int i = p, j = q + 1, k = 0;
+        int[] tmp = new int[r - p + 1];
+        while (i <= q && j <= r) {
+            if (a[i] <= a[j]) {
+                tmp[k++] = a[i++];
+            } else {
+                // 统计 p-q 之间，比a[j]大的元素个数
+                num += (q - i + 1);
+                tmp[k++] = a[j++];
+            }
+        }
+        while (i <= q) {
+            tmp[k++] = a[i++];
+        }
+        while (j <= r) {
+            tmp[k++] = a[j++];
+        }
+        for (i = 0; i <= r - p; ++i) {
+            a[p + i] = tmp[i];
+        }
+    }
+}
+```
+
+- 二维平面上有 n 个点，如何快速计算出两个距离最近的点对?
+- 有两个 n**n 的矩阵 A，B，如何快速求解两个矩阵的乘积 C=A*B?
+- 海量数据处理，比如排序等
 
 ## 回溯算法
 
-> 如数独、八皇后、0-1 背包、图 的着色、旅行商问题、全排列。
+> 如数独、八皇后、0-1 背包、图 的着色、旅行商问题、全排列，图的深度优先搜索，正则表达式匹配。
+
+多做题，没其他办法。
 
 # mysql的索引
 
