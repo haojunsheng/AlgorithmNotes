@@ -1367,7 +1367,23 @@ public class CountSmaller_315 {
 }
 ```
 
-## 2.12 数组中只出现一次的数字@@@ TODO
+## 2.12 数组中只出现一次的数字@@@ 
+
+https://leetcode.cn/problems/single-number/submissions/729578362/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+public int singleNumber(int[] nums) {
+        // 异或运算
+        // 任何数和 0 异或，结果仍然是原来的数
+        // 任何数和其自身异或，结果全变成 0
+        // 异或运算满足交换律和结合律
+        int res = 0;
+        for (int num : nums) {
+            res ^= num;
+        }
+        return res;
+    }
+```
 
 [数组中只出现一次的数字56](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/array/NumbersAppearOnce_5601.java)
 借助于位运算优化时间复杂度和空间复杂度，用来解决其他数字出N（N>=2）次，而一个数字出现1次都可以用这种解法来推导出这个出现1次的数字。
@@ -1792,6 +1808,80 @@ public int[][] merge(int[][] intervals) {
             }
         }
         return Arrays.copyOf(res, idx + 1);
+    }
+```
+
+## 2.21 [寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number/)
+
+https://leetcode.cn/problems/find-the-duplicate-number/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+public int findDuplicate(int[] nums) {
+        // 数组大小为 n + 1，而数字都在 1 到 n 之间。
+        // 这意味着：如果我们把数组的值当成下一个格子的“指针（索引）”，那么从任何一个位置出发，都绝对不会发生越界。
+        // 寻找数组中的重复数，本质上就是寻找这个隐式链表中的“入环点”。
+        // 1. 初始化快慢指针，都从起点（索引 0）出发
+        int slow = nums[0];
+        int fast = nums[nums[0]];
+        // 2. 第一阶段：快慢指针在环中相遇
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[nums[fast]];
+        }
+        // 3. 第二阶段：寻找环的入口（重复数）
+        // 将快指针重置到起点 0
+        fast = 0;
+        while (slow != fast) {
+            slow = nums[slow];
+            fast = nums[fast];
+        }
+        return slow;
+    }
+```
+
+## 2.22 [下一个排列](https://leetcode.cn/problems/next-permutation/)
+
+https://leetcode.cn/problems/next-permutation/description/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+public void nextPermutation(int[] nums) {
+        if (nums.length == 1) {
+            return;
+        }
+        // 1. 从后往前，寻找第一个满足 nums[i] < nums[i + 1] 的突破口 i
+        // 此时，nums[i+1] 到末尾一定是一段严格的降序（山峰）
+        int i = nums.length - 2;
+        while (i >= 0 && nums[i] >= nums[i + 1]) {
+            i--;
+        }
+        // 如果 i >= 0，说明找到了突破口（即数组不是整体降序）
+        if (i >= 0) {
+            // 2. 从后往前，在 [i + 1, end] 中寻找第一个大于 nums[i] 的数 j
+            // 这个 nums[j] 就是整个右侧区域里，比 nums[i] 大一点点的最小数。
+            int j = nums.length - 1;
+            while (j >= 0 && nums[j] <= nums[i]) {
+                j--;
+            }
+            // 3. 交换 i 和 j
+            swap(nums, i, j);
+        }
+        // 4. 🔥 核心收尾：无论 i 是否找到了（如果是全降序，i 会变成 -1），
+        // [i + 1, end] 这一段现在都是严格降序的，我们必须把它反转成升序
+        reverse(nums, i + 1, nums.length - 1);
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    private void reverse(int[] nums, int i, int j) {
+        while (i < j) {
+            swap(nums, i, j);
+            i++;
+            j--;
+        }
     }
 ```
 
@@ -5646,165 +5736,91 @@ boolean isSafe(int maze[][], int i, int j) {
 }
 ```
 
-
-
 # 8. 动态规划和贪心算法
 
-动态规划的一般流程就是三步:**暴力的递归解法** **->** **带备忘录的递归解法** **->** **迭代的动态规划解法**。
+在 LeetCode 实战中，判断一道题该用什么算法，绝不是靠拍脑袋或者虚无缥缈的“直觉”。题目本身就自带了非常强烈的“物理暗示”**和**“数据暗示”。
 
-思考流程来说，就分为一下几步:**找到状态和选择** **->** **明确** **dp** **数组**/**函数的定义** **->** **寻找状态之间的关系**。
+你可以把这个判断过程想象成一个过关斩将的“决策树”。拿到一道题，按照以下顺序问自己三个问题，外加看一眼数据范围，基本就能锁定目标。
 
-**动态规划问题的一般形式就是求最值**。比如说让你求**最长**递增子序列呀，**最小**编辑距离呀等等。既然是要求最值，核心问题是什么呢?**求解动态规划的核心问题是穷举**。因为要求最值，肯定要把所有可行的答案穷举出来，然后在其中找最值呗。
+1. 第一问：题目要求你返回什么？（最强信号）
 
-首先，动态规划的穷举有点特别，因为这类问题**存在「重叠子问题」**，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。
+看函数的返回值和最终目的，这是第一道分水岭。
 
-而且，动态规划问题一定会**具备「最优子结构」**，才能通过子问题的最值得到原问题的最值。
+- **如果要求返回“所有的具体方案”**：比如返回全部的排列组合、所有合法的括号组合、所有的走迷宫路径。
+  - **锁定算法**：**回溯 (Backtracking)**。因为你要记录每一步是怎么走的，除了带“橡皮擦”的回溯，别无他法。
+- **如果要求返回“最值”或“方案总数”**：比如求最大利润、最短路径长度、最少硬币数、有多少种爬楼梯的走法。
+  - **锁定算法**：**DP 或 贪心**。题目根本不在乎你怎么走出来的，只要一个最终结果，这时候千万不要用回溯去穷举，必定超时。
+- **如果要求返回“是否能到达”或“遍历连通块”**：比如判断岛屿数量、是否能从起点走到终点（不求最短）。
+  - **锁定算法**：**DFS (或 BFS)**。只需要傻傻地探路加个 `visited` 数组即可。
 
-另外，虽然动态规划的核心思想就是穷举求最值，但是问题可以千变万化， 穷举所有可行解其实并不是一件容易的事，只有列出**正确的「状态转移方程**」才能正确地穷举。
+2. 第二问：状态能不能合并？（区分回溯与 DP）
 
-在实际的算法问题中，**写出状态转移方程是最困难的**。
+如果你在第一问中发现题目是求“最值”或“方案数”，你可能会在回溯和 DP 之间纠结。这时候你要问自己：**之前走过的路，会对未来产生影响吗？**
 
-> 明确「状态」 -> 定义 dp 数组/函数的含义 -> 明确「选择」-> 明确 base case。
+- **能合并（无后效性）**：比如爬楼梯，不管你是跨1步还是跨2步来到第5阶，从第5阶继续往上爬的方案数是固定不变的。这种存在“重叠子问题”的情况。
+  - **锁定算法**：**DP**（或者带备忘录的 DFS）。
+- **不能合并（有后效性）**：比如走迷宫不能走回头路，你到达某个格子的路径不同，你接下来能走的方向就不同（因为你不能踩刚才走过的格子）。
+  - **锁定算法**：**回溯**。必须老老实实记录路径，不能查表偷懒。
 
-## 8.0 动态规划
+3. 第三问：能不能白嫖“局部最优”？（区分 DP 与 贪心）
 
-[参考](https://www.zhihu.com/question/23995189)
+如果你确定题目是求“极值”，并且状态可以推进，那到底是 DP 还是贪心？这是最容易掉坑的地方。
 
-### 8.0.1 线性规划
+- **敢不敢贪**：试着想出一个极度短视的策略（比如：每次都选最大的、每次都选结束最早的）。然后问自己：**这种短视策略会不会错过全局最优解？** 只要你能举出一个反例，哪怕只有一个，贪心就直接死刑。
+  - **锁定算法**：无法证明贪心绝对正确时，老老实实用 **DP** 穷举所有状态。
+  - **锁定算法**：如果能证明（或者凭借经验知道，如区间调度、贪心跳跃），每次无脑选当前最优，最后一定是最优的，直接上 **贪心**。
 
-线性，就是说各个子问题的规模以线性的方式分布，并且子问题的最佳状态或结果可以存储在一维线性的数据结构里，例如一维数组，哈希表等。 解法中，经常会用 dp[i] 去表示第 i 个位置的结果，或者从 0 开始到第 i 个位置为止的最佳状态或结果。例如，最长上升子序列。dp[i] 表示从数组第 0 个元素开始到第i个元素为止的最长的上升子序列。
+终极实战作弊码：看“数据规模”：
 
-#### **求解 dp[i] 形式一**
+LeetCode 题目的限制条件（Constraints）是极其诚实的，出题人给定的输入数据大小 `N`，直接把算法复杂度写在了脸上。
 
-第一种形式，**当前所求的值仅仅依赖于有限个先前计算好的值（只有一重循环）**，也就是说，dp[i] 仅仅依赖于有限个 dp[j]，其中 j < i。
+- **N <= 20**：不用想了，这数据量小得可怜，$O(2^N)$ 或 $O(N!)$ 都能过。绝对是 **回溯**。
+- **N 在 100 到 1000 之间**：这通常意味着 $O(N^2)$ 的复杂度能通过。大概率是 **二维 DP**（如最长公共子序列）或者图的遍历（DFS）。
+- **N >= 10^4 到 10^5**：时间复杂度必须控制在 $O(N)$ 或 $O(N \log N)$ 级别。这就判了 $O(N^2)$ 的 DP 死刑。这道题大概率是 **贪心**（配合排序）、**一维 DP**、或者是滑动窗口/双指针。
 
-- 斐波那契数列：dp[i]=dp[i−1] + dp[i−2]，可以看到，当前值只依赖于前面两个计算好的值。
-- 给定一个数组，不能选择相邻的数，求如何选才能使总数最大。
 
-解法：这道题需要运用经典的 0-1 思想，简单说就是：“选还是不选”。假设 dp[i] 表示到第 i 个元素为止我们所能收获到的最大总数。
 
-1. 如果选择了第 i 个数，则不能选它的前一个数，因此，收获的最大总数就是 dp[i−2] + nums[i]。
+DP 专门对付那种“一个大问题的最优解，取决于一堆小问题的最优解”的情况。**DP = 状态定义 + 状态转移方程 + 边界条件。** 它的核心价值是**空间换时间**，通过存储子问题的解来避免重复劳动。
 
-2. 不选，则直接考虑它的前一个数 dp[i−1]。
+常见的场景：计数（有多少种方式）、最值（最大/最小）、可行性（能否达到某个目标）。
 
-因此，可以推导出它的递归公式 dp[i]=max(nums[i] + dp[i−2], dp[i−1])，可以看到，dp[i] 仅仅依赖于有限个 dp[j]，其中 j=i−1，i−2。
+状态定义：需要定义一个数组 `dp[]` 或 `dp[][]`，并明确它代表什么。题目问什么，通常 `dp[i]` 就定义成什么。
 
-```java
-public int rob(int[] nums) {
-    int n = nums.length;
-  
-    // 处理当数组为空或者数组只有一个元素的情况
-    if(n == 0) return 0;
-    if(n == 1) return nums[0];
+状态转移方程：如果我想得到 `dp[i]`，我上一步可能在哪里。
 
-    // 定义一个 dp 数组，dp[i] 表示到第 i 个元素为止我们所能收获到的最大总数
-    int[] dp = new int[n];
+初始化与边界条件：结束的条件。
 
-    // 初始化 dp[0]，dp[1]
-    dp[0] = nums[0];
-    dp[1] = Math.max(nums[0], nums[1]);
+| **类型**        | **代表题**                   | 特征                                                         | **核心思路**                                  |
+| --------------- | ---------------------------- | ------------------------------------------------------------ | --------------------------------------------- |
+| **坐标/路径型** | 不同路径、最小路径和         | 你的位置就是你的状态。你在棋盘的 (i, j)，你的过去只能是从左边或者上面走过来的。 | `dp[i][j]` 通常代表到达坐标 (i, j) 的最优值。 |
+| **序列/子串型** | 最长递增子序列、最长回文子串 | 核心在于“以第 i 个元素结尾的子序列如何如何”。不像路径题那样只看邻居，它可能需要回头看之前所有的 `dp[0...i-1]` | 考虑以第 i 个元素**结尾**时的状态。dp[i]      |
+| **背包/选择型** | 零钱兑换、单词拆分           | 状态里通常有两个变量：一个是“我面对第几个物品”，另一个是“我手里还剩多少资源（空间、钱）”。 | 考虑“选”还是“不选”当前这个物品。dp[capacity]  |
 
-    // 对于每个 nums[i]，考虑两种情况，选还是不选，然后取最大值
-    for (int i = 2; i < n; i++) {
-        dp[i] = Math.max(nums[i] + dp[i - 2], dp[i - 1]);
-    }
-  
-    return dp[n - 1];
-}
-```
+dp类问题可以用for循环实现（至少leetcode 100是这样）。
 
-- 机器人移动问题。一个机器人位于一个网格的左上角（起始点在下图中标记为“Start”）。机器人每次只能向下或向右移动一步。机器人试图到达网格的右下角（在下图中标记为“Finish”）。问总共有多少条不同的路径？
+## 8.0 动态规划题目分类
 
-<img src="img/image-20200327172446741.png" alt="image-20200327172446741" style="zoom:33%;" />
+分类的逻辑：你需要几个变量才能描述一个子问题的状态。从而确定 dp 数组的定义和转移方向。 
 
-递推公式为 `dp[i][j]=dp[i−1][j] + dp[i][j−1]`。虽然利用一个二维数组去保存计算的结果，但是 `dp[i][j]` 所表达的意思仍然是线性的，`dp[i][j]` 表示从起点到 (i, j) 的总走法。可以看到，`dp[i][j]` 仅仅依赖于两个先前的状态。
+| 类型      | 原因                                                         | 模板                                                         | 技巧                                                         | 举例                                                         |
+| :-------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- | :----------------------------------------------------------- |
+| 线性 DP   | 问题天然有一个"前缀"结构，当前状态只依赖"前面"的状态         | `dp[i]` 依赖 `dp[i-1]` 或更前面的状态                        | "以 i 结尾"是定义 dp 的常用方式，强制把第 i 个元素纳入考虑   | 爬楼梯：`dp[i]` = 爬到第 i 级的方法数，`dp[i] = dp[i-1] + dp[i-2]` ； |
+|           |                                                              |                                                              |                                                              | 打家劫舍：`dp[i]` = 前 i 家能偷的最大值，`dp[i] = max(dp[i-1], dp[i-2] + nums[i])` |
+|           |                                                              |                                                              |                                                              | 最大子数组和：`dp[i]` = 以 i 结尾的最大子数组和，`dp[i] = max(dp[i-1] + nums[i], nums[i])` |
+| 背包 DP   | 问题有两个维度同时变化："考虑到第 i 个物品"和"当前剩余容量 j"，缺一不可 | `dp[i][j]` = 考虑前 i 个物品，容量为 j 时的最优解；可压缩为一维滚动数组：`dp[j]` = 凑成金额 j 的最少枚数。外层枚举硬币，内层枚举金额 | 0/1 背包逆序遍历容量（防止重复选）；完全背包正序遍历容量（允许重复选） | 零钱兑换：`dp[j]` = 凑成金额 j 的最少硬币数 ；dp[j] = min(dp[j], dp[j - coin] + 1) |
+|           |                                                              |                                                              |                                                              | 零钱兑换 II：统计凑成金额的组合数，dp[j] = dp[j] + dp[j - coin] |
+|           |                                                              |                                                              |                                                              | 分割等和子集：判断能否恰好装满容量为 sum/2 的背包；`dp[j] = dp[j] || dp[j - nums[i]]`<br />*能不能从已经处理过的数字里，凑出和恰好为* `j` |
+|           |                                                              |                                                              |                                                              | 完全平方数，`dp[j]` = 组成数字 j 的最少完全平方数个数。dp[j] = min(dp[j], dp[j - k*k] + 1) |
+|           |                                                              |                                                              |                                                              | 单词拆分。`dp[j]` = 字符串前 j 个字符能否被拆分。`dp[j] = dp[i] && s[i..j] in wordDict`，枚举所有 i < j |
+| 路径 DP   | 问题输入本身是二维网格，当前格子依赖上方和左方               | `dp[i][j]` 依赖 `dp[i-1][j]`（上）和 `dp[i][j-1]`（左）      | 第一行、第一列单独初始化作为 base case                       | 不同路径：`dp[i][j]` = 到达格子 (i,j) 的路径数。`dp[i][j] = dp[i-1][j] + dp[i][j-1]` ； |
+|           |                                                              |                                                              |                                                              | 最小路径和：`dp[i][j]` = 到达格子 (i,j) 的最小路径和。`dp[i][j] = min(dp[i-1][j], dp[i][j-1]) + grid[i][j]` |
+|           |                                                              |                                                              |                                                              | 三角形最小路径和                                             |
+| 字符串 DP | 问题涉及两个字符串的匹配/比较，需要同时描述两个字符串的"推进进度" | `dp[i][j]` = 字符串 s 前 i 个字符与字符串 t 前 j 个字符的最优关系 | 字符相等时继承左上角 `dp[i-1][j-1]`；不等时从三个相邻方向取最优 | 最长公共子序列：`s[i]==t[j]` 时 `dp[i][j]=dp[i-1][j-1]+1`，否则取 `max(dp[i-1][j], dp[i][j-1])` ； |
+|           |                                                              |                                                              |                                                              | 编辑距离：`dp[i][j]` = s 前 i 个字符变成 t 前 j 个字符的最少操作数。不等时 `dp[i][j] = min(dp[i-1][j], dp[i][j-1], dp[i-1][j-1]) + 1` |
+| 区间 DP   | 子问题是"某段区间"的最优解，无法从前缀推导，必须枚举区间内的分割点 | 枚举区间长度 → 枚举左端点 → 枚举分割点 k，`dp[i][j]` 依赖 `dp[i][k]` 和 `dp[k+1][j]` | 从小区间推大区间；逆向思考"最后操作的是哪个"而非第一个       | 戳气球：`dp[i][j]` = 戳破 (i,j) 之间所有气球的最大硬币数 ；最长回文子序列：`dp[i][j]` = s[i..j] 中最长回文子序列长度 |
+| 序列 DP   | 选取的是不连续的元素，`dp[i]` 跨越式依赖所有满足条件的历史状态，而非仅相邻位置 | `dp[i] = max(dp[j] + 1)`，其中 `j < i` 且满足某条件；需内层循环扫描所有历史 | 结果是所有 `dp[i]` 的最大值，而非 `dp[n]`；可用二分优化到 O(n log n) | 最长递增子序列：`dp[i]` = 以 nums[i] 结尾的 LIS 长度，`dp[i] = max(dp[j]+1)`（`j<i` 且 `nums[j]<nums[i]`） |
 
-#### 求解 dp[i] 形式二
-
-第二种求解 dp[i] 的形式，**当前所求的值依赖于所有先前计算好的值**（所以需要二重循环），也就是说，dp[i] 是各个 dp[j] 的某种组合，其中 j 由 0 遍历到 i−1。
-
-举例：求解最长上升子序列。解法：dp[i]=max(dp[j]) + 1，0 <= j < i。可以看到，当前值依赖于前面所有计算好的值。
-
-### 8.0.2 区间规划
-
-区间规划，就是说各个子问题的规模由不同的区间来定义，一般子问题的最佳状态或结果存储在二维数组里。一般用 `dp[i][j]` 代表从第 i 个位置到第 j 个位置之间的最佳状态或结果。
-
- 解这类问题的时间复杂度一般为多项式时间，对于一个大小为 n 的问题，时间复杂度不会超过 n 的多项式倍数。例如，O(n)=n^k，k 是一个常数，根据题目的不同而定。
-
-- LeetCode 第 516 题，在一个字符串 S 中求最长的回文子序列。例如给定字符串为 dccac，最长回文就是 ccc
-
-对于回文来说，必须保证两头的字符都相同。用 `dp[i][j]` 表示从字符串第 i 个字符到第 j 个字符之间的最长回文，比较这段区间外的两个字符，如果发现它们相等，它们就肯定能构成新的最长回文。而最长的回文长度会保存在 `dp[0][n−1]` 里。因此，可以推导出如下的递推公式。
-
-当首尾的两个字符相等的时候 `dp[0][n−1]=dp[1][n−2] + 2`，
-
-否则，`dp[0][n−1]=max(dp[1][n−1], dp[0][n−2])`。
-
-```java
-public static int LPS(String s) {
-    int n = s.length();
-    // 定义 dp 矩阵，dp[i][j] 表示从字符串第 i 个字符到第 j 个字符之间的最长回文
-    int[][] dp = new int[n][n];
-  
-    // 初始化 dp 矩阵，将对角线元素设为 1，即单个字符的回文长度为 1
-    for (int i = 0; i < n; i++) dp[i][i] = 1;
-  
-    // 从长度为 2 开始，尝试将区间扩大，一直扩大到 n
-    for (int len = 2; len <= n; len++) {
-        // 在扩大的过程中，每次都得出区间的其实位置i和结束位置j
-        for (int i = 0; i < n - len + 1; i++) {
-            int j = i + len - 1;
-      
-            // 比较一下区间首尾的字符是否相等，如果相等，就加2；如果不等，从规模更小的字符串中得出最长的回文长度
-            if (s.charAt(i) == s.charAt(j)) {
-                dp[i][j] = 2 + (len == 2 ? 0: dp[i + 1][j - 1]);
-              } else {
-                dp[i][j] = Math.max(dp[i + 1][j], dp[i][j - 1]);
-              }
-        }
-    } 
-    return dp[0][n - 1];
-}
-```
-
-### 8.0.3 约束规划
-
-在普通的线性规划和区间规划里，一般题目有两种需求：统计和最优解。这些题目不会对输出结果中的元素有什么限制，只要满足最终的一个条件就好了。但是在很多情况下，题目会对输出结果的元素添加一定的限制或约束条件，增加了解题的难度。
-
-- 0-1 背包问题。给定 n 个物品，每个物品都有各自的价值 vi 和重量 wi，现在给你一个背包，背包所能承受的最大重量是 W，那么往这个背包里装物品，问怎么装能使被带走的物品的价值总和最大。
-
-```java
-// F(i,C)=max(F(i−1,C),v(i)+F(i−1,C−w(i)))
-public class KnapSack01 {
-     // c是背包容量
-    public static int knapSack(int[] w, int[] v, int C) {
-        int size = w.length;
-        if (size == 0) {
-            return 0;
-        }
-
-        int[][] dp = new int[size][C + 1];
-        //初始化第一行
-        //仅考虑容量为C的背包放第0个物品的情况
-        for (int i = 0; i <= C; i++) {
-            dp[0][i] = w[0] <= i ? v[0] : 0;
-        }
-        for (int i = 1; i < size; i++) {
-            for (int j = 0; j <= C; j++) {
-                if (w[i] <= j) {
-                    dp[i][j] = Math.max(dp[i-1][j], v[i] + dp[i - 1][j - w[i]]);
-                }
-            }
-        }
-        return dp[size - 1][C];
-    }
-
-    public static void main(String[] args) {
-        int[] w = {2, 1, 3, 2};
-        int[] v = {12, 10, 20, 15};
-        System.out.println(knapSack(w, v, 5));
-    }
-}
-```
+数组长度应该如何选择？dp 定义里有"第i个" / "以i结尾" / "区间[i,j]"， 且有数组 nums[i]  → n。  否则是n+1
 
 ## 8.1 **斐波那契数列**
 
@@ -5840,153 +5856,115 @@ public class KnapSack01 {
 
 ## 8.2 背包问题
 
+*有一个容量为* `W` *的背包，若干物品，每个物品有**重量**和**价值**。怎么装，让背包里的总价值最大？*
+
+| 0/1 背包         | 完全背包            |                                     |
+| :--------------- | :------------------ | ----------------------------------- |
+| 每个物品能用几次 | 最多 1 次           | 无限次                              |
+| 典型题目         | 分割等和子集（416） | 零钱兑换（322）、零钱兑换 II（518） |
+| 一维写法内层遍历 | 逆序 `j: W → w[i]`  | 正序 `j: w[i] → W`                  |
+
+本质差异只有一条：同一个物品能不能在同一次 DP 更新里被重复选。
+
+做题三步曲：
+
+1. dp[j] 表示什么？（能不能 / 最少 / 几种）
+2. 物品能重复用吗？
+   - 不能 → 逆序（0/1）
+   - 能   → 正序（完全）
+3. 写转移：
+   - 能不能：dp[j] = dp[j] || dp[j-w]
+   - 最少：  dp[j] = min(dp[j], dp[j-w]+1)
+   - 几种：  dp[j] += dp[j-w]
+
 ### 8.2.1 0-1背包（约束规划）
 
-给你一个可装载重量为`W`的背包和`N`个物品，每个物品有重量和价值两个属性。其中第`i`个物品的重量为`wt[i]`，价值为`val[i]`，现在让你用这个背包装物品，最多能装的价值是多少？
-
-**第一步**要明确两点，「状态」和「选择」。
-
-先说状态，如何才能描述一个问题局面？只要给定几个可选物品和一个背包的容量限制，就形成了一个背包问题，对不对？**所以状态有两个，就是「背包的容量」和「可选择的物品」**。再说选择，也很容易想到啊，对于每件物品，你能选择什么？**选择就是「装进背包」或者「不装进背包」嘛**。
-
-**`dp[i][w]`的定义如下：对于前`i`个物品，当前背包的容量为`w`，这种情况下可以装的最大价值是`dp[i][w]`。**
-
-**如果你没有把这第**`i`个物品装入背包，那么很显然，最大价值`dp[i][w]`应该等于`dp[i-1][w]`。你不装嘛，那就继承之前的结果。
-
-**如果你把这第**`i`个物品装入了背包，那么`dp[i][w]`应该等于`dp[i-1][w-wt[i-1]] + val[i-1]`。首先，由于`i`是从 1 开始的，所以对`val`和`wt`的取值是`i-1`。而`dp[i-1][w-wt[i-1]]`也很好理解：你如果想装第`i`个物品，你怎么计算这时候的最大价值？**换句话说，在装第**`i`个物品的前提下，背包能装的最大价值是多少？显然，你应该寻求剩余重量`w-wt[i-1]`限制下能装的最大价值，加上第`i`个物品的价值`val[i-1]`，这就是装第`i`个物品的前提下，背包可以装的最大价值。
-
 ```java
-public int zeroOnePack(int W, int N, int[] wt, int[] val) {
-        int[][] dp = new int[N + 1][W + 1];
+int[] dp = new int[W + 1];  // dp[j] = 容量 j 的最大价值
 
-        for (int i = 1; i <= N; ++i) {
-            for (int j = 1; j <= W; ++j) {
-                if (j - wt[i - 1] <= 0) {
-                    // 只可以选择不装
-                    dp[i][j] = dp[i - 1][j];
-                } else {
-                    dp[i][j] = Math.max(dp[i - 1][j],//不装
-                            dp[i - 1][j - wt[i - 1]] + val[i - 1]);//如果装入第i个，剩余重量j-wt[i-1]限制下能装的最大价值
-                }
-            }
-        }
-        return dp[N][W];
-    }
-```
-
-### 8.2.2 零钱兑换2（完全背包）
-
-完全背包和背包的区别是：每个物品的数量是无限的。
-
-**第一步要明确两点，「状态」和「选择」**。状态有两个，就是「背包的容量」和「可选择的物品」，选择就是「装进背包」或者「不装进背包」。
-
-**第二步要明确**`dp`数组的定义。**若只使用`coins`中的前`i`个硬币的面值，若想凑出金额`j`，有`dp[i][j]`种凑法**。base case 为`dp[0][..] = 0， dp[..][0] = 1`。因为如果不使用任何硬币面值，就无法凑出任何金额；如果凑出的目标金额为 0，那么“无为而治”就是唯一的一种凑法。我们最终想得到的答案就是`dp[N][amount]`，其中`N`为`coins`数组的大小。
-
-**第三步，根据「选择」，思考状态转移的逻辑**。**如果你不把这第`i`个物品装入背包**，也就是说你不使用`coins[i]`这个面值的硬币，那么凑出面额`j`的方法数`dp[i][j]`应该等于`dp[i-1][j]`，继承之前的结果。**如果你把这第`i`个物品装入了背包**，也就是说你使用`coins[i]`这个面值的硬币，那么`dp[i][j]`应该等于`dp[i][j-coins[i-1]]`。`dp[i][j-coins[i-1]]`也不难理解，如果你决定使用这个面值的硬币，那么就应该关注如何凑出金额`j - coins[i-1]`。
-
-```java
-/**
- * 给定不同面额的硬币和一个总金额。写出函数来计算可以凑成总金额的硬币组合数。假设每一种面额的硬币有无限个。
- * 输入: amount = 5, coins = [1, 2, 5]
- * 输出: 4
- * 解释: 有四种方式可以凑成总金额:
- * 5=5
- * 5=2+2+1
- * 5=2+1+1+1
- * 5=1+1+1+1+1
- * 
- * https://leetcode-cn.com/problems/coin-change-2/
- * 参考：https://mp.weixin.qq.com/s?__biz=MzAxODQxMDM0Mw==&mid=2247485124&idx=1&sn=52068c8000b90a7a972dbd04658d79b7&chksm=9bd7f8ccaca071da66d3c9e567ab49b27c711db154c2f297f55fcd7c3c1156afa37b0ad60555&scene=178#rd
- * @author 俊语
- * @date 2020/9/10 22:51
- */
-public class CoinChange2_518 {
-    public static int change(int amount, int[] coins) {
-        int n = coins.length;
-        int[][] dp = new int[n + 1][amount + 1];
-        // dp[i][0]=1,凑出的目标金额为 0，那么肯定有1种方案
-        for (int i = 0; i <= n; ++i) {
-            dp[i][0] = 1;
-        }
-        for (int i = 1; i <= n; ++i) {
-            for (int j = 1; j <= amount; ++j) {
-                if (j - coins[i - 1] >= 0) {
-                    dp[i][j] = dp[i - 1][j] + dp[i][j - coins[i - 1]];
-                } else {
-                    dp[i][j] = dp[i - 1][j];
-                }
-            }
-        }
-        return dp[n][amount];
-    }
-```
-
-## 8.3 零钱兑换（线性规划）
-
-1. 先来暴力递归。核心是如何写出状态转移方程？
-
-   **先确定「状态」**，也就是原问题和子问题中变化的变量。由于硬币数量无限，所以唯一的状态就是目标金额 amount 。一定是有限的量。
-
-   **然后确定** **dp** **函数的定义**:当前的目标金额是 n ，至少需要 dp(n) 个硬币凑出该金额。
-
-   **然后确定「选择」并择优**，也就是对于每个状态，可以做出什么选择改变当前状态。具体到这个问题，无论当的目标金额是多少，选择就是从面额列表coins 中选择一个硬币，然后目标金额就会减少:
-
-   **最后明确** **base case**，显然目标金额为 0 时，所需硬币数量为 0;当目标金额小于 0 时，无解，返回 -1:
-
-   <img src="img/image-20200308204140947.png" alt="image-20200308204140947" style="zoom:50%;" />
-
-   <img src="img/image-20200321152037481.png" alt="image-20200321152037481" style="zoom:50%;" />
-
-3. **dp**数组的迭代解法
-
-**dp[i] = x** **表示，当目标金额为** **i** **时，至少需要** **x** **枚硬币**。
-
-> dp数组的初始化问题，找最小值，初始化为大一点的数，找最大值，初始化为较小的值。
->
-> 因为dp[i]依赖于前面已经算出的所有值，所以是双重循环。
-
-```java
-/**
- * 零钱兑换
- * https://leetcode-cn.com/problems/coin-change/
- * <p>
- * 给定不同面额的硬币 coins 和一个总金额 amount。编写一个函数来计算可以凑成总金额所需的最少的硬币个数。
- * 如果没有任何一种硬币组合能组成总金额，返回 -1。
- * 输入: coins = [1, 2, 5], amount = 11
- * 输出: 3
- * 解释: 11 = 5 + 5 + 1
- */
-public class CoinChange_322 {
-    /**
-     * 核心是定义状态，不变的量可以充当状态，所以是当前的目标金额是 n ，至少需要 dp(n) 个硬币凑出该金额。
-     * 下一步的核心是状态的转换：从coins中选择一个，和dp(n)进行比较，选择一个较小的；
-     * 然后是basecase,目标金额为 0 时，所需硬币数量为 0，这里基本就做出来了，求；最小值，所以数组初始化为一个较大的数；
-     */
-    public static int coinChange(int[] coins, int amount) {
-        int[] dp = new int[amount + 1];
-        Arrays.fill(dp, amount + 1);
-        dp[0] = 0;
-        for (int i = 1; i < dp.length; ++i) {
-            for (int coin : coins) {
-                if (i - coin < 0) {
-                    continue;
-                }
-                dp[i] = Math.min(dp[i], dp[i - coin] + 1);
-            }
-        }
-        return (dp[amount] == amount + 1 ? -1 : dp[amount]);
+for (int i = 0; i < n; i++) {
+    for (int j = W; j >= w[i]; j--) {  // 逆序！
+        dp[j] = Math.max(dp[j], dp[j - w[i]] + v[i]);
     }
 }
 ```
 
-下面看一个核心的问题，dp数组的遍历方向，有时候正向，有时候反向，有时候斜着。
+### 8.2.2 零钱兑换（完全背包）
 
-<img src="img/image-20200312114425353.png" alt="image-20200312114425353" style="zoom:50%;" />
+https://leetcode.cn/problems/coin-change/description/
 
-两个核心原则：
+完全背包和背包的区别是：**每个物品的数量是无限的**。
 
-**1**、遍历的过程中，所需的**状态必须是已经计算出来的**。
+```java
+public int coinChange(int[] coins, int amount) {
+        // dp[i]表示凑够金额i所需要的最小的硬币
+        int[] dp = new int[amount + 1];
 
-2**、遍历的终点必须是存储结果的那个位置**。
+        // 1. 初始化
+        // 因为求小值，所以初始化一个大值
+        Arrays.fill(dp, amount + 1);
+        dp[0] = 0;
+        // 2. 状态转移
+        for (int i = 1; i <= amount; ++i) {
+            // 遍历所有的硬币
+            for (int coin : coins) {
+                if (i - coin >= 0) {
+                    // dp[i - coin] + 1的含义是,选中当前的i元，再从dp[i-coin]中选取一个
+                    // Math.min的含义是 从多个选择里面挑一个小的
+                    dp[i] = Math.min(dp[i], dp[i - coin] + 1);
+                }
+            }
+        }
+        return dp[amount] > amount ? -1 : dp[amount];
+    }
+```
+
+### 8.2.3 完全平方数
+
+https://leetcode.cn/problems/perfect-squares/description/
+
+```java
+public int numSquares(int n) {
+        // dp[j] = 组成数字 j 所需的最少完全平方数个数
+        int[] dp = new int[n + 1];
+        // 1.初始化
+        Arrays.fill(dp, n + 1);
+        dp[0] = 0;
+        // 状态转移
+        for (int i = 1; i <= n; ++i) {
+            // 自己找平方数
+            for (int j = 1; j * j <= i; ++j) {
+                dp[i] = Math.min(dp[i], dp[i - j * j] + 1);
+            }
+        }
+        return dp[n];
+    }
+```
+
+### 8.2.4 单词拆分
+
+https://leetcode.cn/problems/word-break/description/
+
+```java
+public boolean wordBreak(String s, List<String> wordDict) {
+        // 防止超时
+        Set<String> set = new HashSet<>(wordDict);
+        int length = s.length();
+        // dp[i] = s 的前 i 个字符（s[0..i-1]）能否被成功拆分
+        boolean[] dp = new boolean[length + 1];
+        dp[0] = true;
+        for (int i = 1; i <= length; i++) {
+            for (int j = 0; j < i; j++) {
+                // 前面j个字符可拆，后面一段字符在字典词里
+                if (dp[j] && set.contains(s.substring(j, i))) {
+                    dp[i] = true;
+                    break;
+                }
+            }
+        }
+        return dp[length];
+    }
+```
 
 ## 8.4 子序列问题
 
@@ -6012,49 +5990,77 @@ public class CoinChange_322 {
 
 ### 8.4.1 最长增长子序列（LIS,区间规划）
 
+https://leetcode.cn/problems/longest-increasing-subsequence
+
 **我们的定义是这样的：dp[i] 表示以 nums[i] 这个数结尾的最长递增子序列的长度。**
 
 ```java
-package com.code.leetcode.dp;
-
-import java.util.Arrays;
-
-/**
- * 最长上升子序列,给定一个无序的整数数组，找到其中最长上升子序列的长度
- * 输入: [10,9,2,5,3,7,101,18]
- * 输出: 4
- * 解释: 最长的上升子序列是 [2,3,7,101]，它的长度是 4。
- * https://leetcode-cn.com/problems/longest-increasing-subsequence/
- *
- * @author 俊语
- * @date 2020/9/13 12:43
- */
-public class LengthOfLIS_300 {
-    public int lengthOfLIS(int[] nums) {
-        // 非法数组处理
-        if (nums.length <= 0) {
-            return 0;
-        }
-        // dp[i]表示以num[i]结尾的最长递增子序列的长度
-        int dp[] = new int[nums.length];
-        // 长度最少为1
-        Arrays.fill(dp, 1);
-        for (int i = 0; i < nums.length; ++i) {
+public int lengthOfLIS(int[] nums) {
+        // dp[i] = 以 nums[i] 结尾的最长递增子序列的长度
+        int length = nums.length;
+        int[] dp = new int[length];
+        int res = 1;
+        // dp[i] = max(dp[j] + 1)   其中 j < i 且 nums[j] < nums[i]
+        // 在 j 结尾的 LIS 后面接上 nums[i]，看哪种最长。如果没有更小的 j，dp[i] = 1。
+        for (int i = 0; i < length; ++i) {
+            dp[i] = 1;
             for (int j = 0; j < i; ++j) {
-                if (nums[i] > nums[j]) {
+                if (nums[j] < nums[i]) {
                     dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
+            res = Math.max(dp[i], res);
         }
-        int max = dp[0];
-        for (int temp : dp) {
-            if (temp > max) {
-                max = temp;
+        return res;
+    }
+```
+
+### 最长回文子串
+
+https://leetcode.cn/problems/longest-palindromic-substring
+
+```java
+public String longestPalindrome(String s) {
+        int length = s.length();
+        if (length < 2) {
+            return s;
+        }
+        // 区间 DP
+        // dp[i][j] 表示子串 s[i..j] 是否是回文串
+        boolean[][] dp = new boolean[length][length];
+        // 初始化
+        for (int i = 0; i < length; ++i) {
+            dp[i][i] = true;
+        }
+        // 题目要求最大，还需要维护两个变量，记录从哪里开始，最长是多少
+        int start = 0;
+        int maxLen = 1;
+
+        // 状态转移
+        // i 从后往前，j 从 i 往后
+        for (int i = length - 1; i >= 0; --i) {
+            for (int j = i + 1; j < length; ++j) {
+                // 如果 s[i] != s[j]，那 dp[i][j] = false
+                if (s.charAt(i) != s.charAt(j)) {
+                    dp[i][j] = false;
+                } else {
+                    //如果 s[i] == s[j]
+                    //     当 j - i <= 2（长度 1/2/3）时，dp[i][j] = true，算是提前终止的条件
+                    if (j - i <= 2) {
+                        dp[i][j] = true;
+                    } else {
+                        //     否则 dp[i][j] = dp[i+1][j-1]
+                        dp[i][j] = dp[i + 1][j - 1];
+                    }
+                }
+                if (dp[i][j] && j - i + 1 > maxLen) {
+                    start = i;
+                    maxLen = j - i + 1;
+                }
             }
         }
-        return max;
+        return s.substring(start, start + maxLen);
     }
-}
 ```
 
 ### 8.4.2 **最⻓回文子序列**
@@ -6118,147 +6124,71 @@ public class LongestPalindromeSubseq_516 {
 
 ### 8.4.3 **最⻓公共子序列**
 
-[最⻓公共子序列](https://github.com/haojunsheng/AlgorithmNotes/blob/master/src/com/code/offer/dp_greedy/LCS.java)
-
-**第一步，一定要明确** **dp** **数组的含义**。对于两个字符串的动态规划问题，比如说对于字符串 s1 和 s2 ，一般来说都要构造一个这样的 DP table:
-
-<img src="img/image-20200321154800108.png" alt="image-20200321154800108" style="zoom:50%;" />
-
-为了方便理解此表，我们暂时认为索引是从 1 开始的，待会的代码中只要稍 作调整即可。其中， dp[i][j] 的含义是:对于 s1[1..i] 和 s2[1..j] ， 它们的LCS⻓度是 dp[i][j] 。
-
-比如上图的例子，`d[2][4]` 的含义就是:对于 "ac" 和 "babc" ，它们的 LCS⻓度是2。我们最终想得到的答案应该是 `dp[3][6]` 。
-
-**第二步，定义** **base case**。
-我们专门让索引为 0 的行和列表示空串， `dp[0][..] 和 dp[..][0]` 都应该初始化为 0，这就是 base case。
-
-比如说，按照刚才 dp 数组的定义， `dp[0][3]`=0 的含义是:对于字符串"" 和 "bab" ，其 LCS 的⻓度为 0。因为有一个字符串是空串，它们的最⻓公共子序列的⻓度显然应该是 0。
-
-第三步，找状态转移方程。
-
-这是动态规划最难的一步，不过好在这种字符串问题的套路都差不多，权且 借这道题来聊聊处理这类问题的思路。定义一个二维数组 dp 用来存储最长公共子序列的长度，其中 dp[i][j] 表示 S1 的前 i 个字符与 S2 的前 j 个字符最长公共子序列的长度。考虑 S1i 与 S2j 值是否相等，分为两种情况：
-
-1. 当 S1i==S2j 时，那么就能在 S1 的前 i-1 个字符与 S2 的前 j-1 个字符最长公共子序列的基础上再加上 S1i 这个值，最长公共子序列长度加 1，即 `dp[i][j] = dp[i-1][j-1] + 1`。
-2. 当 S1i != S2j 时，此时最长公共子序列为 S1 的前 i-1 个和 S2 的前 j 个字符最长公共子序列，或者 S1 的前 i 个和 S2 的前 j-1 个字符最长公共子序列，它们最大者，即 `dp[i][j] = max{ dp[i-1][j], dp[i][j-1] }`。
-
-综上，最长公共子序列的状态转移方程为：
-![4c4ff66ed0decdde711678563728e0cf_ecd89a22-c075-4716-8423-e0ba89230e9a.jpg](img/d8555d9231c57efc399b47af4c358d43df0e45d71bc65a235479d9fb091d4af9-4c4ff66ed0decdde711678563728e0cf_ecd89a22-c075-4716-8423-e0ba89230e9a.jpg)
+https://leetcode.cn/problems/longest-common-subsequence
 
 <img src="img/image-20200321155041705.png" alt="image-20200321155041705" style="zoom:50%;" />
 
 ```java
-package com.code.leetcode.dp;
-
-/**
- * 最长公共子序列
- * https://leetcode-cn.com/problems/longest-common-subsequence/
- *
- * 输入：text1 = "abcde", text2 = "ace"
- * 输出：3
- * 解释：最长公共子序列是 "ace"，它的长度为 3。
- *
- * @author 俊语
- * @date 2020/9/13 13:51
- */
-public class LongestCommonSubsequence_1143 {
-    public static int longestCommonSubsequence(String text1, String text2) {
-        int length1 = text1.length(), length2 = text2.length();
-        if (length1 <= 0 || length2 <= 0) {
-            return 0;
-        }
-        int[][] dp = new int[length1 + 1][length2 + 1];
-        for (int i = 1; i <= length1; ++i) {
-            for (int j = 1; j <= length2; ++j) {
+public int longestCommonSubsequence(String text1, String text2) {
+        int m = text1.length();
+        int n = text2.length();
+        // dp[i][j] text1 前 i 个字符 与 text2 前 j 个字符 的 LCS 长度
+        int[][] dp = new int[m + 1][n + 1];
+        for (int i = 1; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                // 字符串相等，这个字符可以加入 LCS
                 if (text1.charAt(i - 1) == text2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1] + 1;
                 } else {
+                    // 上一个字符不相等，这个字符至少有一方用不上，扔掉其中一方最后一个字符， max(dp[i-1][j], dp[i][j-1])
                     dp[i][j] = Math.max(dp[i - 1][j], dp[i][j - 1]);
                 }
             }
         }
-        return dp[length1][length2];
+        return dp[m][n];
     }
-}
 ```
 
 ### 8.4.4 编辑距离
+
+https://leetcode.cn/problems/edit-distance/description
 
 **解决两个字符串的动态规划问题，一般都是 用两个指针** **i,j** **分别指向两个字符串的最后，然后一步步往前走，缩小问题的规模**。
 
 <img src="img/image-20200322113618577.png" alt="image-20200322113618577" style="zoom: 33%;" />
 
 ```java
-package com.code.leetcode.dp;
-
-/**
- * 编辑距离
- * https://leetcode-cn.com/problems/edit-distance/
- * 输入：word1 = "horse", word2 = "ros"
- * 输出：3
- * 解释：
- * horse -> rorse (将 'h' 替换为 'r')
- * rorse -> rose (删除 'r')
- * rose -> ros (删除 'e')
- *
- * @author 俊语
- * @date 2020/9/13 14:35
- */
-public class MinDistance_72 {
-    /**
-     * @param word1
-     * @param word2
-     * @return
-     */
-    public static int minDistance(String word1, String word2) {
-        int length1 = word1.length(), length2 = word2.length();
-        if (length1 <= 0) {
-            return length2;
-        }
-        if (length2 <= 0) {
-            return length1;
-        }
-        int[][] dp = new int[length1 + 1][length2 + 1];
-        // base case
-        for (int i = 1; i <= length1; ++i) {
-            dp[i][0] = i;
-        }
-        for (int i = 1; i <= length2; ++i) {
+public int minDistance(String word1, String word2) {
+        int m = word1.length();
+        int n = word2.length();
+        // dp[i][j] = 把 word1 前 i 个字符 变成 word2 前 j 个字符 的最少操作数
+        int[][] dp = new int[m + 1][n + 1];
+        // 初始化
+        for (int i = 0; i <= n; ++i) {
             dp[0][i] = i;
         }
-        // 递推关系式
-        for (int i = 1; i <= length1; ++i) {
-            for (int j = 1; j <= length2; ++j) {
+        for (int i = 0; i <= m; ++i) {
+            dp[i][0] = i;
+        }
+        for (int i = 1; i <= m; ++i) {
+            for (int j = 1; j <= n; ++j) {
+                // 相等，则无需编辑
                 if (word1.charAt(i - 1) == word2.charAt(j - 1)) {
                     dp[i][j] = dp[i - 1][j - 1];
                 } else {
-                    // 分别是替换，插入和删除三种情况
-                    dp[i][j] = 1 + Math.min(dp[i - 1][j - 1], Math.min(dp[i - 1][j], dp[i][j - 1]));
+                    // dp[i][j] = min(
+                    // dp[i-1][j] + 1,      // 删除 word1
+                    //dp[i][j-1] + 1,      // 删除 word2
+                    //dp[i-1][j-1] + 1     // 替换
+                    dp[i][j] = Math.min(dp[i - 1][j], Math.min(dp[i][j - 1], dp[i - 1][j - 1])) + 1;
                 }
             }
         }
-        return dp[length1][length2];
+        return dp[m][n];
     }
-}
 ```
-
-一般来说，处理两个字符串的动态规划问题，都是按本文的思路处理，建立 DP table。为什么呢，因为易于找出状态转移的关系，比如编辑距离的 DP table：
 
 <img src="img/image-20200322113733409.png" alt="image-20200322113733409" style="zoom:50%;" />
-
-你可能还会问，**这里只求出了最小的编辑距离，那具体的操作是什么**？你之前举的修改公众号文章的例子，只有一个最小编辑距离肯定不够，还得知道具体怎么修改才行。这个其实很简单，代码稍加修改，给 dp 数组增加额外的信息即可：
-
-```java
-// int[][] dp;
-Node[][] dp;
-
-class Node {
-    int val;
-    int choice;
-    // 0 代表啥都不做
-    // 1 代表插入
-    // 2 代表删除
-    // 3 代表替换
-}
-```
 
 ## 8.5 剪绳子
 
@@ -6854,144 +6784,32 @@ public int rob2(TreeNode root) {
 
 ## 8.15 股票买卖问题
 
-1. **穷举框架**
-
-而这里，我们不用递归思想进行穷举，而是利用「状态」进行穷举。我们具 体到每一天，看看总共有几种可能的「状态」，再找出每个「状态」对应的 「选择」。我们要穷举所有「状态」，穷举的目的是根据对应的「选择」更 新状态。听起来抽象，你只要记住「状态」和「选择」两个词就行，下面实 操一下就很容易明白了。
-
-```
-for 状态1 in 状态1的所有取值：
-    for 状态2 in 状态2的所有取值：
-        for ...
-            dp[状态1][状态2][...] = 择优(选择1，选择2...)
-```
-
-比如说这个问题，**每天都有三种「选择」**:买入、卖出、无操作，我们用 buy, sell, rest 表示这三种选择。但问题是，并不是每天都可以任意选择这三 种选择的，因为 sell 必须在 buy 之后，buy 必须在 sell 之后。那么 rest 操作 还应该分两种状态，一种是 buy 之后的 rest(持有了股票)，一种是 sell 之 后的 rest(没有持有股票)。而且别忘了，我们还有交易次数 k 的限制，就 是说你 buy 还只能在 k > 0 的前提下操作。
-
-很复杂对吧，不要怕，我们现在的目的只是穷举，你有再多的状态，老夫要做的就是一把梭全部列举出来。这个问题的「状态」有三个，第一个是天数，第二个是允许交易的最大次数，第三个是当前的持有状态（即之前说的 rest 的状态，我们不妨用 1 表示持有，0 表示没有持有）。然后我们用一个三维数组就可以装下这几种状态的全部组合：
-
-```
-dp[i][k][0 or 1]
-0 <= i <= n-1, 1 <= k <= K
-n 为天数，大 K 为最多交易数
-此问题共 n × K × 2 种状态，全部穷举就能搞定。
-
-for 0 <= i < n:
-    for 1 <= k <= K:
-        for s in {0, 1}:
-            dp[i][k][s] = max(buy, sell, rest)
-```
-
-而且我们可以用自然语言描述出每一个状态的含义，比如说 `dp[3][2][1]` 的含义就是:今天是第三天，我现在手上持有着股票，至今最多进行 2 次交 易。再比如 `dp[2][3][0]` 的含义:今天是第二天，我现在手上没有持有股 票，至今最多进行 3 次交易。
-
-我们想求的最终答案是 `dp[n - 1][K][0]`，即最后一天，最多允许 K 次交易， 最多获得多少利润。读者可能问为什么不是 `dp[n - 1][K][1]`?因为 [1] 代表手 上还持有股票，[0] 表示手上的股票已经卖出去了，很显然后者得到的利润 一定大于前者。
-
-2. 状态转移
-
-现在，我们完成了「状态」的穷举，我们开始思考每种「状态」有哪些「选择」，应该如何更新「状态」。只看「持有状态」，可以画个状态转移图。
-
-<img src="img/image-20200323140341989.png" alt="image-20200323140341989" style="zoom:25%;" />
-
-通过这个图可以很清楚地看到，每种状态（0 和 1）是如何转移而来的。根据这个图，我们来写一下状态转移方程：
-
-```
-dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
-              max(   选择 rest  ,           选择 sell      )
-
-解释：今天我没有持有股票，有两种可能：
-要么是我昨天就没有持有，然后今天选择 rest，所以我今天还是没有持有；
-要么是我昨天持有股票，但是今天我 sell 了，所以我今天没有持有股票了。
-
-dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
-              max(   选择 rest  ,           选择 buy         )
-
-解释：今天我持有着股票，有两种可能：
-要么我昨天就持有着股票，然后今天选择 rest，所以我今天还持有着股票；
-要么我昨天本没有持有，但今天我选择 buy，所以今天我就持有股票了。
-```
-
-这个解释应该很清楚了，如果 buy，就要从利润中减去 prices[i]，如果 sell，就要给利润增加 prices[i]。今天的最大利润就是这两种可能选择中较大的那个。而且注意 k 的限制，我们在选择 buy 的时候，把 k 减小了 1，很好理解吧，当然你也可以在 sell 的时候减 1，一样的。
-
-现在，我们已经完成了动态规划中最困难的一步：状态转移方程。如果之前的内容你都可以理解，那么你已经可以秒杀所有问题了，只要套这个框架就行了。不过还差最后一点点，就是定义 base case，即最简单的情况。
-
-```
-dp[-1][k][0] = 0
-解释：因为 i 是从 0 开始的，所以 i = -1 意味着还没有开始，这时候的利润当然是 0 。
-dp[-1][k][1] = -infinity
-解释：还没开始的时候，是不可能持有股票的，用负无穷表示这种不可能。
-dp[i][0][0] = 0
-解释：因为 k 是从 1 开始的，所以 k = 0 意味着根本不允许交易，这时候利润当然是 0 。
-dp[i][0][1] = -infinity
-解释：不允许交易的情况下，是不可能持有股票的，用负无穷表示这种不可能。
-```
-
-总结：
-
-```
-base case：
-dp[-1][k][0] = dp[i][0][0] = 0
-dp[-1][k][1] = dp[i][0][1] = -infinity
-
-状态转移方程：
-dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
-dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
-```
-
-读者可能会问，这个数组索引是 -1 怎么编程表示出来呢，负无穷怎么表示呢？这都是细节问题，有很多方法实现。现在完整的框架已经完成，下面开始具体化。
+DP 问的是：到第 i 天，在「持有 / 不持有」两种状态下，最大利润是多少？
 
 开始做题：
 
 1. k=1,直接套状态转移方程，根据 base case，可以做一些化简：
 
-   ```
-   dp[i][1][0] = max(dp[i-1][1][0], dp[i-1][1][1] + prices[i])
-   dp[i][1][1] = max(dp[i-1][1][1], dp[i-1][0][0] - prices[i]) 
-               = max(dp[i-1][1][1], -prices[i])
-   解释：k = 0 的 base case，所以 dp[i-1][0][0] = 0。
-   
-   现在发现 k 都是 1，不会改变，即 k 对状态转移已经没有影响了。
-   可以进行进一步化简去掉所有 k：
-   dp[i][0] = max(dp[i-1][0], dp[i-1][1] + prices[i])
-   dp[i][1] = max(dp[i-1][1], -prices[i])
-   ```
+   https://leetcode.cn/problems/best-time-to-buy-and-sell-stock
 
 ```java
 public int maxProfit(int[] prices) {
-        int length = prices.length;
-        if (length <= 0) {
-            return 0;
-        }
         // dp[i][0]表示第i天卖出股票的利润
         // dp[i][1]表示第i天买入股票的利润
+        int length = prices.length;
         int[][] dp = new int[length][2];
-        // base case
+
+        // 初始化
         dp[0][0] = 0;
+        // 买入股票
         dp[0][1] = -prices[0];
-        for (int i = 1; i < length; ++i) {
+        for (int i = 1; i < prices.length; ++i) {
             //第i天卖出的最大收益
             dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
-            //第i天买入的最大收益
-            dp[i][1] = Math.max(dp[i - 1][1], -prices[i]);
+            // 第i天买入的最大收益，注意只能买卖一次。
+            dp[i][1] = Math.max(- prices[i], dp[i - 1][1]);
         }
-        return dp[length - 1][0];
-    }
-```
-
-状态转移方程，新状态只和相邻的一个状态有关，其实不用整个 dp 数组，只需要一个变量储存相邻的那个状态就足够了，这样可以把空间复杂度降到 O(1):
-
-```java
-public int maxProfit(int[] prices) {
-        int length = prices.length;
-        // dp[i][0]表示第i天卖出股票的利润
-        // dp[i][1]表示第i天买入股票的利润
-        int dp0 = 0;
-        int dp1 = -prices[0];
-        for (int i = 1; i < length; ++i) {
-            //第i天卖出的最大收益
-            dp0 = Math.max(dp0, dp1 + prices[i]);
-            //第i天买入的最大收益
-            dp1 = Math.max(dp1, -prices[i]);
-        }
-        return dp0;
+        return dp[length-1][0];
     }
 ```
 
@@ -7414,196 +7232,241 @@ public class Trap_42 {
 }
 ```
 
-# 9. 回溯
+## 8.19 跳跃游戏 I和II
 
-> 动态规划和回溯的区别是有没有重叠的子问题，有的话就是动态规划，没有的话，就是回溯（带剪枝的穷举）。
-
-**解决一个回溯问题，实际上就是一个决策树的遍历过程**。
-
-> 1、路径:也就是已经做出的选择。 
->
-> 2、选择列表:也就是你当前可以做的选择。
->
->  3、结束条件:也就是到达决策树底层，无法再做选择的条件。
-
-<img src="img/image-20200308134535557.png" alt="image-20200308134535557" style="zoom:33%;" />
-
-**其核心就是** **for** **循环里面的递归，在递归调用之前「做选择」，在递归调用 之后「撤销选择」**，特别简单。
-
-我们在写backtrack函数的时候，需要**维护走过的「路径」和当前可以做的「选择列表」，当触发「结束条件」时，将「路径」记入结果集**。回溯实际上是一种试探算法，这种算法跟暴力搜索最大的不同在于，在回溯算法里，是一步一步地小心翼翼地进行向前试探，会对每一步探测到的情况进行评估，如果当前的情况已经无法满足要求，那么就没有必要继续进行下去，也就是说，它可以帮助我们避免走很多的弯路。回溯算法的特点在于，当出现非法的情况时，算法可以回退到之前的情景，可以是返回一步，有时候甚至可以返回多步，然后再去尝试别的路径和办法。这也就意味着，想要采用回溯算法，就必须保证，每次都有多种尝试的可能。
-
-**解题步骤**
-
-1. 判断当前情况是否非法，如果非法就立即返回；
-2. 当前情况是否已经满足递归结束条件，如果是就将当前结果保存起来并返回；
-3. 当前情况下，遍历所有可能出现的情况并进行下一步的尝试；
-4. 递归完毕后，立即回溯，回溯的方法就是取消前一步进行的尝试。
+https://leetcode.cn/problems/jump-game/description/
 
 ```java
-function fn(n) {
-        // 第一步：判断输入或者状态是否非法？
-        if (input/state is invalid){
-            return;
+public boolean canJump(int[] nums) {
+        // 我一路往前走，同时记录目前最远能到哪里。
+        int rightMost = 0;
+        // i > 最远能到的位置,则失败
+        for (int i = 0; i < nums.length; ++i) {
+            if (i > rightMost) {
+                return false;
+            }
+            // 贪心算法，用当前位置更新最大距离
+            rightMost = Math.max(rightMost, i + nums[i]);
+            if (rightMost >= nums.length - 1) {
+                return true;
+            }
         }
-        // 第二步：判读递归是否应当结束?
-        if (match condition){
-            return some value;
-        }
-        // 遍历所有可能出现的情况
-        for (all possible cases) {
-            // 第三步: 尝试下一步的可能性
-            solution.push(case)
-            // 递归
-            result = fn(m)
-            // 第四步：回溯到上一步
-            solution.pop(case)
-        }
+        return true;
     }
 ```
+
+https://leetcode.cn/problems/jump-game-ii/description/
+
+```java
+public int jump(int[] nums) {
+        // 最右边
+        int rightMost = 0;
+        // 跳几次
+        int jump = 0;
+        // 当前这一跳能到哪里
+        int currentEnd = 0;
+        // 循环到 nums.length - 1 前一个位置，因为到了最后一个位置就不用再跳了
+        for (int i = 0; i < nums.length - 1; ++i) {
+            rightMost = Math.max(rightMost, i + nums[i]);
+            if (i == currentEnd) {
+                jump++;
+                currentEnd = rightMost;
+            }
+        }
+        return jump;
+    }
+```
+
+## 8.20 [763. 划分字母区间](https://leetcode.cn/problems/partition-labels/)
+
+https://leetcode.cn/problems/partition-labels/description
+
+```java
+public List<Integer> partitionLabels(String s) {
+        // map 记录每个字母对应的最远位置
+        int[] map = new int[26];
+        Arrays.fill(map, -1);
+        for (int i = 0; i < s.length(); i++) {
+            map[s.charAt(i) - 'a'] = i;
+        }
+        // start 做切合的开始位置
+        int start = 0;
+        // scannedCharMaxPos 已扫描的字符串去到的最远位置
+        int scannedCharMaxPos = 0;
+        List<Integer> res = new ArrayList<>();
+
+        for (int i = 0; i < s.length(); i++) {
+            // 当前正在遍历的字符所能去到的最远距离
+            int currentCharMaxPos = map[s.charAt(i) - 'a'];
+            // 更新已扫描的字符所能去到的最远距离
+            scannedCharMaxPos = Math.max(scannedCharMaxPos, currentCharMaxPos);
+            if (i == scannedCharMaxPos) {
+                res.add(i - start + 1);
+                start = i + 1;
+            }
+        }
+        return res;
+    }
+```
+
+# 9. 回溯
+
+回溯：所有具体的合法方案。
+
+```java
+class Solution {
+    // 1. 全局变量：存放最终结果集和单条路径
+    List<List<Integer>> res = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
+
+    public List<List<Integer>> backtrackTarget(int[] nums) {
+        // 如果题目需要剪枝（去重），通常需要先对数组进行排序！
+        // Arrays.sort(nums); 
+        
+        // 2. 启动回溯
+        backtrack(nums, 0); // 有些题目（如排列）可能需要传入 boolean[] used 数组
+        return res;
+    }
+
+    private void backtrack(int[] nums, int startIndex) {
+        // 3. 终止条件（Base Case）
+        // 什么时候判定找到了一个合法的解？收集它，然后 return
+        if (满足终止条件) {
+            res.add(new ArrayList<>(path)); // 注意：必须深度拷贝 path
+            return;
+        }
+
+        // 4. 单层搜索逻辑：遍历当前节点的所有分叉（选择）
+        for (int i = startIndex; i < nums.length; i++) {
+            // 5. 剪枝（Pruning）
+            // 如果当前分支明显不符合要求，直接 skip (continue)
+            if (不满足要求或重复项) {
+                continue;
+            }
+
+            // 6. 做选择（向本子上记录路径）
+            path.add(nums[i]);
+
+            // 7. 递归：进入下一层决策树
+            backtrack(nums, i + 1); // 如果元素可重复使用，这里传 i；不可重复使用传 i + 1
+
+            // 8. 撤销选择（回溯的核心：擦掉本子上的最后一条记录，恢复现场）
+            path.remove(path.size() - 1);
+        }
+    }
+}
+```
+
+
+
+| **题型分类**                | **核心目标与树的表现**                                       | **遍历控制核心参数 (For 循环)**                              | **是否需要去重 (剪枝)**                                      | **经典 LeetCode 题目**                |
+| --------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------- |
+| **子集问题 (Subsets)**      | 收集树的**所有节点**（每走一步都是一个合法解）。 结果与顺序无关。 | 使用 `startIndex`。 防止往回选（如选了 2 就不能再选 1）。    | 若原数组**有重复元素**，则必须先排序，再通过 `nums[i] == nums[i-1]` 剪枝。 | 78. 子集 90. 子集 II                  |
+| **组合问题 (Combinations)** | 收集树的**叶子节点**（满足特定长度或总和）。 结果与顺序无关。 | 使用 `startIndex`。 元素是否可重复使用决定下一层传 `i` 还是 `i+1`。 | 若原数组**有重复元素**，同样需要排序 + 剪枝。                | 77. 组合 39. 组合总和 40. 组合总和 II |
+| **排列问题 (Permutations)** | 收集树的**叶子节点**。 结果**与顺序有关**（`[1,2]` 和 `[2,1]` 算两种解）。 | **不需要** `startIndex`。 每次都从 `0` 开始遍历，使用 `used` 数组标记当前路径已选元素。 | 若原数组**有重复元素**，需排序，并在同一树层对相同元素进行剪枝。 | 46. 全排列 47. 全排列 II              |
+| **分割/棋盘问题**           | 在字符串或二维矩阵中寻找所有合法的划分/填空方案。            | 分割问题：用 `startIndex` 代表**切割线**位置。 棋盘问题：通常通过行、列坐标进行二维递归。 | 通常利用特定的合法性校验函数（如判断是否回文、判断同行同列是否有皇后）进行剪枝。 | 131. 分割回文串 51. N皇后 37. 解数独  |
+
+**🔥 总结一句话口诀：**
+
+- **组合/子集**不回头，需要 `startIndex` 来兜底。
+- **排列**讲究先后序，不要 `start` 要 `used`。
+- **去重**必遇重复数，先排序再剪枝是正道。
 
 ## 9.1 全排列问题
 
 ### 9.1.1 n个不重复
 
-n 个不重复的数，全排列共有 n! 个。
-
-**回溯算法的决策树模型。**
-
-<img src="img/image-20200308134902305.png" alt="image-20200308134902305" style="zoom:33%;" />
-
-这个玩意就是n叉树的遍历。模板如下。
-
-<img src="img/image-20200308134949714.png" alt="image-20200308134949714" style="zoom:50%;" />
-
-<img src="img/image-20200308135015407.png" alt="image-20200308135015407" style="zoom: 33%;" />
+https://leetcode.cn/problems/permutations/?envType=study-plan-v2&envId=top-100-liked
 
 ```java
-/**
- * 全排列
- * 给定一个没有重复数字的序列，返回其所有可能的全排列。
- * 输入: [1,2,3]
- * 输出:
- * [
- * [1,2,3],
- * [1,3,2],
- * [2,1,3],
- * [2,3,1],
- * [3,1,2],
- * [3,2,1]
- * ]
- *
- * @author 俊语
- * @date 2020/9/17 14:08
- */
-public class Permute_46 {
-    public static void main(String[] args) {
-        int[] nums = {1, 2, 3};
-        Permute_46 permute_46 = new Permute_46();
-        System.out.println(permute_46.permute(nums));
-    }
-
-    List<List<Integer>> res = new LinkedList<>();
+List<List<Integer>> res = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
 
     public List<List<Integer>> permute(int[] nums) {
-        //记录路径
-        LinkedList<Integer> path = new LinkedList<>();
-        int[] visited = new int[nums.length];
-        dfs2(nums, path, visited);
+        // 1.全排问题中，顺序很重要，不需要 startIndex，
+        // 但需要一个 used 数组来标记哪些元素已被使用
+        boolean[] used = new boolean[nums.length];
+        // 2.回溯
+        backtrack(nums, used);
         return res;
     }
 
-    /**
-     * 选择列表:nums 中不存在于 path 的那些元素
-     * 结束条件:nums 中的元素全都在path中出现
-     *
-     * @param nums
-     * @param path 保存路径
-     */
-    private void dfs2(int[] nums, LinkedList<Integer> path, int[] visited) {
+    private void backtrack(int[] nums, boolean[] used) {
+        // 3.终止条件（Base Case）
+        // 如果路径长度等于数组长度，说明找到了一个完整的全排列
         if (path.size() == nums.length) {
-            res.add(new LinkedList<>(path));
+            res.add(new ArrayList<>(path)); // 必须深度拷贝 path，否则 res 里存的都是空 list
             return;
         }
-        for (int i = 0; i < nums.length; ++i) {
-            // 不能重复，注意，这里的时间复杂度为O(n)，可以用一个数组来进行优化
-            if (visited[i] == 1) {
+        // 4. 单层搜索逻辑：排列问题，每次都从头遍历所有元素
+        for (int i = 0; i < nums.length; i++) {
+            // 5. 剪枝：如果当前元素已被使用，跳过
+            if (used[i]) {
                 continue;
             }
-            //选择
+            // 6. 做选择：将元素加入路径，并标记为已使用
             path.add(nums[i]);
-            visited[i] = 1;
-            // 进入下一层决策树
-            dfs2(nums, path, visited);
-            // 撤销选择
-            path.removeLast();
-            visited[i] = 0;
+            used[i] = true;
+            // 7. 递归：进入下一层决策树
+            backtrack(nums, used);
+
+            // 8. 撤销选择：撤销刚才的标记和路径记录（恢复现场）
+            used[i] = false;
+            path.remove(path.size() - 1);
         }
     }
-}
 ```
-
-在回溯算法中，有时候用visited数组，有时候用begin变量，如组合总和(40)，区别在于前者是排列问题，需要讲究顺序，后者是组合问题，不需要讲究顺序。
 
 ### 9.1.2 可重复
 
+https://leetcode.cn/problems/permutations-ii/description/
+
 ```java
-/**
- * 全排列 II
- * 给定一个可包含重复数字的序列，返回所有不重复的全排列。
- * 输入: [1,1,2]
- * 输出:
- * [
- * [1,1,2],
- * [1,2,1],
- * [2,1,1]
- * ]
- *
- * @author 俊语
- * @date 2020/9/17 15:22
- */
-public class PermuteUnique_47 {
-    List<List<Integer>> res = new LinkedList<>();
+List<List<Integer>> res = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
+
     public List<List<Integer>> permuteUnique(int[] nums) {
-        //记录路径
-        LinkedList<Integer> path = new LinkedList<>();
-        int[] visited = new int[nums.length];
+        // 🔥 关键第一步：必须先排序！让相同的数字挨在一起，才能进行去重
         Arrays.sort(nums);
-        dfs(nums, path, visited);
+        
+        boolean[] used = new boolean[nums.length];
+        backtrack(nums, used);
         return res;
     }
 
-    /**
-     * 选择列表:nums 中不存在于 path 的那些元素
-     * 结束条件:nums 中的元素全都在path中出现
-     *
-     * @param nums
-     * @param path 保存路径
-     */
-    private void dfs(int[] nums, LinkedList<Integer> path, int[] visited) {
+    private void backtrack(int[] nums, boolean[] used) {
+        // 终止条件：路径长度等于数组长度
         if (path.size() == nums.length) {
-            res.add(new LinkedList<>(path));
+            res.add(new ArrayList<>(path));
             return;
         }
-        for (int i = 0; i < nums.length; ++i) {
-            // 已经用过
-            if (visited[i] == 1) {
+
+        for (int i = 0; i < nums.length; i++) {
+            // 树枝去重：如果当前元素在当前路径已被使用，直接跳过
+            if (used[i]) {
                 continue;
             }
-            //如果当前节点与他的前一个节点一样，并其他的前一个节点已经被遍历过了，那我们也就不需要了。
-            if (i > 0 && nums[i] == nums[i - 1] && visited[i - 1] == 1) {
-                break;
+
+            // 🔥 关键第二步：树层去重（剪枝）
+            // i > 0 防止索引越界
+            // nums[i] == nums[i-1] 发现平级有重复数字
+            // used[i-1] == false 说明前一个相同的数字在当前树层已经走过了一遍完整的回溯，现在是重复的
+            if (i > 0 && nums[i] == nums[i-1] && !used[i-1]) {
+                continue;
             }
-            //选择
+
+            // 做选择
             path.add(nums[i]);
-            visited[i] = 1;
-            // 进入下一层决策树
-            dfs(nums, path, visited);
-            // 撤销选择
-            path.removeLast();
-            visited[i] = 0;
+            used[i] = true;
+
+            // 递归
+            backtrack(nums, used);
+
+            // 撤销选择（恢复现场）
+            used[i] = false;
+            path.remove(path.size() - 1);
         }
     }
-}
 ```
 
 ## 9.2 组合总和
@@ -7612,235 +7475,199 @@ public class PermuteUnique_47 {
 
 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
 
+https://leetcode.cn/problems/combination-sum/?envType=study-plan-v2&envId=top-100-liked
+
 ```java
-/**
- * 组合总和
- * 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字可以无限制重复被选取。
- * 输入：candidates = [2,3,6,7], target = 7,
- * 所求解集为：
- * [
- * [7],
- * [2,2,3]
- * ]
- * <p>
- * 输入：candidates = [2,3,5], target = 8,
- * 所求解集为：
- * [
- * [2,2,2,2],
- * [2,3,3],
- * [3,5]
- * ]
- *
- * @author 俊语
- * @date 2020/9/17 14:35
- */
-public class CombinationSum_39 {
-    List<List<Integer>> res = new LinkedList<>();
+List<List<Integer>> res = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
 
     public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        if (target <= 0 || candidates.length <= 0) {
-            return res;
-        }
-        //记录路径
-        LinkedList<Integer> path = new LinkedList<>();
-        //排序完，方便进行剪支
+        // 🔥 剪枝优化的前提：必须先对数组进行排序
         Arrays.sort(candidates);
-        dfs(candidates, 0, path, target);
+        backtrack(candidates, target, 0, 0);
         return res;
     }
 
-    private void dfs(int[] nums, int begin, LinkedList<Integer> path, int target) {
-        if (target < 0) {
+    // sum是当前值，startIndex是开始扫描的位置
+    private void backtrack(int[] candidates, int target, int sum, int startIndex) {
+        // 终止条件：如果当前和等于目标值，收集结果
+        if (target == sum) {
+            res.add(new ArrayList<>(path));
             return;
         }
-        // 结束条件
-        if (target == 0) {
-            res.add(new LinkedList<>(path));
-            return;
-        }
-        for (int i = begin; i < nums.length; ++i) {
-            if (target < nums[i]) {
+        // 单层搜索逻辑
+        for (int i = startIndex; i < candidates.length; i++) {
+            // 剪枝
+            if (sum + candidates[i] > target) {
                 break;
             }
-            //选择
-            path.add(nums[i]);
-            // 进入下一层决策树,由于i可以重复使用，所以下次索引还是i
-            dfs(nums, i, path, target - nums[i]);
+            // 做选择
+            sum += candidates[i];
+            path.add(candidates[i]);
+            // 递归：🔥 注意这里传入的是 i，而不是 i + 1！
+            // 这代表下一层决策树依然可以从当前元素 candidates[i] 开始挑，实现无限复用
+            backtrack(candidates, target, sum, i);
             // 撤销选择
-            path.removeLast();
+            sum -= candidates[i];
+            path.remove(path.size() - 1);
         }
     }
-}
 ```
 
 ### 9.2.2 只可以用一次
 
-```java
-/**
- * 组合总和2
- * 给定一个无重复元素的数组 candidates 和一个目标数 target ，找出 candidates 中所有可以使数字和为 target 的组合。candidates 中的数字只可以用一次。
- *
- * @author 俊语
- * @date 2020/9/17 14:35
- */
-public class CombinationSum2_40 {
-    List<List<Integer>> res = new LinkedList<>();
+https://leetcode.cn/problems/combination-sum-ii/
 
-    public List<List<Integer>> combinationSum(int[] candidates, int target) {
-        if (target <= 0 || candidates.length <= 0) {
-            return res;
-        }
-        //记录路径
-        LinkedList<Integer> path = new LinkedList<>();
-        //排序完，方便进行剪支
+```java
+List<List<Integer>> res = new ArrayList<>();
+    List<Integer> path = new ArrayList<>();
+
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        // 🔥 剪枝优化的前提：必须先对数组进行排序
         Arrays.sort(candidates);
-        dfs(candidates, 0, path, target);
+        backtrack(candidates, target, 0, 0);
         return res;
     }
 
-    private void dfs(int[] nums, int begin, LinkedList<Integer> path, int target) {
-        if (target < 0) {
+    // sum是当前值，startIndex是开始扫描的位置
+    private void backtrack(int[] candidates, int target, int sum, int startIndex) {
+        // 终止条件：如果当前和等于目标值，收集结果
+        if (target == sum) {
+            res.add(new ArrayList<>(path));
             return;
         }
-        // 结束条件
-        if (target == 0) {
-            res.add(new LinkedList<>(path));
-            return;
-        }
-        for (int i = begin; i < nums.length; ++i) {
-            // 剪支
-            if (target < nums[i]) {
+        // 单层搜索逻辑
+        for (int i = startIndex; i < candidates.length; i++) {
+            // 剪枝，值已经超过了target
+            if (sum + candidates[i] > target) {
                 break;
             }
-            // 同一层相同数值的结点，从第 2 个开始，候选数更少，结果一定发生重复，因此跳过，用 continue
-            if (i > begin && nums[i] == nums[i - 1]) {
+            // 继续剪枝，这个值已经选过了
+            if (i > startIndex && candidates[i] == candidates[i - 1]) {
                 continue;
             }
-            //选择
-            path.add(nums[i]);
-            // 进入下一层决策树,由于i可以重复使用，所以下次索引还是i
-            dfs(nums, i + 1, path, target - nums[i]);
+            // 做选择
+            sum += candidates[i];
+            path.add(candidates[i]);
+            // 递归：🔥 注意这里传入的是 i，而不是 i + 1！
+            // 这代表下一层决策树依然可以从当前元素 candidates[i] 开始挑，实现无限复用
+            backtrack(candidates, target, sum, i + 1);
             // 撤销选择
-            path.removeLast();
+            sum -= candidates[i];
+            path.remove(path.size() - 1);
         }
     }
-}
+```
+
+### 电话号码的字母组合
+
+https://leetcode.cn/problems/letter-combinations-of-a-phone-number/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+private List<String> res = new ArrayList<>();
+    private StringBuilder path = new StringBuilder();
+    // 数字到字母的映射，0,1留空
+    private String[] map = { "", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz" };
+
+    public List<String> letterCombinations(String digits) {
+        backtrack(digits, 0);
+        return res;
+    }
+
+    // 🔥 这里的 index 代表当前处理的是 digits 中的第几个数字（即决策树的深度）
+    private void backtrack(String digits, int index) {
+        // 边界
+        if (index == digits.length()) {
+            res.add(path.toString());
+            return;
+        }
+        // 获取当前数字对应的字母集
+        int digit = digits.charAt(index) - '0';
+        String letters = map[digit];
+        // 单层搜索逻辑：遍历当前数字对应的所有字母
+        for (int i = 0; i < letters.length(); ++i) {
+            // 做选择
+            path.append(letters.charAt(i));
+            // 递归
+            backtrack(digits, index + 1);
+            // 撤销选择
+            path.deleteCharAt(path.length() - 1);
+        }
+    }
 ```
 
 ## 9.3 子集
 
 ### 9.3.1 无重复元素
 
-```java
-/**
- * 给定一组不含重复元素的整数数组 nums，返回该数组所有可能的子集（幂集）
- * 输入: nums = [1,2,3]
- * 输出:
- * [
- * [3],
- *   [1],
- *   [2],
- *   [1,2,3],
- *   [1,3],
- *   [2,3],
- *   [1,2],
- *   []
- * ]
- * https://leetcode-cn.com/problems/subsets/
- * @author 俊语
- * @date 2020/9/17 15:36
- */
-public class Subsets_78 {
-    public static void main(String[] args) {
-        int[] nums={1,2,3};
-        Subsets_78 subsets_78=new Subsets_78();
-        System.out.println(subsets_78.subsets(nums));
-    }
+https://leetcode.cn/problems/subsets/description/?envType=study-plan-v2&envId=top-100-liked
 
-    List<List<Integer>> res = new LinkedList<>();
+```java
+private List<List<Integer>> res = new ArrayList<>();
+    private List<Integer> path = new ArrayList<>();
 
     public List<List<Integer>> subsets(int[] nums) {
-        if (nums.length <= 0) {
-            return res;
-        }
-        //记录路径
-        LinkedList<Integer> path = new LinkedList<>();
-        dfs(nums, 0, path);
+        backtrack(nums, 0);
         return res;
     }
 
-    private void dfs(int[] nums, int begin, LinkedList<Integer> path) {
-        res.add(new LinkedList<>(path));
-        for (int i = begin; i < nums.length; ++i) {
-            //选择
+    private void backtrack(int[] nums, int startIndex) {
+        // 核心区别：每一个节点都是一个子集，一进来就收集！
+        // 注意：必须深度拷贝 path
+        res.add(new ArrayList<>(path));
+        // 终止条件
+        if (startIndex >= nums.length) {
+            return;
+        }
+        //  单层搜索逻辑
+        for (int i = startIndex; i < nums.length; i++) {
+            // 选择
             path.add(nums[i]);
-            // 进入下一层决策树,由于i可以重复使用，所以下次索引还是i
-            dfs(nums, i + 1, path);
+            // 递归
+            backtrack(nums, i + 1);
             // 撤销选择
-            path.removeLast();
+            path.remove(path.size() - 1);
         }
     }
-}
 ```
 
 ### 9.3.2 有重复元素
 
-```java
-/**
- * 子集 II，元素可重复
- * 
- * 输入: [1,2,2]
- * 输出:
- * [
- * [2],
- * [1],
- * [1,2,2],
- * [2,2],
- * [1,2],
- * []
- * ]
- * https://leetcode-cn.com/problems/subsets-ii/
- * @author 俊语
- * @date 2020/9/17 16:02
- */
-public class SubsetsWithDup_90 {
-    public static void main(String[] args) {
-        int[] nums = {1, 2, 2};
-        SubsetsWithDup_90 subsets = new SubsetsWithDup_90();
-        System.out.println(subsets.subsetsWithDup(nums));
-    }
+https://leetcode.cn/problems/subsets-ii/
 
-    List<List<Integer>> res = new LinkedList<>();
+```java
+private List<List<Integer>> res = new ArrayList<>();
+    private List<Integer> path = new ArrayList<>();
 
     public List<List<Integer>> subsetsWithDup(int[] nums) {
-        if (nums.length <= 0) {
-            return res;
-        }
+        // 排序
         Arrays.sort(nums);
-        //记录路径
-        LinkedList<Integer> path = new LinkedList<>();
-        dfs(nums, 0, path);
+        backtrack(nums, 0);
         return res;
     }
 
-
-    private void dfs(int[] nums, int begin, LinkedList<Integer> path) {
-        res.add(new LinkedList<>(path));
-        for (int i = begin; i < nums.length; ++i) {
+    private void backtrack(int[] nums, int startIndex) {
+        // 核心区别：每一个节点都是一个子集，一进来就收集！
+        // 注意：必须深度拷贝 path
+        res.add(new ArrayList<>(path));
+        // 终止条件
+        if (startIndex >= nums.length) {
+            return;
+        }
+        //  单层搜索逻辑
+        for (int i = startIndex; i < nums.length; i++) {
             // 剪枝
-            if (i > begin && nums[i] == nums[i - 1]) {
+            if (i > startIndex && nums[i] == nums[i - 1]) {
                 continue;
             }
-            //选择
+            // 选择
             path.add(nums[i]);
-            // 进入下一层决策树,由于i可以重复使用，所以下次索引还是i
-            dfs(nums, i + 1, path);
+            // 递归
+            backtrack(nums, i + 1);
             // 撤销选择
-            path.removeLast();
+            path.remove(path.size() - 1);
         }
     }
-}
-
 ```
 
 ## 9.4 矩阵中的路径
@@ -8130,6 +7957,229 @@ public class NQueen_51 {
         return list;
     }
 }
+```
+
+## 9.6 括号生成
+
+https://leetcode.cn/problems/generate-parentheses/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+List<String> res = new ArrayList<>();
+    StringBuilder path = new StringBuilder();
+
+    public List<String> generateParenthesis(int n) {
+        // 我们可以把构建合法括号的过程想象成在做“填空题”，总共有 2n 个空位。在每个空位上，你手里有两种牌：左括号 ( 和右括号 )。
+        // 但放牌时必须遵守两个黄金铁律：
+        // 左括号的数量任何时候都不能超过 n。
+        // 右括号的数量任何时候都不能超过当前已放的左括号数量（如果右括号比左括号还多，比如 ())，这属于不可逆的非法状态，后面再怎么补左括号也没救了）。
+        // 因此，这棵决策树不需要 startIndex，也不需要 used 数组，而是通过两个计数器 left（已使用的左括号数量） 和 right（已使用的右括号数量） 来精准控制树的走向。
+        backtrack(n, 0, 0);
+        return res;
+    }
+
+    // 左括号用了 left 个，右括号用了 right 个
+    private void backtrack(int n, int left, int right) {
+        // 1. 终止条件：当路径长度达到 2n 时，说明有 n 对括号构成了完整组合
+        if (path.length() == n * 2) {
+            res.add(path.toString()); // path.toString() 自动实现了深拷贝
+            return;
+        }
+        // 2. 单层搜索逻辑：这里不用 for 循环，因为每一层的选择不是由数组遍历决定的，
+        // 而是由 left 和 right 的数量显式触发的分支。
+        // 分支一：只要左括号还没用完，就可以无脑放左括号
+        if (left < n) {
+            // 做选择
+            path.append("(");
+            // 递归
+            backtrack(n, left + 1, right);
+            // 撤销选择
+            path.deleteCharAt(path.length() - 1);
+        }
+        // 分支二：只有当已放的右括号少于左括号时，才能放右括号（关键剪枝）
+        if (right < left) {
+            // 做选择
+            path.append(")");
+            // 递归
+            backtrack(n, left, right + 1);
+            //撤销选择
+            path.deleteCharAt(path.length() - 1);
+        }
+    }
+```
+
+## 9.7 单词搜索
+
+https://leetcode.cn/problems/word-search/description/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        // 寻找起点：遍历网格的每一个格子，只要和单词首字母相同，就启动回溯
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                // 只要有一条路径成功匹配，直接返回 true
+                if (backtrack(board, word, i, j, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    // k 当前正在匹配 word 的第 k 个字母（决策树的深度）
+    private boolean backtrack(char[][] board, String word, int i, int j, int k) {
+        // 终止条件一：如果已经成功匹配完了最后一个字母，说明找到了完整单词
+        if (k == word.length()) {
+            return true;
+        }
+        // 边界剪枝：越界判定，或者当前格子字符与 word[k] 不匹配，直接回头
+        if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] != word.charAt(k)) {
+            return false;
+        }
+        // --- 到达这里，说明当前格子 board[i][j] 匹配成功，准备向四周探索 ---
+
+        // 做选择（标记当前格子已被访问，防止纵向树枝重复使用）
+        char temp = board[i][j];
+        board[i][j] = '#'; // 临时修改为特殊字符，省去了 visited 数组的空间
+        // 单层搜索逻辑：向上下左右四个方向扩散（纵向递归）
+        // 只要任何一个方向能成功走通，res 就会是 true
+        boolean res = backtrack(board, word, i + 1, j, k + 1) || // 下
+                backtrack(board, word, i - 1, j, k + 1) || // 上
+                backtrack(board, word, i, j + 1, k + 1) || // 右
+                backtrack(board, word, i, j - 1, k + 1); // 左
+        // 撤销选择（恢复现场）：无论成功与否，都要把格子还原，供其他分支或起点使用
+        board[i][j] = temp;
+        return res;
+    }
+```
+
+## 9.8 [分割回文串](https://leetcode.cn/problems/palindrome-partitioning/)
+
+https://leetcode.cn/problems/palindrome-partitioning/description/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+List<List<String>> res = new ArrayList<>();
+    List<String> path = new ArrayList<>();
+
+    public List<List<String>> partition(String s) {
+        // 分割类问题可以转换为组合问题
+        backtrack(s, 0);
+        return res;
+    }
+
+    // startIndex代表切割线的索引
+    private void backtrack(String s, int startIndex) {
+        // 终止
+        if (startIndex >= s.length()) {
+            res.add(new ArrayList<>(path));
+            return;
+        }
+        // 单层搜索
+        for (int i = startIndex; i < s.length(); ++i) {
+            // 判断是否回文
+            if (huiwen(s, startIndex, i)) {
+                path.add(s.substring(startIndex, i + 1));
+            } else {
+                continue;
+            }
+            // 递归
+            backtrack(s, i + 1);
+            // 撤销选择
+            path.remove(path.size() - 1);
+        }
+    }
+
+    private boolean huiwen(String s, int left, int right) {
+        while (left < right) {
+            if (s.charAt(left) != s.charAt(right)) {
+                return false;
+            }
+            left++;
+            right--;
+        }
+        return true;
+    }
+```
+
+## 9.9 N皇后
+
+https://leetcode.cn/problems/n-queens/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+List<List<String>> res = new ArrayList<>();
+
+    public List<List<String>> solveNQueens(int n) {
+        // 初始化棋盘，全部填上点 '.'
+        char[][] chessboard = new char[n][n];
+        for (char[] c : chessboard) {
+            Arrays.fill(c, '.');
+        }
+
+        // 启动回溯，从第 0 行开始
+        backtrack(n, 0, chessboard);
+        return res;
+    }
+
+    // row 代表当前正在处理棋盘的第几行（决策树的深度）
+    private void backtrack(int n, int row, char[][] chessboard) {
+        // 1. 终止条件：如果成功填完了最后一行（row == n），说明找到了一个合法布局
+        if (row == n) {
+            res.add(convertToList(chessboard)); // 将二维字符数组转换为题目要求的 List<String>
+            return;
+        }
+
+        // 2. 单层搜索逻辑：遍历当前行的每一列（决策树的宽度）
+        for (int col = 0; col < n; col++) {
+            // 3. 剪枝：检查在 (row, col) 放置皇后是否合法
+            if (isValid(row, col, chessboard, n)) {
+
+                // 4. 做选择：放置皇后
+                chessboard[row][col] = 'Q';
+
+                // 5. 递归：进入下一行
+                backtrack(n, row + 1, chessboard);
+
+                // 6. 撤销选择（恢复现场）
+                chessboard[row][col] = '.';
+            }
+        }
+    }
+
+    // 检查 (row, col) 位置放皇后是否安全
+    private boolean isValid(int row, int col, char[][] chessboard, int n) {
+        // 检查正上方（同列）
+        for (int i = 0; i < row; i++) {
+            if (chessboard[i][col] == 'Q') {
+                return false;
+            }
+        }
+
+        // 检查左上方斜线（row 减，col 减）
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
+            if (chessboard[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        // 检查右上方斜线（row 减，col 加）
+        for (int i = row - 1, j = col + 1; i >= 0 && j < n; i--, j++) {
+            if (chessboard[i][j] == 'Q') {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    // 辅助函数：将二维字符数组转为 List<String> 结果集（自动实现深拷贝）
+    private List<String> convertToList(char[][] chessboard) {
+        List<String> list = new ArrayList<>();
+        for (char[] c : chessboard) {
+            list.add(String.copyValueOf(c));
+        }
+        return list;
+    }
 ```
 
 # 10. 常见算法思维
@@ -9423,11 +9473,60 @@ public class RandXRandY_470 {
 }
 ```
 
-#11 参考
+## 10.12 摩尔投票
 
- [leetcode dp相关问题](https://leetcode-cn.com/circle/article/NfHhXD/)
+https://leetcode.cn/problems/majority-element/description/?envType=study-plan-v2&envId=top-100-liked
 
-[剑指offer系列题解](https://leetcode-cn.com/circle/article/kQcYo2/)
+```java
+int res = 0;
+        int count = 0;
+        for (int num : nums) {
+            if (count == 0) {
+                res = num;
+            }
+            if (num == res) {
+                count++;
+            } else {
+                count--;
+            }
+        }
+        return res;
+    }
+```
 
-[链表相关](https://leetcode-cn.com/circle/article/YGr54o/)
+## 10.13 三指针
+
+https://leetcode.cn/problems/sort-colors/?envType=study-plan-v2&envId=top-100-liked
+
+```java
+public void sortColors(int[] nums) {
+        // 0的右边界
+        int left = 0;
+        // 2的左边界
+        int right = nums.length - 1;
+        // 当前指针
+        int cur = 0;
+        // 不能超过右边界，超过了说明右边全是 2，排序已完成
+        while (cur <= right) {
+            if (nums[cur] == 0) {
+                swap(nums, cur, left);
+                left++;
+                // 因为从 left 换过来的数一定是已经扫描过的 1（或者就是 curr 自己），所以 curr 可以放心前进
+                cur++;
+            } else if (nums[cur] == 1) {
+                cur++;
+            } else {
+                swap(nums, cur, right);
+                right--;
+                // 🔥 关键点：cur 不能自增！因为从 right 换过来的数是什么我们根本不知道，必须留在原地继续检查它
+            }
+        }
+    }
+
+    private void swap(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+```
 

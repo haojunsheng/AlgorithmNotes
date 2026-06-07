@@ -1,9 +1,6 @@
 package com.code.leetcode.map;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 字母异位词分组
@@ -18,24 +15,56 @@ import java.util.Map;
  * ]
  */
 public class GroupAnagrams_49 {
-    public List<List<String>> groupAnagrams(String[] strs) {
-        if (strs == null || strs.length <= 0) {
-            return new ArrayList<>();
+    public void rotate(int[] nums, int k) {
+        if (k == 0) {
+            return;
         }
-        // 把每个英文字母的出现的次数作为键，每个符合要求的字符串作为值
-        Map<String, List<String>> map = new HashMap<>();
-        for (String str : strs) {
-            // 统计每个字符出现的次数
-            char[] temp = new char[26];
-            for (char ch : str.toCharArray()) {
-                temp[ch - 'a']++;
-            }
-            String keyStr = String.valueOf(temp);
-            if (!map.containsKey(keyStr)) {
-                map.put(keyStr, new ArrayList<>());
-            }
-            map.get(keyStr).add(str);
+        // 取个余取个余。
+        k = k % nums.length;
+        String s;
+
+        // 开辟一个长度为k的子数组出来。
+        int[] temp=new int[k];
+        int j=0;
+        for(int i=nums.length-k;i<nums.length;++i){
+            temp[j]=nums[i];
+            j++;
         }
-        return new ArrayList<>(map.values());
+        Arrays.stream(temp).forEach(System.out::println);
+        System.out.println("------");
+        // 处理前半段向后移动。
+        for(int i=nums.length-k-1;i>=0;i--){
+            nums[i+k]=nums[i];
+        }
+        Arrays.stream(nums).forEach(System.out::println);        // temp还原到原来
+        for(int i=0;i<nums.length-k-1;i++){
+            nums[i]=temp[i];
+        }
+        return;
+    }
+
+
+    public boolean isValid(String s) {
+        char[] chars=s.toCharArray();
+        Stack<Character> stack=new Stack<>();
+        for(char ch:chars){
+            if(ch=='('||ch =='{'||ch=='['){
+                stack.push(ch);
+            }else{
+                char existCh= stack.pop();
+
+                if(ch!=existCh){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = new int[]{-1,-100,3,99};int k = 2;
+        GroupAnagrams_49 groupAnagrams49 = new GroupAnagrams_49();
+//        groupAnagrams49.rotate(nums,k);
+        System.out.println(groupAnagrams49.isValid("()"));
     }
 }
